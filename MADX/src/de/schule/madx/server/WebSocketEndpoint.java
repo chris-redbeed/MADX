@@ -1,5 +1,8 @@
 package de.schule.madx.server;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,20 +16,24 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint("/serverendpoint")
 public class WebSocketEndpoint {
 	
-	Logger logger = Logger.getLogger(WebSocketEndpoint.class.getName());
+	private Logger logger = Logger.getLogger(WebSocketEndpoint.class.getName());
+	
+	private static Set<Session> users = Collections.synchronizedSet(new HashSet<Session>());
 	
 	@OnOpen
-	public void handleOpen(Session session) {
+	public void handleOpen(Session userSession) {
 		logger.log(Level.INFO, "client connected...");
+		users.add(userSession);
 	}
 	
 	@OnClose
-	public void handleClose(Session session) {
+	public void handleClose(Session userSession) {
 		logger.log(Level.INFO, "client disconnected...");
+		users.remove(userSession);
 	}
 	
 	@OnMessage
-	public String handleMessage(String message, Session session) {
+	public String handleMessage(String message, Session userSession) {
 		logger.log(Level.INFO, "client send:" + message);
 		return "echo" + message;
 	}
