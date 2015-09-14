@@ -3,7 +3,7 @@
  */
 package de.schule.madx.client;
 
-import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.event.shared.EventBus;
 import com.googlecode.mgwt.ui.client.animation.AnimationHelper;
 
 import de.schule.madx.client.websocket.WebSocket;
@@ -18,10 +18,16 @@ public interface GameController {
 	
 	public void setWebSocket(WebSocket webSocket);
 	
-	public HandlerManager getEventBus();
+	public EventBus getEventBus();
 	
-	public AnimationViewChanger getAnimationViewChanger();
+	public PresenterChanger getPresenterChanger();
 	
 	public void go(AnimationHelper container);
+	
+	public void initWebSocket(String url);
+	
+	public PresenterMapper getPresenterMapper();
+	
+	public AnimationHelper getContainer();
 
 }

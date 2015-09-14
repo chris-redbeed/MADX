@@ -1,2 +1,0 @@
-serviceClass: de.schule.madx.client.GreetingService
-path: B87C13204FE07FC05D9738D2E6CFBD7E.gwt.rpc

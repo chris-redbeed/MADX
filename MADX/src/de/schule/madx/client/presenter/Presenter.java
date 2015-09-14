@@ -10,5 +10,5 @@ import com.googlecode.mgwt.ui.client.animation.AnimationHelper;
  *
  */
 public interface Presenter {
-	public abstract void go(final AnimationHelper container);
+	public abstract void go();
 }

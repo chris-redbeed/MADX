@@ -1,3 +1,2 @@
 # Module madx
 # RPC service class, partial path of RPC policy file
-de.schule.madx.client.GreetingService, B87C13204FE07FC05D9738D2E6CFBD7E.gwt.rpc

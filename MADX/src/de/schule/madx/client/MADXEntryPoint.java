@@ -1,7 +1,8 @@
 package de.schule.madx.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.shared.GWT;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.googlecode.mgwt.ui.client.animation.AnimationHelper;
 
@@ -25,8 +26,9 @@ public class MADXEntryPoint implements EntryPoint {
 		rootPanel = RootPanel.get();
 		display = new AnimationHelper();
 		rootPanel.add(display);
+		EventBus eventBus = new SimpleEventBus();
 		
-		gameController = GWT.create(GameController.class);
+		gameController = new GameControllerImpl(eventBus);
 		gameController.go(display);
 	}
 }
