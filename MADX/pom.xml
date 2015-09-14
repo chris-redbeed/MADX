@@ -82,8 +82,8 @@
 						<goals>
 							<goal>compile</goal>
 							<goal>test</goal>
-<!-- 							<goal>i18n</goal> -->
-<!-- 							<goal>generateAsync</goal> -->
+							<!-- <goal>i18n</goal> -->
+							<!-- <goal>generateAsync</goal> -->
 						</goals>
 					</execution>
 				</executions>
@@ -123,6 +123,21 @@
 				<configuration>
 					<warSourceDirectory>WebContent</warSourceDirectory>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<followSymlinks>false</followSymlinks>
+							<directory>WebContent\madx</directory>
+							<includes>
+								<include>*</include>
+							</includes>
+						</fileset>
+					</filesets>
 				</configuration>
 			</plugin>
 		</plugins>

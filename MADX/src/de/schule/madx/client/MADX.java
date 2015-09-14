@@ -144,7 +144,7 @@ public class MADX implements EntryPoint {
 		
 		final TextBox textBox = new TextBox();
 		Button button = new Button("Send");
-		TextBox textBox2 = new TextBox();
+		final TextBox textBox2 = new TextBox();
 		
 		rootPanel.add(textBox);
 		rootPanel.add(button);
@@ -154,7 +154,9 @@ public class MADX implements EntryPoint {
 			
 			@Override
 			public void onClick(ClickEvent arg0) {
-				WebSocketClient.sendMessage(textBox.getText());
+				WebSocketClient client = new WebSocketClient("localhost", "8080");
+				
+				textBox2.setText(client.sendMessage(textBox.getText()));
 			}
 		});
 	}

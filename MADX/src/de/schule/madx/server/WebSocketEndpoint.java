@@ -7,6 +7,7 @@ import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
+import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 @ServerEndpoint("/serverendpoint")
@@ -15,17 +16,17 @@ public class WebSocketEndpoint {
 	Logger logger = Logger.getLogger(WebSocketEndpoint.class.getName());
 	
 	@OnOpen
-	public void handleOpen() {
+	public void handleOpen(Session session) {
 		logger.log(Level.INFO, "client connected...");
 	}
 	
 	@OnClose
-	public void handleClose() {
+	public void handleClose(Session session) {
 		logger.log(Level.INFO, "client disconnected...");
 	}
 	
 	@OnMessage
-	public String handleMessage(String message) {
+	public String handleMessage(String message, Session session) {
 		logger.log(Level.INFO, "client send:" + message);
 		return "echo" + message;
 	}
