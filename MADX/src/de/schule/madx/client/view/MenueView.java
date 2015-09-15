@@ -39,8 +39,12 @@ public class MenueView extends AbstractView implements Display{
 
 	@Override
 	void initStyles() {
-		// TODO Auto-generated method stub
-		
+		getRootPanel().addStyleName("Menue-Main");
+		btnSinglePlayer.addStyleName("gwt-Button-Menue");
+		btnMultiPlayer.addStyleName("gwt-Button-Menue");
+		btnHighScore.addStyleName("gwt-Button-Menue");
+		btnOptions.addStyleName("gwt-Button-Menue");
+		btnExit.addStyleName("gwt-Button-Menue");
 	}
 
 	@Override

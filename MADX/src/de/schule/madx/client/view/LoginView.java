@@ -51,8 +51,7 @@ public class LoginView extends AbstractView implements Display{
 
 	@Override
 	void initStyles() {
-		// TODO Auto-generated method stub
-		
+		getRootPanel().addStyleName("Login-Main");
 	}
 
 	@Override

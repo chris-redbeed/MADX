@@ -3,6 +3,8 @@
  */
 package de.schule.madx.client;
 
+import org.eclipse.jetty.util.ajax.JSON;
+
 import com.google.gwt.event.shared.EventBus;
 import com.googlecode.mgwt.ui.client.animation.AnimationHelper;
 
@@ -70,41 +72,13 @@ public class GameControllerImpl implements GameController, Presenter{
 	@Override
 	public void initWebSocket(String url) {
 		webSocket = WebSocket.create("ws://" + url);
-		webSocket.setOnOpen(new OpenHandler() {
-			
-			@Override
-			public void onOpen(WebSocket webSocket) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		webSocket.setOnOpen(new OnOpenHandler());
 		
-		webSocket.setOnClose(new CloseHandler() {
-			
-			@Override
-			public void onClose(WebSocket webSocket) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		webSocket.setOnClose(new OnCloseHandler());
 		
-		webSocket.setOnError(new ErrorHandler() {
-			
-			@Override
-			public void onError(WebSocket webSocket) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		webSocket.setOnError(new OnErrorHandler());
 		
-		webSocket.setOnMessage(new MessageHandler() {
-			
-			@Override
-			public void onMessage(WebSocket webSocket, MessageEvent event) {
-				eventBus.fireEvent(new GetMessageEvent());
-				
-			}
-		});
+		webSocket.setOnMessage(new OnMessageHandler());
 	}
 
 	@Override
@@ -123,5 +97,40 @@ public class GameControllerImpl implements GameController, Presenter{
 	@Override
 	public AnimationHelper getContainer() {
 		return container;
+	}
+	
+	private class OnOpenHandler implements OpenHandler {
+		
+		@Override
+		public void onOpen(WebSocket webSocket) {
+			// TODO Auto-generated method stub
+			
+		}
+	}
+	
+	private class OnCloseHandler implements CloseHandler {
+		
+		@Override
+		public void onClose(WebSocket webSocket) {
+			// TODO Auto-generated method stub
+			
+		}
+	}
+	
+	private class OnErrorHandler implements ErrorHandler {
+		
+		@Override
+		public void onError(WebSocket webSocket) {
+			// TODO Auto-generated method stub
+			
+		}
+	}
+	
+	private class OnMessageHandler implements MessageHandler {
+		
+		@Override
+		public void onMessage(WebSocket webSocket, MessageEvent event) {
+			eventBus.fireEvent(new GetMessageEvent(event));
+		}
 	}
 }
