@@ -3,8 +3,6 @@
  */
 package de.schule.madx.client;
 
-import org.eclipse.jetty.util.ajax.JSON;
-
 import com.google.gwt.event.shared.EventBus;
 import com.googlecode.mgwt.ui.client.animation.AnimationHelper;
 
