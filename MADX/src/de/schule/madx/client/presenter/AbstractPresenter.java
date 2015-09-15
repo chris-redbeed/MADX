@@ -21,7 +21,11 @@ public abstract class AbstractPresenter implements Presenter{
 		this.model = model;
 		this.view = view;
 		this.gameController= gameController;
+		
+		addHandler();
 	}
+	
+	public abstract void addHandler();
 
 	@Override
 	public void go() {

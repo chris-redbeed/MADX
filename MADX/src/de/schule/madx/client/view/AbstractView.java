@@ -3,8 +3,6 @@
  */
 package de.schule.madx.client.view;
 
-import java.util.Observable;
-
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
@@ -15,19 +13,36 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public abstract class AbstractView implements View, IsWidget{
 	
-	protected FlowPanel main;
+	private FlowPanel rootPanel;
 	
 	public AbstractView() {
-		init();
+		setRootPanel(new FlowPanel());
+		init(getRootPanel());
+		initStyles();
 	}
 
-	private void init() {
-		main = new FlowPanel();
-	}
+	/**
+	 * @param rootPanel the root panel to add the view's content
+	 * @see #getRootPanel()
+	 */
+	abstract void init(FlowPanel rootPanel);
+	
+	abstract void initStyles();
 	
 	@Override
 	public Widget asWidget() {
-		return main;
+		return getRootPanel();
+	}
+
+	/**
+	 * @return the root panel of this view
+	 */
+	public FlowPanel getRootPanel() {
+		return rootPanel;
+	}
+
+	private void setRootPanel(FlowPanel rootPanel) {
+		this.rootPanel = rootPanel;
 	}
 
 }

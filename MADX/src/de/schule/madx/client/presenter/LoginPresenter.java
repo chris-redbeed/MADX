@@ -9,6 +9,7 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.HasText;
 
 import de.schule.madx.client.GameController;
+import de.schule.madx.client.PresenterMapper;
 import de.schule.madx.client.model.AbstractModel;
 import de.schule.madx.client.view.AbstractView;
 import de.schule.madx.client.view.LoginView;
@@ -39,29 +40,29 @@ public class LoginPresenter extends AbstractPresenter {
 	
 	public LoginPresenter(AbstractModel model, AbstractView view, GameController gameController) {
 		super(model, view, gameController);
-		
-		addHandler();
 	}
 
-	private void addHandler() {
-		((LoginView) view).getBtnLogin().addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+	@Override
+	public void addHandler() {
+		((LoginView) view).getBtnLogin().addClickHandler(new LoginClickHandler());
 		
-		((LoginView) view).getBtnRegister().addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		((LoginView) view).getBtnRegister().addClickHandler(new RegisterClickHandler());
 	}
-
-
+	
+	private class LoginClickHandler implements ClickHandler {
+		
+		@Override
+		public void onClick(ClickEvent event) {
+			gameController.getPresenterChanger().goTo(PresenterMapper.MENUE);
+		}
+	}
+	
+	private class RegisterClickHandler implements ClickHandler {
+		
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			
+		}
+	}
 }

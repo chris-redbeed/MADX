@@ -14,6 +14,7 @@ public class MADXEntryPoint implements EntryPoint {
 	private RootPanel rootPanel;
 	private AnimationHelper display;
 	private GameController gameController;
+	private EventBus eventBus;
 
 	/**
 	 * This is the entry point method.

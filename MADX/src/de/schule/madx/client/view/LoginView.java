@@ -18,8 +18,6 @@ import de.schule.madx.client.presenter.LoginPresenter.Display;
  */
 public class LoginView extends AbstractView implements Display{
 	
-	private FlowPanel main;
-	
 	private TextBox txtUser;
 	private PasswordTextBox pwtxtPassword;
 	private TextBox txtServer;
@@ -29,20 +27,11 @@ public class LoginView extends AbstractView implements Display{
 	private Button btnLogin;
 
 	public LoginView() {
-		init();
-		initStyles();
-		
-		main.add(txtUser);
-		main.add(pwtxtPassword);
-		main.add(txtServer);
-		main.add(txtPort);
-		main.add(txtUrl);
-		main.add(btnRegister);
-		main.add(btnLogin);
+		super();
 	}
 	
-	private void init() {
-		main = new FlowPanel();
+	@Override
+	void init(FlowPanel rootPanel) {
 		txtPort = new TextBox();
 		txtServer = new TextBox();
 		txtUrl = new TextBox();
@@ -50,9 +39,19 @@ public class LoginView extends AbstractView implements Display{
 		pwtxtPassword = new PasswordTextBox();
 		btnLogin = new Button("anmelden");
 		btnRegister = new Button("registrieren");
+		
+		rootPanel.add(txtUser);
+		rootPanel.add(pwtxtPassword);
+		rootPanel.add(txtServer);
+		rootPanel.add(txtPort);
+		rootPanel.add(txtUrl);
+		rootPanel.add(btnRegister);
+		rootPanel.add(btnLogin);
 	}
-	
-	private void initStyles() {
+
+	@Override
+	void initStyles() {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -90,5 +89,4 @@ public class LoginView extends AbstractView implements Display{
 	public HasClickHandlers getBtnRegister() {
 		return btnRegister;
 	}
-	
 }

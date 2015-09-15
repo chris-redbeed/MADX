@@ -6,6 +6,7 @@ package de.schule.madx.client;
 import com.google.gwt.event.shared.EventBus;
 import com.googlecode.mgwt.ui.client.animation.AnimationHelper;
 
+import de.schule.madx.client.event.GetMessageEvent;
 import de.schule.madx.client.presenter.Presenter;
 import de.schule.madx.client.websocket.CloseHandler;
 import de.schule.madx.client.websocket.ErrorHandler;
@@ -100,7 +101,7 @@ public class GameControllerImpl implements GameController, Presenter{
 			
 			@Override
 			public void onMessage(WebSocket webSocket, MessageEvent event) {
-				// TODO Auto-generated method stub
+				eventBus.fireEvent(new GetMessageEvent());
 				
 			}
 		});
@@ -108,7 +109,7 @@ public class GameControllerImpl implements GameController, Presenter{
 
 	@Override
 	public void go() {
-		getPresenterChanger().goTo(PresenterMapper.LOGIN_VIEW);
+		getPresenterChanger().goTo(PresenterMapper.LOGIN);
 	}
 
 	@Override

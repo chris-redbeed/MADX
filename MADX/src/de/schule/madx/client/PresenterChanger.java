@@ -7,6 +7,8 @@ import com.googlecode.mgwt.ui.client.widget.animation.Animation;
 import com.googlecode.mgwt.ui.client.widget.animation.Animations;
 
 import de.schule.madx.client.view.AbstractView;
+import de.schule.madx.client.view.LoginView;
+import de.schule.madx.client.view.MenueView;
 
 /**
  * @author xgadscj
@@ -28,12 +30,9 @@ public class PresenterChanger {
 	
 	public Animation getAnimation(AbstractView view) {
 		
-//		if (currentView instanceof LoginView && view instanceof LoginView) {
-//			return Animations.FLIP;
-//		} else if () {
-//			
-//		}
-		
+		if (currentView instanceof MenueView && view instanceof LoginView) {
+			return Animations.FLIP_REVERSE;
+		}
 		return Animations.FLIP;
 	}
 }

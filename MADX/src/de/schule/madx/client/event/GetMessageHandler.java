@@ -9,6 +9,6 @@ import com.google.gwt.event.shared.EventHandler;
  * @author xgadscj
  *
  */
-public interface SwitchViewHandler extends EventHandler {
-	void switchView(SwitchViewEvent event);
+public interface GetMessageHandler extends EventHandler {
+	void getMessage(GetMessageEvent event);
 }
