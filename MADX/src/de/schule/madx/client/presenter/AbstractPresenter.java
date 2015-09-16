@@ -29,7 +29,8 @@ public abstract class AbstractPresenter implements Presenter{
 
 	@Override
 	public void go() {
-		gameController.getContainer().goTo(view, gameController.getPresenterChanger().getAnimation(view));
+		gameController.getContainer().clear();
+		gameController.getContainer().add(view.asWidget());
 	}
 
 }

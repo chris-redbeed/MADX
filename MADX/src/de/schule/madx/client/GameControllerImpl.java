@@ -4,7 +4,7 @@
 package de.schule.madx.client;
 
 import com.google.gwt.event.shared.EventBus;
-import com.googlecode.mgwt.ui.client.animation.AnimationHelper;
+import com.google.gwt.user.client.ui.HasWidgets;
 
 import de.schule.madx.client.event.GetMessageEvent;
 import de.schule.madx.client.presenter.Presenter;
@@ -23,7 +23,7 @@ public class GameControllerImpl implements GameController, Presenter{
 
 	private WebSocket webSocket;
 	private final EventBus eventBus;
-	private AnimationHelper container;
+	private HasWidgets container;
 	private PresenterChanger animationViewChanger;
 	private PresenterMapper presenterMapper;
 	
@@ -49,7 +49,7 @@ public class GameControllerImpl implements GameController, Presenter{
 	}
 
 	@Override
-	public void go(AnimationHelper container) {
+	public void go(HasWidgets container) {
 		this.container = container;
 		go();
 	}
@@ -93,7 +93,7 @@ public class GameControllerImpl implements GameController, Presenter{
 	}
 
 	@Override
-	public AnimationHelper getContainer() {
+	public HasWidgets getContainer() {
 		return container;
 	}
 	
