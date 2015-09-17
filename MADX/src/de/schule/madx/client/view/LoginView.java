@@ -7,6 +7,7 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 
@@ -17,6 +18,13 @@ import de.schule.madx.client.presenter.LoginPresenter.Display;
  *
  */
 public class LoginView extends AbstractView implements Display{
+	
+	private Label lblTitle;
+	private Label lblUser;
+	private Label lblPassword;
+	private Label lblServer;
+	private Label lblPort;
+	private Label lblUrl;
 	
 	private TextBox txtUser;
 	private PasswordTextBox pwtxtPassword;
@@ -32,6 +40,13 @@ public class LoginView extends AbstractView implements Display{
 	
 	@Override
 	void init(FlowPanel rootPanel) {
+		lblTitle = new Label("MADX");
+		lblUser = new Label("User:");
+		lblPassword = new Label("Password:");
+		lblServer = new Label("Server:");
+		lblPort = new Label("Port:");
+		lblUrl = new Label("Url:");
+		
 		txtPort = new TextBox();
 		txtServer = new TextBox();
 		txtUrl = new TextBox();
@@ -40,18 +55,38 @@ public class LoginView extends AbstractView implements Display{
 		btnLogin = new Button("anmelden");
 		btnRegister = new Button("registrieren");
 		
+		rootPanel.add(lblTitle);
+		rootPanel.add(lblUser);
 		rootPanel.add(txtUser);
+		rootPanel.add(lblPassword);
 		rootPanel.add(pwtxtPassword);
+		rootPanel.add(lblServer);
 		rootPanel.add(txtServer);
+		rootPanel.add(lblPort);
 		rootPanel.add(txtPort);
+		rootPanel.add(lblUrl);
 		rootPanel.add(txtUrl);
+
 		rootPanel.add(btnRegister);
 		rootPanel.add(btnLogin);
 	}
 
 	@Override
 	void initStyles() {
-		getRootPanel().addStyleName("Login-Main");
+		getRootPanel().addStyleName("login-Main");
+		lblTitle.addStyleName("login-Title");
+		lblUser.addStyleName("login-Label");
+		lblPassword.addStyleName("login-Label");
+		lblServer.addStyleName("login-Label");
+		lblPort.addStyleName("login-Label");
+		lblUrl.addStyleName("login-Label");
+		txtPort.addStyleName("login-TextField");
+		txtServer.addStyleName("login-TextField");
+		txtUrl.addStyleName("login-TextField");
+		txtUser.addStyleName("login-TextField");
+		pwtxtPassword.addStyleName("login-TextField");
+		btnLogin.addStyleName("login-Button");
+		btnRegister.addStyleName("login-Button");
 	}
 
 	@Override

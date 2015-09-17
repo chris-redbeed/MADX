@@ -1,14 +1,13 @@
 /**
  * 
  */
-package de.schule.madx.client.widgets;
+package de.schule.madx.client.widgets.lobby;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -16,33 +15,44 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
-import de.schule.madx.client.event.GetMessageEvent;
-import de.schule.madx.client.event.GetMessageHandler;
-import de.schule.madx.client.websocket.WebSocket;
-
 /**
  * @author xgadscj
  *
  */
-public class NetworkChat extends Composite {
+public class NetworkChatModule extends Composite{
 
 	private FlowPanel rootPanel;
 	private TextArea txtAContent;
 	private TextBox txtMessage;
 	private Button btnSend;
 
-	private WebSocket webSocket;
-	private EventBus eventBus;
-
-	public NetworkChat(WebSocket webSocket, EventBus eventBus) {
-		this.webSocket = webSocket;
-		this.eventBus = eventBus;
-
+//	private WebSocket webSocket;
+//	private EventBus eventBus;
+//
+//	public NetworkChat(WebSocket webSocket, EventBus eventBus) {
+//		this.webSocket = webSocket;
+//		this.eventBus = eventBus;
+//
+//		init();
+//		initStyles();
+//		
+//		addHandlers();
+//	}
+	
+	public NetworkChatModule() {
 		init();
 		initStyles();
 		
 		addHandlers();
 	}
+	
+//	public void setEventBus(EventBus eventBus) {
+//		this.eventBus = eventBus;
+//	}
+//	
+//	public void setWebSocket(WebSocket webSocket) {
+//		this.webSocket = webSocket;
+//	}
 
 	@Override
 	public Widget asWidget() {
@@ -61,11 +71,17 @@ public class NetworkChat extends Composite {
 	}
 
 	private void initStyles() {
-
+		txtAContent.addStyleName("lobby-Chat-TextArea");
+		txtMessage.addStyleName("lobby-Chat-TextBox");
+		btnSend.addStyleName("lobby-Chat-Button");
+	}
+	
+	public void addStyle (String styleName) {
+		rootPanel.addStyleName(styleName);
 	}
 	
 	private void sendMessage() {
-		webSocket.send(txtMessage.getText());
+//		webSocket.send(txtMessage.getText());
 		txtMessage.setText("");
 	}
 	
@@ -74,17 +90,17 @@ public class NetworkChat extends Composite {
 		
 		btnSend.addClickHandler(new SendButtonClickHandler());
 		
-		eventBus.addHandler(GetMessageEvent.TYPE, new GetChatMessageHandler());
+//		eventBus.addHandler(GetMessageEvent.TYPE, new GetChatMessageHandler());
 	}
 	
-	private class GetChatMessageHandler implements GetMessageHandler {
-		
-		@Override
-		public void getMessage(GetMessageEvent event) {
-			String data = event.getEvent().getData();
-			
-		}
-	}
+//	private class GetChatMessageHandler implements GetMessageHandler {
+//		
+//		@Override
+//		public void getMessage(GetMessageEvent event) {
+//			String data = event.getEvent().getData();
+//			
+//		}
+//	}
 	
 	private class SendButtonClickHandler implements ClickHandler {
 		

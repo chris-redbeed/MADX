@@ -32,7 +32,7 @@ public class MenuePresenter extends AbstractPresenter {
 	@Override
 	public void addHandler() {
 		((MenueView) view).getBtnSinglePlayer()
-				.addClickHandler(new ChangeViewClickHandler(PresenterMapper.SINGLEPLAYER));
+				.addClickHandler(new ChangeViewClickHandler(PresenterMapper.LOBBY));
 
 		((MenueView) view).getBtnMultiPlayer().addClickHandler(new ChangeViewClickHandler(PresenterMapper.MULTIPLAYER));
 

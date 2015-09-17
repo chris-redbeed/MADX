@@ -6,6 +6,7 @@ package de.schule.madx.client.view;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Label;
 
 import de.schule.madx.client.presenter.MenuePresenter.Display;
 
@@ -15,6 +16,7 @@ import de.schule.madx.client.presenter.MenuePresenter.Display;
  */
 public class MenueView extends AbstractView implements Display{
 	
+	private Label lblTitle;
 	private Button btnSinglePlayer;
 	private Button btnMultiPlayer;
 	private Button btnHighScore;
@@ -23,12 +25,14 @@ public class MenueView extends AbstractView implements Display{
 
 	@Override
 	void init(FlowPanel rootPanel) {
+		lblTitle = new Label("Menü");
 		btnSinglePlayer = new Button("Einzelspieler");
 		btnMultiPlayer = new Button("Mehrspieler");
 		btnHighScore = new Button("HighScore");
 		btnOptions = new Button("Optionen");
 		btnExit = new Button("Beenden");
 		
+		rootPanel.add(lblTitle);
 		rootPanel.add(btnSinglePlayer);
 		rootPanel.add(btnMultiPlayer);
 		rootPanel.add(btnHighScore);
@@ -39,7 +43,8 @@ public class MenueView extends AbstractView implements Display{
 
 	@Override
 	void initStyles() {
-		getRootPanel().addStyleName("Menue-Main");
+		getRootPanel().addStyleName("menue-Main");
+		lblTitle.addStyleName("menue-Title");
 		btnSinglePlayer.addStyleName("gwt-Button-Menue");
 		btnMultiPlayer.addStyleName("gwt-Button-Menue");
 		btnHighScore.addStyleName("gwt-Button-Menue");
