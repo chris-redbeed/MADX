@@ -5,6 +5,7 @@ package de.schule.madx.server.handler;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,7 +24,7 @@ import de.schule.madx.shared.JSONHelper;
  *
  */
 public class LoginHandler {
-	
+
 	private Logger logger = Logger.getLogger(LoginHandler.class.getName());
 
 	private Properties prop = new Properties();;
@@ -34,9 +35,9 @@ public class LoginHandler {
 	public String handleMessage(String message) {
 		try {
 			File file = new File(PATH);
-			output = new FileOutputStream(file);
 			input = new FileInputStream(file);
 			prop.load(input);
+			input.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -44,7 +45,7 @@ public class LoginHandler {
 		JsonElement jelement = parser.parse(message);
 		JsonObject jsonObject = jelement.getAsJsonObject();
 		String method = JSONHelper.valueToString(jsonObject.get("method").toString());
-		logger.info("method: " +method);
+		logger.info("method: " + method);
 		if (method.equals("login")) {
 			String user = JSONHelper.valueToString(jsonObject.get("user").toString());
 			String password = JSONHelper.valueToString(jsonObject.get("password").toString());
@@ -59,16 +60,8 @@ public class LoginHandler {
 
 	private String handleLogin(String user, String password) {
 		String pw = "";
-		try {
-			if (prop.contains(user)) {
+		if (prop.contains(user)) {
 			pw = prop.getProperty(user);
-			}
-			prop.store(output, null);
-			input.close();
-			output.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		JsonObject json = new JsonObject();
 		if (pw.equals(password)) {
@@ -84,6 +77,13 @@ public class LoginHandler {
 
 	private String handleRegister(String user, String password) {
 		JsonObject json = new JsonObject();
+		File file = new File(PATH);
+		try {
+			output = new FileOutputStream(file);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		if (prop.containsKey(user)) {
 			json.addProperty("method", "register");
 			json.addProperty("result", "error");
