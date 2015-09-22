@@ -26,13 +26,12 @@ public class LoginHandler {
 	
 	private Logger logger = Logger.getLogger(LoginHandler.class.getName());
 
-	private Properties prop;
+	private Properties prop = new Properties();;
 	private OutputStream output;
 	private InputStream input;
 	private final static String PATH = "C:/Users/xgadscj/Desktop/User_Password.txt";
 
 	public String handleMessage(String message) {
-		prop = new Properties();
 		try {
 			File file = new File(PATH);
 			output = new FileOutputStream(file);
@@ -62,7 +61,7 @@ public class LoginHandler {
 		String pw = "";
 		try {
 			if (prop.contains(user)) {
-			pw = prop.get(user).toString();
+			pw = prop.getProperty(user);
 			}
 			prop.store(output, null);
 			input.close();
@@ -89,7 +88,7 @@ public class LoginHandler {
 			json.addProperty("method", "register");
 			json.addProperty("result", "error");
 		} else {
-			prop.put(user, password);
+			prop.setProperty(user, password);
 			json.addProperty("method", "register");
 			json.addProperty("result", "okay");
 		}

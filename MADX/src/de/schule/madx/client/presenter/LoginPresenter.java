@@ -66,28 +66,14 @@ public class LoginPresenter extends AbstractPresenter {
 
 				JSONObject parse = (JSONObject) JSONParser.parse(data);
 				String method = JSONHelper.valueToString(parse.get("method").toString());
+				String result = JSONHelper.valueToString(parse.get("result").toString());
 				if (method.equals("login")) {
-					String result = JSONHelper.valueToString(parse.get("result").toString());
 					if (result.toString().equals("okay")) {
 						gameController.getPresenterChanger().goTo(PresenterMapper.MENUE);
 					} else {
 						Window.alert("Die Nutzerdaten sind ungültig! Bitte probieren Sie es erneut!");
 					}
-				}
-
-			}
-		});
-		
-		gameController.getEventBus().addHandler(GetMessageEvent.TYPE, new GetMessageHandler() {
-
-			@Override
-			public void getMessage(GetMessageEvent event) {
-				String data = event.getEvent().getData();
-
-				JSONObject parse = (JSONObject) JSONParser.parse(data);
-				String method = JSONHelper.valueToString(parse.get("method").toString());
-				if (method.toString().equals("register")) {
-					String result = JSONHelper.valueToString(parse.get("result").toString());
+				} else if (method.equals("register")) {
 					if (result.toString().equals("okay")) {
 						gameController.getPresenterChanger().goTo(PresenterMapper.MENUE);
 					} else {
