@@ -13,12 +13,16 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import de.schule.madx.server.handler.LoginHandler;
+
 @ServerEndpoint("/serverendpoint")
 public class WebSocketEndpoint {
 	
 	private Logger logger = Logger.getLogger(WebSocketEndpoint.class.getName());
 	
 	private static Set<Session> users = Collections.synchronizedSet(new HashSet<Session>());
+	
+	private LoginHandler loginHandler = new LoginHandler();
 	
 	@OnOpen
 	public void handleOpen(Session userSession) {
@@ -34,8 +38,11 @@ public class WebSocketEndpoint {
 	
 	@OnMessage
 	public String handleMessage(String message, Session userSession) {
-		logger.log(Level.INFO, "client send:" + message);
-		return "echo" + message;
+		String handleLoginMessage = loginHandler.handleMessage(message);
+		if (!handleLoginMessage.equals("error")) {
+			return handleLoginMessage;
+		}
+		return "error";
 	}
 	
 	@OnError

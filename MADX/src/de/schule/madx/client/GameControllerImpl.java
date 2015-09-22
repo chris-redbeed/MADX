@@ -19,17 +19,17 @@ import de.schule.madx.client.websocket.WebSocket;
  * @author xgadscj
  *
  */
-public class GameControllerImpl implements GameController, Presenter{
+public class GameControllerImpl implements GameController, Presenter {
 
 	private WebSocket webSocket;
 	private final EventBus eventBus;
 	private HasWidgets container;
 	private PresenterChanger animationViewChanger;
 	private PresenterMapper presenterMapper;
-	
+
 	public GameControllerImpl(EventBus eventBus) {
 		this.eventBus = eventBus;
-		
+
 		bind();
 	}
 
@@ -41,11 +41,19 @@ public class GameControllerImpl implements GameController, Presenter{
 	@Override
 	public void setWebSocket(WebSocket webSocket) {
 		this.webSocket = webSocket;
+
+		webSocket.setOnOpen(new OnOpenHandler());
+
+		webSocket.setOnClose(new OnCloseHandler());
+
+		webSocket.setOnError(new OnErrorHandler());
+
+		webSocket.setOnMessage(new OnMessageHandler());
 	}
-	
+
 	private void bind() {
 		// TODO Die verschiedenen Event-Handler am Eventbus registieren
-		
+
 	}
 
 	@Override
@@ -68,18 +76,6 @@ public class GameControllerImpl implements GameController, Presenter{
 	}
 
 	@Override
-	public void initWebSocket(String url) {
-		webSocket = WebSocket.create("ws://" + url);
-		webSocket.setOnOpen(new OnOpenHandler());
-		
-		webSocket.setOnClose(new OnCloseHandler());
-		
-		webSocket.setOnError(new OnErrorHandler());
-		
-		webSocket.setOnMessage(new OnMessageHandler());
-	}
-
-	@Override
 	public void go() {
 		getPresenterChanger().goTo(PresenterMapper.LOGIN);
 	}
@@ -96,36 +92,33 @@ public class GameControllerImpl implements GameController, Presenter{
 	public HasWidgets getContainer() {
 		return container;
 	}
-	
+
 	private class OnOpenHandler implements OpenHandler {
-		
+
 		@Override
 		public void onOpen(WebSocket webSocket) {
-			// TODO Auto-generated method stub
-			
+			System.out.println("WebSocket: OPEN");
 		}
 	}
-	
+
 	private class OnCloseHandler implements CloseHandler {
-		
+
 		@Override
 		public void onClose(WebSocket webSocket) {
-			// TODO Auto-generated method stub
-			
+			System.out.println("WebSocket: CLOSED");
 		}
 	}
-	
+
 	private class OnErrorHandler implements ErrorHandler {
-		
+
 		@Override
 		public void onError(WebSocket webSocket) {
-			// TODO Auto-generated method stub
-			
+			System.out.println("WebSocket: ERROR");
 		}
 	}
-	
+
 	private class OnMessageHandler implements MessageHandler {
-		
+
 		@Override
 		public void onMessage(WebSocket webSocket, MessageEvent event) {
 			eventBus.fireEvent(new GetMessageEvent(event));

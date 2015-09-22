@@ -48,8 +48,11 @@ public class LoginView extends AbstractView implements Display{
 		lblUrl = new Label("Url:");
 		
 		txtPort = new TextBox();
+		txtPort.setText("8080");
 		txtServer = new TextBox();
+		txtServer.setText("msgscjm1.gadeg.de");
 		txtUrl = new TextBox();
+		txtUrl.setText("MADX/serverendpoint");
 		txtUser = new TextBox();
 		pwtxtPassword = new PasswordTextBox();
 		btnLogin = new Button("anmelden");

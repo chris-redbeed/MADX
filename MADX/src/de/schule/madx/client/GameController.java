@@ -24,8 +24,6 @@ public interface GameController {
 	
 	public void go(HasWidgets container);
 	
-	public void initWebSocket(String url);
-	
 	public PresenterMapper getPresenterMapper();
 	
 	public HasWidgets getContainer();
