@@ -1,0 +1,126 @@
+/** Add css rules here for your application. */
+/** Example rules used by the template application (remove for your app) */
+body {
+	background-color: none;
+	background-image: url("img/MenschAErgereDichNicht.jpg") !important;
+	width: 100%;
+	height: 100%;
+	margin: 0 !important;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+}
+
+.login-Main {
+	width: 20%;
+	padding-left: 40%;
+	padding-top: 20%;
+}
+
+.gwt-Button-Menue {
+	margin-top: 25% !important;
+}
+
+.gwt-Button {
+	width: 100%;
+}
+
+.menue-Main {
+	width: 20%;
+	padding-left: 40%;
+}
+
+.login-Label {
+	color: red !important;
+}
+
+.login-Button {
+	width: 50%;
+}
+
+.login-TextField {
+	width: 100%;
+	height: 15px;
+}
+
+.login-Title {
+	font-size: 40px;
+	font-style: italic;
+	color: red !important;
+	font-family: cursive;
+	text-align: center;
+	margin-bottom: 20%;
+}
+
+.menue-Title {
+	color: red !important;
+	font-size: 40px;
+	font-style: italic;
+	font-family: cursive;
+	text-align: center;
+	margin-bottom: 20%;
+}
+
+.network-Main {
+	width: 50%;
+	padding-left: 25%;
+}
+
+.network-Table {
+	width: 100%;
+	color: red !important;
+	text-align: center;
+}
+
+.lobby-Chat-TextArea {
+	width: 100% !important;
+	height: 80% !important;
+	padding: 0px !important;
+	margin: 0px !important;
+}
+
+.lobby-Chat-TextBox {
+	width: 85%;
+	bottom: 0 !important;
+}
+
+.lobby-Chat-Button {
+	width: 14% !important;
+	right: 0% !important;
+	bottom: 0% !important;
+	margin-left: 5px;
+}
+
+.lobby-Chat {  
+	width: 80%;
+	height: 20%;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+}
+
+.lobby-RootPanel {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.lobby-OptionsPanel {
+	width: 20%;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	position: absolute;
+}
+
+.lobby-PlayerPanel {
+	width: 80%;
+	left: 0;
+	height: 80%;
+	top: 0;
+	position: absolute;
+}

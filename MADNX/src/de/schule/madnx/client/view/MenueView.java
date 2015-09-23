@@ -1,0 +1,80 @@
+/**
+ * 
+ */
+package de.schule.madnx.client.view;
+
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Label;
+
+import de.schule.madnx.client.presenter.MenuePresenter.Display;
+
+/**
+ * @author xgadscj
+ *
+ */
+public class MenueView extends AbstractView implements Display{
+	
+	private Label lblTitle;
+	private Button btnSinglePlayer;
+	private Button btnMultiPlayer;
+	private Button btnHighScore;
+	private Button btnOptions;
+	private Button btnExit;
+
+	@Override
+	void init(FlowPanel rootPanel) {
+		lblTitle = new Label("Menü");
+		btnSinglePlayer = new Button("Einzelspieler");
+		btnMultiPlayer = new Button("Mehrspieler");
+		btnHighScore = new Button("HighScore");
+		btnOptions = new Button("Optionen");
+		btnExit = new Button("Beenden");
+		
+		rootPanel.add(lblTitle);
+		rootPanel.add(btnSinglePlayer);
+		rootPanel.add(btnMultiPlayer);
+		rootPanel.add(btnHighScore);
+		rootPanel.add(btnOptions);
+		rootPanel.add(btnExit);
+		
+	}
+
+	@Override
+	void initStyles() {
+		getRootPanel().addStyleName("menue-Main");
+		lblTitle.addStyleName("menue-Title");
+		btnSinglePlayer.addStyleName("gwt-Button-Menue");
+		btnMultiPlayer.addStyleName("gwt-Button-Menue");
+		btnHighScore.addStyleName("gwt-Button-Menue");
+		btnOptions.addStyleName("gwt-Button-Menue");
+		btnExit.addStyleName("gwt-Button-Menue");
+	}
+
+	@Override
+	public HasClickHandlers getBtnSinglePlayer() {
+		return btnSinglePlayer;
+	}
+
+	@Override
+	public HasClickHandlers getBtnMultiPlayer() {
+		return btnMultiPlayer;
+	}
+
+	@Override
+	public HasClickHandlers getBtnHighScore() {
+		return btnHighScore;
+	}
+
+	@Override
+	public HasClickHandlers getBtnOptions() {
+		return btnOptions;
+	}
+
+	@Override
+	public HasClickHandlers getBtnExit() {
+		return btnExit;
+	}
+
+}
