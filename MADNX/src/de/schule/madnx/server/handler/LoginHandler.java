@@ -60,7 +60,7 @@ public class LoginHandler {
 
 	private String handleLogin(String user, String password) {
 		String pw = "";
-		if (prop.contains(user)) {
+		if (prop.containsKey(user)) {
 			pw = prop.getProperty(user);
 		}
 		JsonObject json = new JsonObject();

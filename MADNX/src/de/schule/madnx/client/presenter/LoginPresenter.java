@@ -36,12 +36,6 @@ public class LoginPresenter extends AbstractPresenter {
 
 		HasText getPwTxtPassword();
 
-		HasText getTxtServer();
-
-		HasText getTxtPort();
-
-		HasText getTxtUrl();
-
 		HasClickHandlers getBtnLogin();
 
 		HasClickHandlers getBtnRegister();
@@ -98,6 +92,7 @@ public class LoginPresenter extends AbstractPresenter {
 			object.put("password", new JSONString(password));
 
 			gameController.getWebSocket().send(object.toString());
+			clearTxtBox();
 		}
 	}
 
@@ -115,8 +110,15 @@ public class LoginPresenter extends AbstractPresenter {
 
 
 			gameController.getWebSocket().send(object.toString());
+			clearTxtBox();
 		}
 	}
+	
+	private void clearTxtBox() {
+		((LoginView) view).getPwTxtPassword().setText("");
+		((LoginView) view).getTxtUser().setText("");
+	}
+	
 	@Override
 	public void go() {
 		super.go();

@@ -22,15 +22,10 @@ public class LoginView extends AbstractView implements Display{
 	private Label lblTitle;
 	private Label lblUser;
 	private Label lblPassword;
-	private Label lblServer;
-	private Label lblPort;
-	private Label lblUrl;
 	
 	private TextBox txtUser;
 	private PasswordTextBox pwtxtPassword;
-	private TextBox txtServer;
-	private TextBox txtPort;
-	private TextBox txtUrl;
+
 	private Button btnRegister;
 	private Button btnLogin;
 
@@ -43,16 +38,7 @@ public class LoginView extends AbstractView implements Display{
 		lblTitle = new Label("MADX");
 		lblUser = new Label("User:");
 		lblPassword = new Label("Password:");
-		lblServer = new Label("Server:");
-		lblPort = new Label("Port:");
-		lblUrl = new Label("Url:");
-		
-		txtPort = new TextBox();
-		txtPort.setText("8080");
-		txtServer = new TextBox();
-		txtServer.setText("msgscjm1.gadeg.de");
-		txtUrl = new TextBox();
-		txtUrl.setText("MADX/serverendpoint");
+
 		txtUser = new TextBox();
 		pwtxtPassword = new PasswordTextBox();
 		btnLogin = new Button("anmelden");
@@ -63,12 +49,6 @@ public class LoginView extends AbstractView implements Display{
 		rootPanel.add(txtUser);
 		rootPanel.add(lblPassword);
 		rootPanel.add(pwtxtPassword);
-		rootPanel.add(lblServer);
-		rootPanel.add(txtServer);
-		rootPanel.add(lblPort);
-		rootPanel.add(txtPort);
-		rootPanel.add(lblUrl);
-		rootPanel.add(txtUrl);
 
 		rootPanel.add(btnRegister);
 		rootPanel.add(btnLogin);
@@ -80,12 +60,7 @@ public class LoginView extends AbstractView implements Display{
 		lblTitle.addStyleName("login-Title");
 		lblUser.addStyleName("login-Label");
 		lblPassword.addStyleName("login-Label");
-		lblServer.addStyleName("login-Label");
-		lblPort.addStyleName("login-Label");
-		lblUrl.addStyleName("login-Label");
-		txtPort.addStyleName("login-TextField");
-		txtServer.addStyleName("login-TextField");
-		txtUrl.addStyleName("login-TextField");
+
 		txtUser.addStyleName("login-TextField");
 		pwtxtPassword.addStyleName("login-TextField");
 		btnLogin.addStyleName("login-Button");
@@ -100,21 +75,6 @@ public class LoginView extends AbstractView implements Display{
 	@Override
 	public HasText getPwTxtPassword() {
 		return pwtxtPassword;
-	}
-
-	@Override
-	public HasText getTxtServer() {
-		return txtServer;
-	}
-
-	@Override
-	public HasText getTxtPort() {
-		return txtPort;
-	}
-
-	@Override
-	public HasText getTxtUrl() {
-		return txtUrl;
 	}
 
 	@Override
