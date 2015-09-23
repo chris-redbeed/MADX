@@ -13,6 +13,7 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import de.schule.madnx.server.handler.ChatHandler;
 import de.schule.madnx.server.handler.LoginHandler;
 
 @ServerEndpoint("/serverendpoint")
@@ -23,6 +24,7 @@ public class WebSocketEndpoint {
 	private static Set<Session> users = Collections.synchronizedSet(new HashSet<Session>());
 	
 	private LoginHandler loginHandler = new LoginHandler();
+	private ChatHandler chatHandler = new ChatHandler();
 	
 	@OnOpen
 	public void handleOpen(Session userSession) {
@@ -38,10 +40,15 @@ public class WebSocketEndpoint {
 	
 	@OnMessage
 	public String handleMessage(String message, Session userSession) {
-		String handleLoginMessage = loginHandler.handleMessage(message);
+		String handleLoginMessage = loginHandler.handleMessage(message, userSession);
+		String handleChatMessage = chatHandler.handleMessage(message, userSession, users);
 		if (!handleLoginMessage.equals("error")) {
 			return handleLoginMessage;
 		}
+		if (!handleChatMessage.equals("error")) {
+			return handleChatMessage;
+		}
+		
 		return "error";
 	}
 	

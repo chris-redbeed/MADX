@@ -13,6 +13,8 @@ import java.io.OutputStream;
 import java.util.Properties;
 import java.util.logging.Logger;
 
+import javax.websocket.Session;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -32,7 +34,7 @@ public class LoginHandler {
 	private InputStream input;
 	private final static String PATH = "C:/Users/xgadscj/Desktop/User_Password.txt";
 
-	public String handleMessage(String message) {
+	public String handleMessage(String message, Session session) {
 		try {
 			File file = new File(PATH);
 			input = new FileInputStream(file);
@@ -49,16 +51,16 @@ public class LoginHandler {
 		if (method.equals("login")) {
 			String user = JSONHelper.valueToString(jsonObject.get("user").toString());
 			String password = JSONHelper.valueToString(jsonObject.get("password").toString());
-			return handleLogin(user, password);
+			return handleLogin(user, password,session);
 		} else if (method.equals("register")) {
 			String user = JSONHelper.valueToString(jsonObject.get("user").toString());
 			String password = JSONHelper.valueToString(jsonObject.get("password").toString());
-			return handleRegister(user, password);
+			return handleRegister(user, password,session);
 		}
 		return "error";
 	}
 
-	private String handleLogin(String user, String password) {
+	private String handleLogin(String user, String password, Session session) {
 		String pw = "";
 		if (prop.containsKey(user)) {
 			pw = prop.getProperty(user);
@@ -67,6 +69,7 @@ public class LoginHandler {
 		if (pw.equals(password)) {
 			json.addProperty("method", "login");
 			json.addProperty("result", "okay");
+			session.getUserProperties().put("user", user);
 			return json.toString();
 		}
 		json.addProperty("method", "login");
@@ -75,7 +78,7 @@ public class LoginHandler {
 		return json.toString();
 	}
 
-	private String handleRegister(String user, String password) {
+	private String handleRegister(String user, String password, Session session) {
 		JsonObject json = new JsonObject();
 		File file = new File(PATH);
 		try {
@@ -89,6 +92,7 @@ public class LoginHandler {
 			json.addProperty("result", "error");
 		} else {
 			prop.setProperty(user, password);
+			session.getUserProperties().put("user", user);
 			json.addProperty("method", "register");
 			json.addProperty("result", "okay");
 		}

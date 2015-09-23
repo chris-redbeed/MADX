@@ -37,6 +37,7 @@ public class NetworkChatModule extends Composite{
 	private void init() {
 		rootPanel = new FlowPanel();
 		txtAContent = new TextArea();
+		txtAContent.setReadOnly(true);
 		txtMessage = new TextBox();
 		btnSend = new Button("Senden");
 		

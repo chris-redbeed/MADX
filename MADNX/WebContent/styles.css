@@ -93,7 +93,23 @@ html {
 	margin-left: 5px;
 }
 
-.lobby-Chat {  
+.lobby-Button-top {
+	position: absolute;
+	bottom: 10%;
+	right: 0;
+	height: 10%;
+	width: 20%;
+}
+
+.lobby-Button-bottom {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	height: 10%;
+	width: 20%;
+}
+
+.lobby-Chat {
 	width: 80%;
 	height: 20%;
 	bottom: 0;
@@ -113,7 +129,7 @@ html {
 	width: 20%;
 	right: 0;
 	top: 0;
-	bottom: 0;
+	bottom: 20%;
 	position: absolute;
 }
 
