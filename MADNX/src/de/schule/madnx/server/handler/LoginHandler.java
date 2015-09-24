@@ -20,6 +20,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import de.schule.madnx.shared.JSONHelper;
+import de.schule.madnx.shared.Methods;
 
 /**
  * @author xgadscj
@@ -46,15 +47,15 @@ public class LoginHandler {
 		JsonParser parser = new JsonParser();
 		JsonElement jelement = parser.parse(message);
 		JsonObject jsonObject = jelement.getAsJsonObject();
-		String method = JSONHelper.valueToString(jsonObject.get("method").toString());
+		String method = JSONHelper.valueToString(jsonObject.get(Methods.METHOD).toString());
 		logger.info("method: " + method);
-		if (method.equals("login")) {
-			String user = JSONHelper.valueToString(jsonObject.get("user").toString());
-			String password = JSONHelper.valueToString(jsonObject.get("password").toString());
+		if (method.equals(Methods.LOGIN)) {
+			String user = JSONHelper.valueToString(jsonObject.get(Methods.USER).toString());
+			String password = JSONHelper.valueToString(jsonObject.get(Methods.PASSWORD).toString());
 			return handleLogin(user, password,session);
-		} else if (method.equals("register")) {
-			String user = JSONHelper.valueToString(jsonObject.get("user").toString());
-			String password = JSONHelper.valueToString(jsonObject.get("password").toString());
+		} else if (method.equals(Methods.REGISTER)) {
+			String user = JSONHelper.valueToString(jsonObject.get(Methods.USER).toString());
+			String password = JSONHelper.valueToString(jsonObject.get(Methods.PASSWORD).toString());
 			return handleRegister(user, password,session);
 		}
 		return "error";
@@ -67,12 +68,15 @@ public class LoginHandler {
 		}
 		JsonObject json = new JsonObject();
 		if (pw.equals(password)) {
-			json.addProperty("method", "login");
+			// Setzt Sessionattribute
+			session.getUserProperties().put(Methods.USER, user);
+			session.getUserProperties().put(Methods.LOBBY, 0);
+			
+			json.addProperty(Methods.METHOD, Methods.LOGIN);
 			json.addProperty("result", "okay");
-			session.getUserProperties().put("user", user);
 			return json.toString();
 		}
-		json.addProperty("method", "login");
+		json.addProperty(Methods.METHOD, Methods.LOGIN);
 		json.addProperty("result", "error");
 
 		return json.toString();
@@ -88,12 +92,12 @@ public class LoginHandler {
 			e1.printStackTrace();
 		}
 		if (prop.containsKey(user)) {
-			json.addProperty("method", "register");
+			json.addProperty(Methods.METHOD, Methods.REGISTER);
 			json.addProperty("result", "error");
 		} else {
 			prop.setProperty(user, password);
-			session.getUserProperties().put("user", user);
-			json.addProperty("method", "register");
+			session.getUserProperties().put(Methods.USER, user);
+			json.addProperty(Methods.METHOD, Methods.REGISTER);
 			json.addProperty("result", "okay");
 		}
 

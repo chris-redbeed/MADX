@@ -12,16 +12,19 @@ public class MultiPlayerView   extends AbstractView implements Display{
 	private Label lblTitle;
 	private Button btnConnect;
 	private Button btnCreate;
+	private Button btnClose;
 
 	@Override
 	void init(FlowPanel rootPanel) {
 		lblTitle = new Label("Multiplayer Menü");
 		btnConnect = new Button("Beitreten");
 		btnCreate = new Button("Anlegen");
+		btnClose = new Button("zurück");
 		
 		rootPanel.add(lblTitle);
 		rootPanel.add(btnConnect);
 		rootPanel.add(btnCreate);
+		rootPanel.add(btnClose);
 	}
 
 	@Override
@@ -30,6 +33,7 @@ public class MultiPlayerView   extends AbstractView implements Display{
 		lblTitle.addStyleName("menue-Title");
 		btnConnect.addStyleName("gwt-Button-Menue");
 		btnCreate.addStyleName("gwt-Button-Menue");
+		btnClose.addStyleName("gwt-Button-Menue");
 	}
 
 	@Override
@@ -40,6 +44,11 @@ public class MultiPlayerView   extends AbstractView implements Display{
 	@Override
 	public HasClickHandlers getBtnCreate() {
 		return btnCreate;
+	}
+
+	@Override
+	public HasClickHandlers getBtnClose() {
+		return btnClose;
 	}
 
 }

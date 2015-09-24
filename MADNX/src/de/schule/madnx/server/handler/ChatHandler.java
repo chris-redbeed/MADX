@@ -3,10 +3,7 @@
  */
 package de.schule.madnx.server.handler;
 
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.logging.Level;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.websocket.Session;
@@ -15,7 +12,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import de.schule.madnx.server.handler.list.SessionLobby;
 import de.schule.madnx.shared.JSONHelper;
+import de.schule.madnx.shared.Methods;
 
 /**
  * @author xgadscj
@@ -25,48 +24,28 @@ public class ChatHandler {
 
 	private Logger logger = Logger.getLogger(ChatHandler.class.getName());
 
-	public String handleMessage(String message, Session session, Set<Session> users) {
+	public String handleMessage(String message, Session session, Map<Integer, SessionLobby> lobbies) {
 		JsonParser parser = new JsonParser();
 		JsonElement jelement = parser.parse(message);
 		JsonObject jsonObject = jelement.getAsJsonObject();
-		String method = JSONHelper.valueToString(jsonObject.get("method").toString());
+		String method = JSONHelper.valueToString(jsonObject.get(Methods.METHOD).toString());
 		logger.info("method: " + method);
-		if (method.equals("chat")) {
-			String chatMessage = JSONHelper.valueToString(jsonObject.get("message").toString());
-			String returnMessage = session.getUserProperties().get("user").toString() + ": " + chatMessage;
+		if (method.equals(Methods.CHAT)) {
+			String chatMessage = JSONHelper.valueToString(jsonObject.get(Methods.MESSAGE).toString());
+			String returnMessage = session.getUserProperties().get(Methods.USER).toString() + ": " + chatMessage;
 
 			JsonObject json = new JsonObject();
-			json.addProperty("method", "chat");
-			json.addProperty("message", returnMessage);
+			json.addProperty(Methods.METHOD, Methods.CHAT);
+			json.addProperty(Methods.MESSAGE, returnMessage);
 
-			// String lobby =
-			// session.getUserProperties().get("lobby").toString();
+			int lobbyID = (int) session.getUserProperties().get(Methods.LOBBY);
+			SessionLobby lobby = lobbies.get(lobbyID);
 
-			sendToUsers("", json.toString(), users, session);
+			if (lobbyID != 0) {
+			lobby.sendToAll(json.toString(), session);
+			}
 			return json.toString();
 		}
 		return "error";
-	}
-
-	private void sendToUsers(String lobby, String message, Set<Session> users, Session session) {
-		Iterator<Session> iterator = users.iterator();
-
-		while (iterator.hasNext()) {
-			Session next = iterator.next();
-			// String userLobby =
-			// next.getUserProperties().get("lobby").toString();
-
-			// userLobby.equals(lobby)
-			if (!session.equals(next) && next.isOpen()) {
-				try {
-					next.getBasicRemote().sendText(message);
-				} catch (IOException e) {
-					logger.log(Level.SEVERE, "Chat-Error", e);
-					e.printStackTrace();
-				}
-				// }
-			}
-
-		}
 	}
 }

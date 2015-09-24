@@ -35,7 +35,7 @@ public class LoginView extends AbstractView implements Display{
 	
 	@Override
 	void init(FlowPanel rootPanel) {
-		lblTitle = new Label("MADX");
+		lblTitle = new Label("MADNX");
 		lblUser = new Label("User:");
 		lblPassword = new Label("Password:");
 

@@ -9,7 +9,6 @@ import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.json.client.JSONString;
-import com.google.gwt.user.client.Window;
 
 import de.schule.madnx.client.GameController;
 import de.schule.madnx.client.event.GetMessageEvent;
@@ -21,6 +20,7 @@ import de.schule.madnx.client.widgets.lobby.GameOptionsModule;
 import de.schule.madnx.client.widgets.lobby.LobbyModule;
 import de.schule.madnx.client.widgets.lobby.NetworkChatModule;
 import de.schule.madnx.shared.JSONHelper;
+import de.schule.madnx.shared.Methods;
 
 public class LobbyPresenter extends AbstractPresenter{
 	
@@ -38,13 +38,13 @@ public class LobbyPresenter extends AbstractPresenter{
 
 	public LobbyPresenter(AbstractModel model, AbstractView view, GameController gameController) {
 		super(model, view, gameController);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void addHandler() {
 		((LobbyView) view).getNetworkChatModule().getBtnSend().addClickHandler(new SendClickHandler());
 		((LobbyView) view).getNetworkChatModule().getTxtMessage().addKeyDownHandler(new EnterKeyDownHandler());
+		((LobbyView) view).getBtnClose().addClickHandler(new CloseClickHandler());
 		gameController.getEventBus().addHandler(GetMessageEvent.TYPE, new LobbyGetMessageHandler());
 	}
 	
@@ -55,10 +55,10 @@ public class LobbyPresenter extends AbstractPresenter{
 			String data = event.getEvent().getData();
 			
 			JSONObject parse = (JSONObject) JSONParser.parse(data);
-			String method = JSONHelper.valueToString(parse.get("method").toString());
+			String method = JSONHelper.valueToString(parse.get(Methods.METHOD).toString());
 			
-			if (method.equals("chat")) {
-				String message = JSONHelper.valueToString(parse.get("message").toString());
+			if (method.equals(Methods.CHAT)) {
+				String message = JSONHelper.valueToString(parse.get(Methods.MESSAGE).toString());
 				
 				String oldText = ((LobbyView) view).getNetworkChatModule().getTxtAContent().getText();
 				if (oldText.equals("")) {
@@ -66,6 +66,12 @@ public class LobbyPresenter extends AbstractPresenter{
 				} else {
 				((LobbyView) view).getNetworkChatModule().getTxtAContent().setText(oldText + "\r\n" + message);
 				}
+			} else if (method.equals(Methods.LEAFE_GAME)) {
+				
+			} else if (method.equals(Methods.CLOSE_GAME)) {
+				
+			} else if (method.equals(Methods.JOIN_GAME)) {
+				
 			}
 		}
 	}
@@ -74,8 +80,8 @@ public class LobbyPresenter extends AbstractPresenter{
 		String message = ((LobbyView) view).getNetworkChatModule().getTxtMessage().getText();
 		((LobbyView) view).getNetworkChatModule().getTxtMessage().setText("");
 		JSONObject object = new JSONObject();
-		object.put("method", new JSONString("chat"));
-		object.put("message", new JSONString(message));
+		object.put(Methods.METHOD, new JSONString(Methods.CHAT));
+		object.put(Methods.MESSAGE, new JSONString(message));
 		gameController.getWebSocket().send(object.toString());
 	}
 	

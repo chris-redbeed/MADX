@@ -2,6 +2,8 @@ package de.schule.madnx.client.view;
 
 import java.util.ArrayList;
 
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
@@ -13,17 +15,20 @@ public class NetworkGameView   extends AbstractView implements Display{
 	
 	private Label lblTitle;
 	private Grid table;
+	private Button	btnClose;
 
 	@Override
 	void init(FlowPanel rootPanel) {
 		lblTitle = new Label("Übersicht Netzwerkspiele");
 		table = new Grid(21,3);
-		table.setText(0, 0, "Spielname");
+		btnClose = new Button("Zurück");
+		table.setText(0, 0, "Host");
 		table.setText(0, 1, "Status");
 		table.setText(0, 2, "Offene Plätze");
 		
 		rootPanel.add(lblTitle);
 		rootPanel.add(table);
+		rootPanel.add(btnClose);
 	}
 
 	@Override
@@ -60,6 +65,11 @@ public class NetworkGameView   extends AbstractView implements Display{
 			}
 		}
 		
+	}
+
+	@Override
+	public HasClickHandlers getBtnClose() {
+		return btnClose;
 	}
 
 }

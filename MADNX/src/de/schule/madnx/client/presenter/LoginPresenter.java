@@ -21,6 +21,7 @@ import de.schule.madnx.client.view.AbstractView;
 import de.schule.madnx.client.view.LoginView;
 import de.schule.madnx.client.websocket.WebSocket;
 import de.schule.madnx.shared.JSONHelper;
+import de.schule.madnx.shared.Methods;
 
 /**
  * @author xgadscj
@@ -59,15 +60,15 @@ public class LoginPresenter extends AbstractPresenter {
 				String data = event.getEvent().getData();
 
 				JSONObject parse = (JSONObject) JSONParser.parse(data);
-				String method = JSONHelper.valueToString(parse.get("method").toString());
+				String method = JSONHelper.valueToString(parse.get(Methods.METHOD).toString());
 				String result = JSONHelper.valueToString(parse.get("result").toString());
-				if (method.equals("login")) {
+				if (method.equals(Methods.LOGIN)) {
 					if (result.toString().equals("okay")) {
 						gameController.getPresenterChanger().goTo(PresenterMapper.MENUE);
 					} else {
 						Window.alert("Die Nutzerdaten sind ungültig! Bitte probieren Sie es erneut!");
 					}
-				} else if (method.equals("register")) {
+				} else if (method.equals(Methods.REGISTER)) {
 					if (result.toString().equals("okay")) {
 						gameController.getPresenterChanger().goTo(PresenterMapper.MENUE);
 					} else {
@@ -87,7 +88,7 @@ public class LoginPresenter extends AbstractPresenter {
 			String password = ((LoginView) view).getPwTxtPassword().getText();
 			
 			JSONObject object = new JSONObject();
-			object.put("method", new JSONString("login"));
+			object.put("method", new JSONString(Methods.LOGIN));
 			object.put("user", new JSONString(user));
 			object.put("password", new JSONString(password));
 
@@ -104,7 +105,7 @@ public class LoginPresenter extends AbstractPresenter {
 			String password = ((LoginView) view).getPwTxtPassword().getText();
 			
 			JSONObject object = new JSONObject();
-			object.put("method", new JSONString("register"));
+			object.put("method", new JSONString(Methods.REGISTER));
 			object.put("user", new JSONString(user));
 			object.put("password", new JSONString(password));
 
