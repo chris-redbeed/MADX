@@ -1,5 +1,6 @@
 package de.schule.madnx.server;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -13,6 +14,7 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import de.schule.madnx.server.handler.ChatHandler;
+import de.schule.madnx.server.handler.LobbyHandler;
 import de.schule.madnx.server.handler.LoginHandler;
 import de.schule.madnx.server.handler.list.SessionLobby;
 
@@ -21,10 +23,11 @@ public class WebSocketEndpoint {
 	
 	private Logger logger = Logger.getLogger(WebSocketEndpoint.class.getName());
 	
-	private Map<Integer,SessionLobby> lobbies = new HashMap<Integer,SessionLobby>();
+	static Map<Integer,SessionLobby> lobbies = Collections.synchronizedMap(new HashMap<Integer,SessionLobby>());
 	
 	private LoginHandler loginHandler = new LoginHandler();
 	private ChatHandler chatHandler = new ChatHandler();
+	private LobbyHandler lobbyHandler = new LobbyHandler();
 	
 	@OnOpen
 	public void handleOpen(Session userSession) {
@@ -40,11 +43,15 @@ public class WebSocketEndpoint {
 	public String handleMessage(String message, Session userSession) {
 		String handleLoginMessage = loginHandler.handleMessage(message, userSession);
 		String handleChatMessage = chatHandler.handleMessage(message, userSession, lobbies);
+		String lobbyChatMessage = lobbyHandler.handleMessage(message, userSession, lobbies);
 		if (!handleLoginMessage.equals("error")) {
 			return handleLoginMessage;
 		}
 		if (!handleChatMessage.equals("error")) {
 			return handleChatMessage;
+		}
+		if (!lobbyChatMessage.equals("error")) {
+			return lobbyChatMessage;
 		}
 		
 		return "error";

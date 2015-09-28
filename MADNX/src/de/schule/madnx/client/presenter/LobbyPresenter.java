@@ -66,7 +66,7 @@ public class LobbyPresenter extends AbstractPresenter{
 				} else {
 				((LobbyView) view).getNetworkChatModule().getTxtAContent().setText(oldText + "\r\n" + message);
 				}
-			} else if (method.equals(Methods.LEAFE_GAME)) {
+			} else if (method.equals(Methods.LEAVE_GAME)) {
 				
 			} else if (method.equals(Methods.CLOSE_GAME)) {
 				

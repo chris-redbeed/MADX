@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTMLTable.Cell;
 
 import de.schule.madnx.client.GameController;
+import de.schule.madnx.client.PresenterMapper;
 import de.schule.madnx.client.event.GetMessageEvent;
 import de.schule.madnx.client.event.GetMessageHandler;
 import de.schule.madnx.client.model.AbstractModel;
@@ -43,6 +44,14 @@ public class NetworkGamePresenter extends AbstractPresenter {
 		((NetworkGameView) view).getBtnClose().addClickHandler(new CloseClickHandler());
 		gameController.getEventBus().addHandler(GetMessageEvent.TYPE, new NetworkGameGetMessageHandler());
 	}
+	
+	@Override
+	public void go() {
+		super.go();
+		JSONObject object = new JSONObject();
+		object.put(Methods.METHOD, new JSONString(Methods.LIST_GAMES));
+		gameController.getWebSocket().send(object.toString());
+	}
 
 	private class TableClickHandler implements ClickHandler {
 
@@ -59,8 +68,14 @@ public class NetworkGamePresenter extends AbstractPresenter {
 			
 			// Server-Call um ins Spiel zu kommen
 			JSONObject object = new JSONObject();
-			object.put(Methods.METHOD, new JSONString(Methods.LIST_GAMES));
+			object.put(Methods.METHOD, new JSONString(Methods.JOIN_GAME));
+			String gameID = table.getText(rowIndex, 1);
+			if (gameID != null && !gameID.equals("")) {
+			object.put("game", new JSONString(gameID));
 			gameController.getWebSocket().send(object.toString());
+			
+			gameController.getPresenterChanger().goTo(PresenterMapper.LOBBY);
+			}
 		}
 	}
 
@@ -73,7 +88,7 @@ public class NetworkGamePresenter extends AbstractPresenter {
 			JSONObject parse = (JSONObject) JSONParser.parse(data);
 			String method = JSONHelper.valueToString(parse.get(Methods.METHOD).toString());
 			if (method.equals(Methods.LIST_GAMES)) {
-			String result = JSONHelper.valueToString(parse.get(Methods.METHOD).toString());
+			String result = JSONHelper.valueToString(parse.get("result").toString());
 				ArrayList<Game> decode = GameListCoder.decode(result);
 				Grid table = ((NetworkGameView) view).getTable();
 				for (int i = 0; i < table.getRowCount()-1; i ++) {

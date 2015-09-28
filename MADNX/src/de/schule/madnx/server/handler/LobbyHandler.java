@@ -39,8 +39,8 @@ public class LobbyHandler {
 			return createGame(session, lobbies);
 		} else if (method.equals(Methods.CLOSE_GAME)) {
 			return closeGame(session, lobbies);
-		} else if (method.equals(Methods.LEAFE_GAME)) {
-			return leafeGame(session, lobbies);
+		} else if (method.equals(Methods.LEAVE_GAME)) {
+			return leaveGame(session, lobbies);
 		} else if (method.equals(Methods.JOIN_GAME)) {
 			return joinGame(jsonObject, session, lobbies);
 		} else if (method.equals(Methods.LIST_GAMES)) {
@@ -53,7 +53,7 @@ public class LobbyHandler {
 		Collection<SessionLobby> collection = lobbies.values();
 		ArrayList<SessionLobby> arrayListLobby = new ArrayList<>(collection);
 		ArrayList<Game> arrayListGame = toGameList(arrayListLobby);
-		String gameList = GameListCoder.decode(arrayListGame);
+		String gameList = GameListCoder.encode(arrayListGame);
 
 		JsonObject json = new JsonObject();
 		json.addProperty(Methods.METHOD, Methods.LIST_GAMES);
@@ -66,17 +66,23 @@ public class LobbyHandler {
 		String game = JSONHelper.valueToString(jsonObject.get("game").toString());
 		int lobbyID = Integer.parseInt(game);
 
+		SessionLobby sessionLobby = lobbies.get(lobbyID);
+		if (sessionLobby != null) {
 		session.getUserProperties().remove(Methods.LOBBY);
 		session.getUserProperties().put(Methods.LOBBY, lobbyID);
+		
+		sessionLobby.addToLobby(session);
+		}
 
 		// TODO ResultString erstellen!
 
-		SessionLobby lobby = lobbies.get(lobbyID);
-		lobby.sendToAll("", session);
-		return "";
+		JsonObject json = new JsonObject();
+		
+//		sessionLobby.sendToAll("", session);
+		return json.toString();
 	}
 
-	private String leafeGame(Session session, Map<Integer, SessionLobby> lobbies) {
+	private String leaveGame(Session session, Map<Integer, SessionLobby> lobbies) {
 		int lobbyID = (int) session.getUserProperties().get(Methods.LOBBY);
 		session.getUserProperties().remove(Methods.LOBBY);
 		session.getUserProperties().put(Methods.LOBBY, 0);
@@ -144,6 +150,7 @@ public class LobbyHandler {
 			game.setHost(l.getHost());
 			game.setCurrentPlaces(l.getCurrentCount());
 			game.setId(l.getID());
+			result.add(game);
 		}
 
 		return result;
