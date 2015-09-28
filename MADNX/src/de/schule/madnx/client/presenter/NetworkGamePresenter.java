@@ -42,7 +42,7 @@ public class NetworkGamePresenter extends AbstractPresenter {
 		((NetworkGameView) view).getBtnClose().addClickHandler(new CloseClickHandler());
 		gameController.getEventBus().addHandler(GetMessageEvent.TYPE, new NetworkGameGetMessageHandler());
 	}
-	
+
 	@Override
 	public void go() {
 		super.go();
@@ -63,14 +63,17 @@ public class NetworkGamePresenter extends AbstractPresenter {
 		public void onClick(ClickEvent event) {
 			Cell cellForEvent = table.getCellForEvent(event);
 			int rowIndex = cellForEvent.getRowIndex();
-			
-			// Server-Call um ins Spiel zu kommen
-			JSONObject object = new JSONObject();
-			object.put(Methods.METHOD, new JSONString(Methods.JOIN_GAME));
-			String gameID = table.getText(rowIndex, 1);
-			if (gameID != null && !gameID.equals("")) {
-			object.put("game", new JSONString(gameID));
-			gameController.getWebSocket().send(object.toString());
+
+			if (rowIndex > 0) {
+
+				// Server-Call um ins Spiel zu kommen
+				JSONObject object = new JSONObject();
+				object.put(Methods.METHOD, new JSONString(Methods.JOIN_GAME));
+				String gameID = table.getText(rowIndex, 1);
+				if (gameID != null && !gameID.equals("")) {
+					object.put("game", new JSONString(gameID));
+					gameController.getWebSocket().send(object.toString());
+				}
 			}
 		}
 	}
@@ -84,7 +87,7 @@ public class NetworkGamePresenter extends AbstractPresenter {
 			JSONObject parse = (JSONObject) JSONParser.parse(data);
 			String method = JSONHelper.valueToString(parse.get(Methods.METHOD).toString());
 			if (method.equals(Methods.LIST_GAMES)) {
-			String result = JSONHelper.valueToString(parse.get("result").toString());
+				String result = JSONHelper.valueToString(parse.get("result").toString());
 				ArrayList<Game> decode = GameListCoder.decode(result);
 				((NetworkGameView) view).setTable(decode);
 			}

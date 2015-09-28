@@ -33,7 +33,7 @@ public class MenueView extends AbstractView implements Display{
 		btnExit = new Button("Beenden");
 		
 		rootPanel.add(lblTitle);
-		rootPanel.add(btnSinglePlayer);
+//		rootPanel.add(btnSinglePlayer);
 		rootPanel.add(btnMultiPlayer);
 		rootPanel.add(btnHighScore);
 		rootPanel.add(btnOptions);

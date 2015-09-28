@@ -122,7 +122,7 @@ public class LoginPresenter extends AbstractPresenter {
 	@Override
 	public void go() {
 		super.go();
-		if (gameController.getWebSocket() == null || gameController.getWebSocket().getReadyState() == WebSocket.OPEN) {
+		if (gameController.getWebSocket() == null || gameController.getWebSocket().getReadyState() != WebSocket.OPEN) {
 			WebSocket socket = WebSocket.create(WebSocketURL);
 			gameController.setWebSocket(socket);
 			}
