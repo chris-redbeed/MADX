@@ -12,29 +12,27 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTMLTable.Cell;
 
 import de.schule.madnx.client.GameController;
-import de.schule.madnx.client.PresenterMapper;
 import de.schule.madnx.client.event.GetMessageEvent;
 import de.schule.madnx.client.event.GetMessageHandler;
-import de.schule.madnx.client.model.AbstractModel;
 import de.schule.madnx.client.view.AbstractView;
 import de.schule.madnx.client.view.NetworkGameView;
+import de.schule.madnx.shared.Game;
 import de.schule.madnx.shared.JSONHelper;
 import de.schule.madnx.shared.Methods;
-import de.schule.madnx.shared.gamelist.Game;
-import de.schule.madnx.shared.gamelist.GameListCoder;
+import de.schule.madnx.shared.coder.GameListCoder;
 
 public class NetworkGamePresenter extends AbstractPresenter {
 
 	public interface Display {
 		Grid getTable();
 
-		void setTable(ArrayList<?> list);
+		void setTable(ArrayList<Game> list);
 
 		HasClickHandlers getBtnClose();
 	}
 
-	public NetworkGamePresenter(AbstractModel model, AbstractView view, GameController gameController) {
-		super(model, view, gameController);
+	public NetworkGamePresenter(AbstractView view, GameController gameController) {
+		super(view, gameController);
 	}
 
 	@Override
@@ -73,8 +71,6 @@ public class NetworkGamePresenter extends AbstractPresenter {
 			if (gameID != null && !gameID.equals("")) {
 			object.put("game", new JSONString(gameID));
 			gameController.getWebSocket().send(object.toString());
-			
-			gameController.getPresenterChanger().goTo(PresenterMapper.LOBBY);
 			}
 		}
 	}
@@ -90,20 +86,7 @@ public class NetworkGamePresenter extends AbstractPresenter {
 			if (method.equals(Methods.LIST_GAMES)) {
 			String result = JSONHelper.valueToString(parse.get("result").toString());
 				ArrayList<Game> decode = GameListCoder.decode(result);
-				Grid table = ((NetworkGameView) view).getTable();
-				for (int i = 0; i < table.getRowCount()-1; i ++) {
-					if (decode.size() > i) {
-					Game game = decode.get(i);
-					table.setText(i+1, 0, game.getHost());
-					table.setText(i+1, 1, String.valueOf(game.getId()));
-					table.setText(i+1, 2, String.valueOf(game.getCurrentPlaces()));
-					}
-					else {
-						table.setText(i+1, 0,"");
-						table.setText(i+1, 1,"");
-						table.setText(i+1, 2,"");
-					}
-				}
+				((NetworkGameView) view).setTable(decode);
 			}
 		}
 	}

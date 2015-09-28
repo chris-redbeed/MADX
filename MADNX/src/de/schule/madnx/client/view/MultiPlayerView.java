@@ -5,7 +5,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 
-import de.schule.madnx.client.presenter.MultiPlayerPresenter.Display;
+import de.schule.madnx.client.presenter.MultiPlayerMenuePresenter.Display;
 
 public class MultiPlayerView   extends AbstractView implements Display{
 	

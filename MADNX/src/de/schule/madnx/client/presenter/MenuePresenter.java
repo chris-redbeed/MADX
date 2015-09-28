@@ -6,7 +6,6 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 
 import de.schule.madnx.client.GameController;
 import de.schule.madnx.client.PresenterMapper;
-import de.schule.madnx.client.model.AbstractModel;
 import de.schule.madnx.client.view.AbstractView;
 import de.schule.madnx.client.view.MenueView;
 
@@ -24,9 +23,8 @@ public class MenuePresenter extends AbstractPresenter {
 		HasClickHandlers getBtnExit();
 	}
 
-	public MenuePresenter(AbstractModel model, AbstractView view, GameController gameController) {
-		super(model, view, gameController);
-		// TODO Auto-generated constructor stub
+	public MenuePresenter(AbstractView view, GameController gameController) {
+		super(view, gameController);
 	}
 
 	@Override

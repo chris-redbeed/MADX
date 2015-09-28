@@ -16,7 +16,6 @@ import de.schule.madnx.client.GameController;
 import de.schule.madnx.client.PresenterMapper;
 import de.schule.madnx.client.event.GetMessageEvent;
 import de.schule.madnx.client.event.GetMessageHandler;
-import de.schule.madnx.client.model.AbstractModel;
 import de.schule.madnx.client.view.AbstractView;
 import de.schule.madnx.client.view.LoginView;
 import de.schule.madnx.client.websocket.WebSocket;
@@ -43,8 +42,8 @@ public class LoginPresenter extends AbstractPresenter {
 
 	}
 
-	public LoginPresenter(AbstractModel model, AbstractView view, GameController gameController) {
-		super(model, view, gameController);
+	public LoginPresenter(AbstractView view, GameController gameController) {
+		super(view, gameController);
 	}
 
 	@Override

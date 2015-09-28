@@ -6,20 +6,15 @@ package de.schule.madnx.client;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.schule.madnx.client.model.HighScoreModel;
-import de.schule.madnx.client.model.LobbyModel;
-import de.schule.madnx.client.model.NetworkGameModel;
-import de.schule.madnx.client.model.OptionsModel;
-import de.schule.madnx.client.model.SinglePlayerModel;
 import de.schule.madnx.client.presenter.HighScorePresenter;
 import de.schule.madnx.client.presenter.LobbyPresenter;
 import de.schule.madnx.client.presenter.LoginPresenter;
 import de.schule.madnx.client.presenter.MenuePresenter;
-import de.schule.madnx.client.presenter.MultiPlayerPresenter;
+import de.schule.madnx.client.presenter.MultiPlayerMenuePresenter;
 import de.schule.madnx.client.presenter.NetworkGamePresenter;
 import de.schule.madnx.client.presenter.OptionsPresenter;
 import de.schule.madnx.client.presenter.Presenter;
-import de.schule.madnx.client.presenter.SinglePlayerPresenter;
+import de.schule.madnx.client.presenter.SinglePlayerGamePresenter;
 import de.schule.madnx.client.view.HighScoreView;
 import de.schule.madnx.client.view.LobbyView;
 import de.schule.madnx.client.view.LoginView;
@@ -50,14 +45,14 @@ public class PresenterMapper {
 	public PresenterMapper(GameController gameController) {
 		
 		presenterList = new HashMap<>();
-		LoginPresenter loginPresenter = new LoginPresenter(null, new LoginView(), gameController);
-		MenuePresenter menuePresenter = new MenuePresenter(null, new MenueView(), gameController);
-		SinglePlayerPresenter singlePlayerPresenter = new SinglePlayerPresenter(new SinglePlayerModel(), new SinglePlayerView(), gameController);
-		MultiPlayerPresenter multiPlayerPresenter = new MultiPlayerPresenter(null, new MultiPlayerView(), gameController);
-		HighScorePresenter highScorePresenter = new HighScorePresenter(new HighScoreModel(), new HighScoreView(), gameController);
-		OptionsPresenter optionsPresenter = new OptionsPresenter(new OptionsModel(), new OptionsView(), gameController);
-		LobbyPresenter lobbyPresenter = new LobbyPresenter(new LobbyModel(), new LobbyView(), gameController);
-		NetworkGamePresenter NetworkGamePresenter = new NetworkGamePresenter(new NetworkGameModel(), new NetworkGameView(), gameController);
+		LoginPresenter loginPresenter = new LoginPresenter(new LoginView(), gameController);
+		MenuePresenter menuePresenter = new MenuePresenter(new MenueView(), gameController);
+		SinglePlayerGamePresenter singlePlayerPresenter = new SinglePlayerGamePresenter(new SinglePlayerView(), gameController);
+		MultiPlayerMenuePresenter multiPlayerPresenter = new MultiPlayerMenuePresenter(new MultiPlayerView(), gameController);
+		HighScorePresenter highScorePresenter = new HighScorePresenter(new HighScoreView(), gameController);
+		OptionsPresenter optionsPresenter = new OptionsPresenter(new OptionsView(), gameController);
+		LobbyPresenter lobbyPresenter = new LobbyPresenter(new LobbyView(), gameController);
+		NetworkGamePresenter NetworkGamePresenter = new NetworkGamePresenter(new NetworkGameView(), gameController);
 		
 		
 		

@@ -8,7 +8,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 
 import de.schule.madnx.client.GameController;
 import de.schule.madnx.client.PresenterMapper;
-import de.schule.madnx.client.model.AbstractModel;
 import de.schule.madnx.client.view.AbstractView;
 
 /**
@@ -18,11 +17,9 @@ import de.schule.madnx.client.view.AbstractView;
 public abstract class AbstractPresenter implements Presenter{
 	
 	protected GameController gameController;
-	protected AbstractModel model;
 	protected AbstractView view;
 	
-	public AbstractPresenter(AbstractModel model, AbstractView view, GameController gameController) {
-		this.model = model;
+	public AbstractPresenter(AbstractView view, GameController gameController) {
 		this.view = view;
 		this.gameController= gameController;
 		

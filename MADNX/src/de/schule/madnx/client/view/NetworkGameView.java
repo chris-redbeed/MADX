@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 
 import de.schule.madnx.client.presenter.NetworkGamePresenter.Display;
+import de.schule.madnx.shared.Game;
 
 public class NetworkGameView   extends AbstractView implements Display{
 	
@@ -45,23 +46,18 @@ public class NetworkGameView   extends AbstractView implements Display{
 	}
 
 	@Override
-	public void setTable(ArrayList<?> list) {
-		table = new Grid(20,3);
-		table.setText(0, 0, "Spielname");
-		table.setText(0, 1, "Status");
-		table.setText(0, 2, "Offene Plätze");
-		
-		for (int i = 0; i < list.size(); i++) {
-			if (i < 20) {
-				Object x = list.get(i);
-				
-				// Für eine Zeile
-				table.setText(i+1, 0, x.toString());
-				table.setText(i+1, 1, x.toString());
-				table.setText(i+1, 2, x.toString());
+	public void setTable(ArrayList<Game> list) {
+		for (int i = 0; i < table.getRowCount()-1; i ++) {
+			if (list.size() > i) {
+			Game game = list.get(i);
+			table.setText(i+1, 0, game.getHost());
+			table.setText(i+1, 1, String.valueOf(game.getId()));
+			table.setText(i+1, 2, String.valueOf(game.getCurrentPlaces()));
 			}
 			else {
-				return;
+				table.setText(i+1, 0,"");
+				table.setText(i+1, 1,"");
+				table.setText(i+1, 2,"");
 			}
 		}
 		

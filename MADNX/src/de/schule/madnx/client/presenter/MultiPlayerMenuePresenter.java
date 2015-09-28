@@ -11,7 +11,6 @@ import com.google.gwt.json.client.JSONString;
 
 import de.schule.madnx.client.GameController;
 import de.schule.madnx.client.PresenterMapper;
-import de.schule.madnx.client.model.AbstractModel;
 import de.schule.madnx.client.view.AbstractView;
 import de.schule.madnx.client.view.MultiPlayerView;
 import de.schule.madnx.shared.Methods;
@@ -20,7 +19,7 @@ import de.schule.madnx.shared.Methods;
  * @author xgadscj
  *
  */
-public class MultiPlayerPresenter extends AbstractPresenter {
+public class MultiPlayerMenuePresenter extends AbstractPresenter {
 
 	public interface Display {
 		HasClickHandlers getBtnConnect();
@@ -30,8 +29,8 @@ public class MultiPlayerPresenter extends AbstractPresenter {
 		HasClickHandlers getBtnClose();
 	}
 
-	public MultiPlayerPresenter(AbstractModel model, AbstractView view, GameController gameController) {
-		super(model, view, gameController);
+	public MultiPlayerMenuePresenter(AbstractView view, GameController gameController) {
+		super(view, gameController);
 		// TODO Auto-generated constructor stub
 	}
 

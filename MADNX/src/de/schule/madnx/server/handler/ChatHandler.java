@@ -38,6 +38,7 @@ public class ChatHandler {
 			json.addProperty(Methods.METHOD, Methods.CHAT);
 			json.addProperty(Methods.MESSAGE, returnMessage);
 
+			// Schickt die Nachricht nur an die Leute aus der Lobby
 			int lobbyID = (int) session.getUserProperties().get(Methods.LOBBY);
 			SessionLobby lobby = lobbies.get(lobbyID);
 

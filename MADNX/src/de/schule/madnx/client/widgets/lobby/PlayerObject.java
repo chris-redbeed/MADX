@@ -7,14 +7,14 @@ package de.schule.madnx.client.widgets.lobby;
  * @author xgadscj
  *
  */
-public class Player {
+public class PlayerObject {
 	
 	private String name;
 	private boolean status;
 	private boolean self;
 	private int position;
 	
-	public Player(String name, boolean status, boolean self, int position) {
+	public PlayerObject(String name, boolean status, boolean self, int position) {
 		this.name = name;
 		this.status = status;
 		this.self = self;

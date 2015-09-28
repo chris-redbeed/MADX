@@ -5,7 +5,7 @@ package de.schule.madnx.client.view;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 
-import de.schule.madnx.client.presenter.SinglePlayerPresenter.Display;
+import de.schule.madnx.client.presenter.SinglePlayerGamePresenter.Display;
 
 /**
  * @author xgadscj

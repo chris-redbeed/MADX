@@ -18,9 +18,9 @@ public class Methods {
 	public static final String MESSAGE = "message";
 	public static final String LOBBY = "lobby";
 	public static final String CREATE_GAME = "creategame";
-	public static final String LEAVE_GAME = "leavegame";
 	public static final String CLOSE_GAME = "closegame";
 	public static final String JOIN_GAME = "joingame";
 	public static final String LIST_GAMES = "listgames";
+	public static final String HIGHSCORE = "highscore";
 
 }

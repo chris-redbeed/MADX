@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.websocket.Session;
@@ -36,19 +37,25 @@ public class LoginHandler {
 	private final static String PATH = "C:/Users/xgadscj/Desktop/User_Password.txt";
 
 	public String handleMessage(String message, Session session) {
+		
+		// Läd die registrierten Nutzer aus einer TXT-Datei
 		try {
 			File file = new File(PATH);
 			input = new FileInputStream(file);
 			prop.load(input);
 			input.close();
 		} catch (IOException e) {
+			logger.log(Level.SEVERE, "Property-Error", e);
 			e.printStackTrace();
 		}
+		
+		// Parst das json, um die Methode zu bekommen
 		JsonParser parser = new JsonParser();
 		JsonElement jelement = parser.parse(message);
 		JsonObject jsonObject = jelement.getAsJsonObject();
 		String method = JSONHelper.valueToString(jsonObject.get(Methods.METHOD).toString());
 		logger.info("method: " + method);
+		//Vergleich zwischen den Methoden
 		if (method.equals(Methods.LOGIN)) {
 			String user = JSONHelper.valueToString(jsonObject.get(Methods.USER).toString());
 			String password = JSONHelper.valueToString(jsonObject.get(Methods.PASSWORD).toString());
@@ -61,6 +68,7 @@ public class LoginHandler {
 		return "error";
 	}
 
+	// loggt den Spieler ein
 	private String handleLogin(String user, String password, Session session) {
 		String pw = "";
 		if (prop.containsKey(user)) {
@@ -82,13 +90,14 @@ public class LoginHandler {
 		return json.toString();
 	}
 
+	// erstellt einen neuen User und loggt dann den Spieler ein
 	private String handleRegister(String user, String password, Session session) {
 		JsonObject json = new JsonObject();
 		File file = new File(PATH);
 		try {
 			output = new FileOutputStream(file);
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
+			logger.log(Level.SEVERE, "Register-Error", e1);
 			e1.printStackTrace();
 		}
 		if (prop.containsKey(user)) {
@@ -101,11 +110,12 @@ public class LoginHandler {
 			json.addProperty("result", "okay");
 		}
 
+		// Abspeichern der Properties in der TXT-Datei
 		try {
 			prop.store(output, null);
 			output.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			logger.log(Level.SEVERE, "Property-Error", e);
 			e.printStackTrace();
 		}
 

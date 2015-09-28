@@ -4,22 +4,20 @@
 package de.schule.madnx.client.presenter;
 
 import de.schule.madnx.client.GameController;
-import de.schule.madnx.client.model.AbstractModel;
 import de.schule.madnx.client.view.AbstractView;
 
 /**
  * @author xgadscj
  *
  */
-public class SinglePlayerPresenter extends AbstractPresenter{
+public class SinglePlayerGamePresenter extends AbstractPresenter{
 	
 	public interface Display {
 		
 	}
 
-	public SinglePlayerPresenter(AbstractModel model, AbstractView view, GameController gameController) {
-		super(model, view, gameController);
-		// TODO Auto-generated constructor stub
+	public SinglePlayerGamePresenter(AbstractView view, GameController gameController) {
+		super(view, gameController);
 	}
 
 	@Override

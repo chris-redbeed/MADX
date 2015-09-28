@@ -21,7 +21,7 @@ public class LobbyModule extends Composite{
 		init();
 		initStyles();
 		
-		initPlayer(8);
+		initPlayer(4);
 	}
 
 	private void initStyles() {
@@ -35,17 +35,17 @@ public class LobbyModule extends Composite{
 		}
 	}
 	
-	public void updatePlayer(ArrayList<Player> list) {
+	public void updatePlayer(ArrayList<PlayerObject> list) {
 		pnlContent.clear();
 		for (int i = 0; i < list.size(); i++) {
-			Player player = list.get(i);
-			if (i < player.getPosition()) {
-				int differ = player.getPosition() - i;
-				for (int y = 0; y < differ; y++) {
-					pnlContent.add(new Label("Leerer Platz"));
-				}
-			}
-			pnlContent.add(new PlayerModule(player.getName(),player.getSelf(), player.getStatus()));
+			PlayerObject player = list.get(i);
+//			if (i < player.getPosition()) {
+//				int differ = player.getPosition() - i;
+//				for (int y = 0; y < differ; y++) {
+//					pnlContent.add(new Label("Leerer Platz"));
+//				}
+//			}
+			pnlContent.add(new PlayerModule(player.getName(),player.getSelf(), player.getStatus()).asWidget());
 		}
 	}
 

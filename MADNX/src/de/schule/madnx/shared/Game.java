@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.schule.madnx.shared.gamelist;
+package de.schule.madnx.shared;
 
 /**
  * @author xgadscj

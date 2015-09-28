@@ -1,9 +1,11 @@
 /**
  * 
  */
-package de.schule.madnx.shared.gamelist;
+package de.schule.madnx.shared.coder;
 
 import java.util.ArrayList;
+
+import de.schule.madnx.shared.Game;
 
 /**
  * @author xgadscj
@@ -33,7 +35,7 @@ public class GameListCoder {
 
 	public static String encode(ArrayList<Game> gameList) {
 		String result = "";
-		if (gameList != null) {
+		if (gameList != null && gameList.size() > 0) {
 			for (Game g : gameList) {
 				result += g.getHost() + ATTR_INDICATOR + g.getId() + ATTR_INDICATOR + g.getCurrentPlaces()
 						+ GAME_INDICATOR;

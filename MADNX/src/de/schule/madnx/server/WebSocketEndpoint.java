@@ -14,6 +14,7 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import de.schule.madnx.server.handler.ChatHandler;
+import de.schule.madnx.server.handler.HighScoreHandler;
 import de.schule.madnx.server.handler.LobbyHandler;
 import de.schule.madnx.server.handler.LoginHandler;
 import de.schule.madnx.server.handler.list.SessionLobby;
@@ -28,6 +29,7 @@ public class WebSocketEndpoint {
 	private LoginHandler loginHandler = new LoginHandler();
 	private ChatHandler chatHandler = new ChatHandler();
 	private LobbyHandler lobbyHandler = new LobbyHandler();
+	private HighScoreHandler highScoreHandler = new HighScoreHandler();
 	
 	@OnOpen
 	public void handleOpen(Session userSession) {
@@ -44,6 +46,7 @@ public class WebSocketEndpoint {
 		String handleLoginMessage = loginHandler.handleMessage(message, userSession);
 		String handleChatMessage = chatHandler.handleMessage(message, userSession, lobbies);
 		String lobbyChatMessage = lobbyHandler.handleMessage(message, userSession, lobbies);
+		String highScoreString = highScoreHandler.handleMessage(message, userSession);
 		if (!handleLoginMessage.equals("error")) {
 			return handleLoginMessage;
 		}
@@ -52,6 +55,9 @@ public class WebSocketEndpoint {
 		}
 		if (!lobbyChatMessage.equals("error")) {
 			return lobbyChatMessage;
+		}
+		if (!highScoreString.equals("error")) {
+			return highScoreString;
 		}
 		
 		return "error";
