@@ -48,7 +48,7 @@ public class HighScorePresenter extends AbstractPresenter {
 	public void go() {
 		super.go();
 		JSONObject object = new JSONObject();
-		object.put(Methods.METHOD, new JSONString(Methods.HIGHSCORE));
+		object.put(Methods.METHOD, new JSONString(Methods.LIST_HIGHSCORE));
 		gameController.getWebSocket().send(object.toString());
 	}
 
@@ -60,7 +60,7 @@ public class HighScorePresenter extends AbstractPresenter {
 
 			JSONObject parse = (JSONObject) JSONParser.parse(data);
 			String method = JSONHelper.valueToString(parse.get(Methods.METHOD).toString());
-			if (method.equals(Methods.HIGHSCORE)) {
+			if (method.equals(Methods.LIST_HIGHSCORE)) {
 				String result = JSONHelper.valueToString(parse.get("result").toString());
 				
 				Map<String, Integer> highScoreMap = HighScoreMapCoder.decode(result);

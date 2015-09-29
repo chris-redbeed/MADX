@@ -140,3 +140,47 @@ html {
 	top: 0;
 	position: absolute;
 }
+
+.spielfeld {
+	background-color: white !important;
+	height: 5%;
+	width: 5%;
+	border-radius: 50px;
+	border: 2px solid black;
+}
+
+.player-red {
+	background-color: red !important;
+	height: 5%;
+	width: 5%;
+	border-radius: 50px;
+	border: 2px solid black;
+}
+
+.player-blue {
+	background-color: blue !important;
+	height: 5%;
+	width: 5%;
+	border-radius: 50px;
+	border: 2px solid black;
+}
+
+.player-yellow {
+	background-color: yellow !important;
+	height: 5%;
+	width: 5%;
+	border-radius: 50px;
+	border: 2px solid black;
+}
+
+.player-green {
+	background-color: green !important;
+	height: 5%;
+	width: 5%;
+	border-radius: 50px;
+	border: 2px solid black;
+}
+
+.board {
+	position: inherit !important;
+}

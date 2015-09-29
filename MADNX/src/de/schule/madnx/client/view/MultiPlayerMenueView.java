@@ -7,7 +7,7 @@ import com.google.gwt.user.client.ui.Label;
 
 import de.schule.madnx.client.presenter.MultiPlayerMenuePresenter.Display;
 
-public class MultiPlayerView   extends AbstractView implements Display{
+public class MultiPlayerMenueView   extends AbstractView implements Display{
 	
 	private Label lblTitle;
 	private Button btnConnect;

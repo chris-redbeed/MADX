@@ -25,9 +25,9 @@ import de.schule.madnx.client.widgets.lobby.PlayerObject;
 import de.schule.madnx.shared.JSONHelper;
 import de.schule.madnx.shared.Methods;
 import de.schule.madnx.shared.Option;
-import de.schule.madnx.shared.Player;
+import de.schule.madnx.shared.User;
 import de.schule.madnx.shared.coder.OptionListCoder;
-import de.schule.madnx.shared.coder.PlayerListCoder;
+import de.schule.madnx.shared.coder.UserListCoder;
 
 public class LobbyPresenter extends AbstractPresenter {
 
@@ -52,6 +52,7 @@ public class LobbyPresenter extends AbstractPresenter {
 		((LobbyView) view).getNetworkChatModule().getBtnSend().addClickHandler(new SendClickHandler());
 		((LobbyView) view).getNetworkChatModule().getTxtMessage().addKeyDownHandler(new EnterKeyDownHandler());
 		((LobbyView) view).getBtnClose().addClickHandler(new CloseGameClickHandler());
+		((LobbyView) view).getBtnStart().addClickHandler(new StartGameClickHandler());
 		gameController.getEventBus().addHandler(GetMessageEvent.TYPE, new LobbyGetMessageHandler());
 	}
 
@@ -73,7 +74,7 @@ public class LobbyPresenter extends AbstractPresenter {
 				} else {
 					((LobbyView) view).getNetworkChatModule().getTxtAContent().setText(oldText + "\r\n" + message);
 				}
-			} else if (method.equals(Methods.JOIN_GAME)) {
+			} else if (method.equals(Methods.JOIN_LOBBY)) {
 				String result = JSONHelper.valueToString(parse.get("result").toString());
 				if (!result.equals("error")) {
 					String newMember = JSONHelper.valueToString(parse.get("new").toString());
@@ -84,13 +85,13 @@ public class LobbyPresenter extends AbstractPresenter {
 					String playerResult = JSONHelper.valueToString(parse.get("players").toString());
 					String optionResult = JSONHelper.valueToString(parse.get("options").toString());
 
-					ArrayList<Player> players = PlayerListCoder.decode(playerResult);
+					ArrayList<User> players = UserListCoder.decode(playerResult);
 					ArrayList<Option> options = OptionListCoder.decode(optionResult);
 
 					updatePlayers(players, self);
 					updateOptions(options);
 				}
-			} else if (method.equals(Methods.CLOSE_GAME)) {
+			} else if (method.equals(Methods.CLOSE_LOBBY)) {
 				gameController.getPresenterChanger().goTo(PresenterMapper.MENUE);
 			}
 		}
@@ -105,9 +106,9 @@ public class LobbyPresenter extends AbstractPresenter {
 		gameController.getWebSocket().send(object.toString());
 	}
 
-	private void updatePlayers(ArrayList<Player> players, String self) {
+	private void updatePlayers(ArrayList<User> players, String self) {
 		ArrayList<PlayerObject> list = new ArrayList<>();
-		for (Player p : players) {
+		for (User p : players) {
 			PlayerObject module = null;
 			if (p.getName().equals(self)) {
 				module = new PlayerObject(p.getName(), p.getStatus(), true, 0);
@@ -152,8 +153,20 @@ public class LobbyPresenter extends AbstractPresenter {
 		@Override
 		public void onClick(ClickEvent event) {
 			JSONObject object = new JSONObject();
-			object.put(Methods.METHOD, new JSONString(Methods.CLOSE_GAME));
+			object.put(Methods.METHOD, new JSONString(Methods.CLOSE_LOBBY));
 			gameController.getWebSocket().send(object.toString());
+		}
+
+	}
+	
+	private class StartGameClickHandler implements ClickHandler {
+
+		@Override
+		public void onClick(ClickEvent event) {
+//			JSONObject object = new JSONObject();
+//			object.put(Methods.METHOD, new JSONString(Methods.START_GAME));
+//			gameController.getWebSocket().send(object.toString());
+			gameController.getPresenterChanger().goTo(PresenterMapper.GAME);
 		}
 
 	}

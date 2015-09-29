@@ -24,9 +24,30 @@ public class GameHandler {
 		String method = JSONHelper.valueToString(jsonObject.get(Methods.METHOD).toString());
 		logger.info("method: " + method);
 
-		
+		if (method.equals(Methods.START_GAME)) {
+			startGame();
+		}else if (method.equals(Methods.DICE)) {
+			dice();
+		}else if (method.equals(Methods.SET)) {
+			set();
+		}
 		
 		return "error";
+	}
+
+	private void set() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void dice() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void startGame() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

@@ -12,7 +12,7 @@ import javax.websocket.Session;
 
 import de.schule.madnx.shared.Methods;
 import de.schule.madnx.shared.Option;
-import de.schule.madnx.shared.Player;
+import de.schule.madnx.shared.User;
 
 /**
  * @author xgadscj
@@ -20,7 +20,7 @@ import de.schule.madnx.shared.Player;
  */
 public class SessionLobby {
 	private ArrayList<Option> options;
-	private ArrayList<Player> players;
+	private ArrayList<User> players;
 	private ArrayList<Session> lobby;
 	private String host;
 	private int size;
@@ -38,7 +38,7 @@ public class SessionLobby {
 
 	public void addToLobby(Session session, boolean host) {
 		lobby.add(session);
-		Player player = new Player();
+		User player = new User();
 		player.setHost(host);
 		String user = session.getUserProperties().get(Methods.USER).toString();
 		if (user.equals(host)) {
@@ -54,8 +54,8 @@ public class SessionLobby {
 		lobby.remove(session);
 
 		String user = session.getUserProperties().get(Methods.USER).toString();
-		Player remove = null;
-		for (Player p : players) {
+		User remove = null;
+		for (User p : players) {
 			if (p.getName().equals(user)) {
 				remove = p;
 			}
@@ -124,7 +124,7 @@ public class SessionLobby {
 		return (int) lobby.get(0).getUserProperties().get("lobby");
 	}
 
-	public ArrayList<Player> getPlayers() {
+	public ArrayList<User> getPlayers() {
 		return players;
 	}
 

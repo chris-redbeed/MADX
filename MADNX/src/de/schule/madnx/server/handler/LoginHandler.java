@@ -31,7 +31,7 @@ public class LoginHandler {
 
 	private Logger logger = Logger.getLogger(LoginHandler.class.getName());
 
-	private Properties prop = new Properties();;
+	private Properties prop = new Properties();
 	private OutputStream output;
 	private InputStream input;
 	private final static String PATH = "C:/Users/xgadscj/Desktop/User_Password.txt";

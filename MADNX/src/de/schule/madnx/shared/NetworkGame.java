@@ -7,7 +7,7 @@ package de.schule.madnx.shared;
  * @author xgadscj
  *
  */
-public class Game {
+public class NetworkGame {
 	private String host;
 	private String status;
 	private int id;

@@ -12,7 +12,7 @@ import com.google.gwt.json.client.JSONString;
 import de.schule.madnx.client.GameController;
 import de.schule.madnx.client.PresenterMapper;
 import de.schule.madnx.client.view.AbstractView;
-import de.schule.madnx.client.view.MultiPlayerView;
+import de.schule.madnx.client.view.MultiPlayerMenueView;
 import de.schule.madnx.shared.Methods;
 
 /**
@@ -36,9 +36,9 @@ public class MultiPlayerMenuePresenter extends AbstractPresenter {
 
 	@Override
 	public void addHandler() {
-		((MultiPlayerView) view).getBtnConnect().addClickHandler(new ConnectClickHandler());
-		((MultiPlayerView) view).getBtnCreate().addClickHandler(new CreateClickHandler());
-		((MultiPlayerView) view).getBtnClose().addClickHandler(new CloseClickHandler());
+		((MultiPlayerMenueView) view).getBtnConnect().addClickHandler(new ConnectClickHandler());
+		((MultiPlayerMenueView) view).getBtnCreate().addClickHandler(new CreateClickHandler());
+		((MultiPlayerMenueView) view).getBtnClose().addClickHandler(new CloseClickHandler());
 
 	}
 
@@ -55,7 +55,7 @@ public class MultiPlayerMenuePresenter extends AbstractPresenter {
 		@Override
 		public void onClick(ClickEvent event) {
 			JSONObject object = new JSONObject();
-			object.put(Methods.METHOD, new JSONString(Methods.CREATE_GAME));
+			object.put(Methods.METHOD, new JSONString(Methods.CREATE_LOBBY));
 			
 			gameController.getWebSocket().send(object.toString());
 			gameController.getPresenterChanger().goTo(PresenterMapper.LOBBY);

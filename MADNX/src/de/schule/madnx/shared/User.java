@@ -7,7 +7,7 @@ package de.schule.madnx.shared;
  * @author xgadscj
  *
  */
-public class Player {
+public class User {
 	private String name;
 	private boolean host;
 	private boolean status;

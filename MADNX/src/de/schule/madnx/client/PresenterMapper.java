@@ -6,6 +6,7 @@ package de.schule.madnx.client;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.schule.madnx.client.presenter.GamePresenter;
 import de.schule.madnx.client.presenter.HighScorePresenter;
 import de.schule.madnx.client.presenter.LobbyPresenter;
 import de.schule.madnx.client.presenter.LoginPresenter;
@@ -14,15 +15,14 @@ import de.schule.madnx.client.presenter.MultiPlayerMenuePresenter;
 import de.schule.madnx.client.presenter.NetworkGamePresenter;
 import de.schule.madnx.client.presenter.OptionsPresenter;
 import de.schule.madnx.client.presenter.Presenter;
-import de.schule.madnx.client.presenter.SinglePlayerGamePresenter;
+import de.schule.madnx.client.view.GameView;
 import de.schule.madnx.client.view.HighScoreView;
 import de.schule.madnx.client.view.LobbyView;
 import de.schule.madnx.client.view.LoginView;
 import de.schule.madnx.client.view.MenueView;
-import de.schule.madnx.client.view.MultiPlayerView;
+import de.schule.madnx.client.view.MultiPlayerMenueView;
 import de.schule.madnx.client.view.NetworkGameView;
 import de.schule.madnx.client.view.OptionsView;
-import de.schule.madnx.client.view.SinglePlayerView;
 
 /**
  * @author xgadscj
@@ -41,25 +41,25 @@ public class PresenterMapper {
 	public static final String MULTIPLAYERMENUE = "MultiPlayerMenue";
 	public static final String LOBBY = "Lobby";
 	public static final String NETWORKGAME = "NetworkGame";
+	public static final String GAME = "Game";
 	
 	public PresenterMapper(GameController gameController) {
 		
 		presenterList = new HashMap<>();
 		LoginPresenter loginPresenter = new LoginPresenter(new LoginView(), gameController);
 		MenuePresenter menuePresenter = new MenuePresenter(new MenueView(), gameController);
-		SinglePlayerGamePresenter singlePlayerPresenter = new SinglePlayerGamePresenter(new SinglePlayerView(), gameController);
-		MultiPlayerMenuePresenter multiPlayerPresenter = new MultiPlayerMenuePresenter(new MultiPlayerView(), gameController);
+		MultiPlayerMenuePresenter multiPlayerPresenter = new MultiPlayerMenuePresenter(new MultiPlayerMenueView(), gameController);
 		HighScorePresenter highScorePresenter = new HighScorePresenter(new HighScoreView(), gameController);
 		OptionsPresenter optionsPresenter = new OptionsPresenter(new OptionsView(), gameController);
 		LobbyPresenter lobbyPresenter = new LobbyPresenter(new LobbyView(), gameController);
 		NetworkGamePresenter NetworkGamePresenter = new NetworkGamePresenter(new NetworkGameView(), gameController);
-		
+		GamePresenter gamePresenter = new GamePresenter(new GameView(),gameController);
 		
 		
 		
 		presenterList.put(LOGIN, loginPresenter);
 		presenterList.put(MENUE, menuePresenter);
-		presenterList.put(SINGLEPLAYER, singlePlayerPresenter);
+		presenterList.put(GAME, gamePresenter);
 		presenterList.put(MULTIPLAYER, multiPlayerPresenter);
 		presenterList.put(HIGHSCORE, highScorePresenter);
 		presenterList.put(OPTIONS, optionsPresenter);

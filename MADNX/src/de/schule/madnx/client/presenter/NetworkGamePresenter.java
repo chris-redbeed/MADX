@@ -16,17 +16,17 @@ import de.schule.madnx.client.event.GetMessageEvent;
 import de.schule.madnx.client.event.GetMessageHandler;
 import de.schule.madnx.client.view.AbstractView;
 import de.schule.madnx.client.view.NetworkGameView;
-import de.schule.madnx.shared.Game;
+import de.schule.madnx.shared.NetworkGame;
 import de.schule.madnx.shared.JSONHelper;
 import de.schule.madnx.shared.Methods;
-import de.schule.madnx.shared.coder.GameListCoder;
+import de.schule.madnx.shared.coder.NetworkGameListCoder;
 
 public class NetworkGamePresenter extends AbstractPresenter {
 
 	public interface Display {
 		Grid getTable();
 
-		void setTable(ArrayList<Game> list);
+		void setTable(ArrayList<NetworkGame> list);
 
 		HasClickHandlers getBtnClose();
 	}
@@ -68,7 +68,7 @@ public class NetworkGamePresenter extends AbstractPresenter {
 
 				// Server-Call um ins Spiel zu kommen
 				JSONObject object = new JSONObject();
-				object.put(Methods.METHOD, new JSONString(Methods.JOIN_GAME));
+				object.put(Methods.METHOD, new JSONString(Methods.JOIN_LOBBY));
 				String gameID = table.getText(rowIndex, 1);
 				if (gameID != null && !gameID.equals("")) {
 					object.put("game", new JSONString(gameID));
@@ -88,7 +88,7 @@ public class NetworkGamePresenter extends AbstractPresenter {
 			String method = JSONHelper.valueToString(parse.get(Methods.METHOD).toString());
 			if (method.equals(Methods.LIST_GAMES)) {
 				String result = JSONHelper.valueToString(parse.get("result").toString());
-				ArrayList<Game> decode = GameListCoder.decode(result);
+				ArrayList<NetworkGame> decode = NetworkGameListCoder.decode(result);
 				((NetworkGameView) view).setTable(decode);
 			}
 		}

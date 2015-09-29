@@ -46,7 +46,7 @@ public class HighScoreHandler {
 		JsonObject jsonObject = jelement.getAsJsonObject();
 		String method = JSONHelper.valueToString(jsonObject.get(Methods.METHOD).toString());
 		logger.info("method: " + method);
-		if (method.equals(Methods.HIGHSCORE)) {
+		if (method.equals(Methods.LIST_HIGHSCORE)) {
 			// Holt sich die HighScore-Daten aus einer Txt-Datei
 			try {
 				File file = new File(PATH);
@@ -67,7 +67,7 @@ public class HighScoreHandler {
 			String resultString = HighScoreMapCoder.encode(sortedResult);
 			
 			JsonObject json = new JsonObject();
-			json.addProperty(Methods.METHOD, Methods.HIGHSCORE);
+			json.addProperty(Methods.METHOD, Methods.LIST_HIGHSCORE);
 			json.addProperty("result", resultString);
 
 			return json.toString();

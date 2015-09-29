@@ -5,24 +5,24 @@ package de.schule.madnx.shared.coder;
 
 import java.util.ArrayList;
 
-import de.schule.madnx.shared.Game;
+import de.schule.madnx.shared.NetworkGame;
 
 /**
  * @author xgadscj
  *
  */
-public class GameListCoder {
+public class NetworkGameListCoder {
 
 	private static final String ATTR_INDICATOR = "_";
 	private static final String GAME_INDICATOR = "/";
 
-	public static ArrayList<Game> decode(String gameList) {
-		ArrayList<Game> result = new ArrayList<>();
+	public static ArrayList<NetworkGame> decode(String gameList) {
+		ArrayList<NetworkGame> result = new ArrayList<>();
 		if (gameList != null) {
 			String[] games = gameList.split(GAME_INDICATOR);
 			for (String s : games) {
 				String[] attributes = s.split(ATTR_INDICATOR);
-				Game game = new Game();
+				NetworkGame game = new NetworkGame();
 				game.setHost(attributes[0]);
 				game.setId(Integer.valueOf(attributes[1]));
 				game.setCurrentPlaces(Integer.valueOf(attributes[2]));
@@ -33,10 +33,10 @@ public class GameListCoder {
 		return result;
 	}
 
-	public static String encode(ArrayList<Game> gameList) {
+	public static String encode(ArrayList<NetworkGame> gameList) {
 		String result = "";
 		if (gameList != null && gameList.size() > 0) {
-			for (Game g : gameList) {
+			for (NetworkGame g : gameList) {
 				result += g.getHost() + ATTR_INDICATOR + g.getId() + ATTR_INDICATOR + g.getCurrentPlaces()
 						+ GAME_INDICATOR;
 			}

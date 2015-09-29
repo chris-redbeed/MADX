@@ -17,12 +17,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import de.schule.madnx.server.handler.list.SessionLobby;
-import de.schule.madnx.shared.Game;
+import de.schule.madnx.shared.NetworkGame;
 import de.schule.madnx.shared.JSONHelper;
 import de.schule.madnx.shared.Methods;
-import de.schule.madnx.shared.coder.GameListCoder;
+import de.schule.madnx.shared.coder.NetworkGameListCoder;
 import de.schule.madnx.shared.coder.OptionListCoder;
-import de.schule.madnx.shared.coder.PlayerListCoder;
+import de.schule.madnx.shared.coder.UserListCoder;
 
 /**
  * @author xgadscj
@@ -41,11 +41,11 @@ public class LobbyHandler {
 		logger.info("method: " + method);
 		
 		// Unterscheidung zwischen den verschiedenen Methoden
-		if (method.equals(Methods.CREATE_GAME)) {
+		if (method.equals(Methods.CREATE_LOBBY)) {
 			return createGame(session, lobbies);
-		} else if (method.equals(Methods.CLOSE_GAME)) {
+		} else if (method.equals(Methods.CLOSE_LOBBY)) {
 			return closeGame(session, lobbies);
-		} else if (method.equals(Methods.JOIN_GAME)) {
+		} else if (method.equals(Methods.JOIN_LOBBY)) {
 			return joinGame(jsonObject, session, lobbies);
 		} else if (method.equals(Methods.LIST_GAMES)) {
 			return listGame(lobbies);
@@ -57,8 +57,8 @@ public class LobbyHandler {
 	private String listGame(Map<Integer, SessionLobby> lobbies) {
 		Collection<SessionLobby> collection = lobbies.values();
 		ArrayList<SessionLobby> arrayListLobby = new ArrayList<>(collection);
-		ArrayList<Game> arrayListGame = toGameList(arrayListLobby);
-		String gameList = GameListCoder.encode(arrayListGame);
+		ArrayList<NetworkGame> arrayListGame = toGameList(arrayListLobby);
+		String gameList = NetworkGameListCoder.encode(arrayListGame);
 
 		JsonObject json = new JsonObject();
 		json.addProperty(Methods.METHOD, Methods.LIST_GAMES);
@@ -87,7 +87,7 @@ public class LobbyHandler {
 			}
 			json = createJoinResult(sessionLobby, session);
 		} else {
-			json.addProperty(Methods.METHOD, Methods.JOIN_GAME);
+			json.addProperty(Methods.METHOD, Methods.JOIN_LOBBY);
 			json.addProperty("result", "error");
 		}
 		json.remove("new");
@@ -98,12 +98,12 @@ public class LobbyHandler {
 	// Dient der Unterscheidung, was für Optionen der Spieler in der Lobby hat
 	// Der Spieler soll zum Beispiel nicht den Status eines anderen auf Fertig setzten!
 	private JsonObject createJoinResult(SessionLobby sessionLobby, Session session) {
-		String playerResult = PlayerListCoder.encode(sessionLobby.getPlayers());
+		String playerResult = UserListCoder.encode(sessionLobby.getPlayers());
 		String optionsResult = OptionListCoder.encode(sessionLobby.getOptions());
 		String user = session.getUserProperties().get(Methods.USER).toString();
 
 		JsonObject json = new JsonObject();
-		json.addProperty(Methods.METHOD, Methods.JOIN_GAME);
+		json.addProperty(Methods.METHOD, Methods.JOIN_LOBBY);
 		json.addProperty("players", playerResult);
 		json.addProperty("options", optionsResult);
 		json.addProperty("result", "okay");
@@ -137,12 +137,12 @@ public class LobbyHandler {
 		} else {
 			lobbies.remove(lobbyID);
 			json = new JsonObject();
-			json.addProperty(Methods.METHOD, Methods.CLOSE_GAME);
+			json.addProperty(Methods.METHOD, Methods.CLOSE_LOBBY);
 			lobby.sendToAll(json.toString(), session);
 		}
 
 		json = new JsonObject();
-		json.addProperty(Methods.METHOD, Methods.CLOSE_GAME);
+		json.addProperty(Methods.METHOD, Methods.CLOSE_LOBBY);
 
 		return json.toString();
 	}
@@ -188,11 +188,11 @@ public class LobbyHandler {
 	}
 
 	// Erstellt eine Liste von Spielen aus allen Lobbies
-	private ArrayList<Game> toGameList(ArrayList<SessionLobby> lobbies) {
-		ArrayList<Game> result = new ArrayList<>();
+	private ArrayList<NetworkGame> toGameList(ArrayList<SessionLobby> lobbies) {
+		ArrayList<NetworkGame> result = new ArrayList<>();
 
 		for (SessionLobby l : lobbies) {
-			Game game = new Game();
+			NetworkGame game = new NetworkGame();
 			game.setHost(l.getHost());
 			game.setCurrentPlaces(l.getCurrentCount());
 			game.setId(l.getID());
