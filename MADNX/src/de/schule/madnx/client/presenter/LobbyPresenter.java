@@ -163,10 +163,9 @@ public class LobbyPresenter extends AbstractPresenter {
 
 		@Override
 		public void onClick(ClickEvent event) {
-//			JSONObject object = new JSONObject();
-//			object.put(Methods.METHOD, new JSONString(Methods.START_GAME));
-//			gameController.getWebSocket().send(object.toString());
-			gameController.getPresenterChanger().goTo(PresenterMapper.GAME);
+			JSONObject object = new JSONObject();
+			object.put(Methods.METHOD, new JSONString(Methods.START_GAME));
+			gameController.getWebSocket().send(object.toString());
 		}
 
 	}

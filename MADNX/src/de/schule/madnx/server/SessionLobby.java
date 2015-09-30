@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.schule.madnx.server.handler.list;
+package de.schule.madnx.server;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import javax.websocket.Session;
 
+import de.schule.madnx.server.game.GamePlay;
 import de.schule.madnx.shared.Methods;
 import de.schule.madnx.shared.Option;
 import de.schule.madnx.shared.User;
@@ -25,6 +26,7 @@ public class SessionLobby {
 	private String host;
 	private int size;
 	private String status;
+	private GamePlay gamePlay;
 
 	private Logger logger = Logger.getLogger(SessionLobby.class.getName());
 
@@ -139,4 +141,13 @@ public class SessionLobby {
 	private void loadOptions() {
 
 	}
+
+	public void setGamePlay(GamePlay gamePlay) {
+		this.gamePlay = gamePlay;
+	}
+
+	public GamePlay getGamePlay() {
+		return gamePlay;
+	}
+
 }

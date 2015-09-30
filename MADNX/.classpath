@@ -7,6 +7,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/gson-2.3.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/gwt-servlet.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.websocket-api-1.1.jar"/>
-	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER/GWT (1)"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>

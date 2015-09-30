@@ -141,40 +141,7 @@ html {
 	position: absolute;
 }
 
-.spielfeld {
-	background-color: white !important;
-	height: 5%;
-	width: 5%;
-	border-radius: 50px;
-	border: 2px solid black;
-}
-
-.player-red {
-	background-color: red !important;
-	height: 5%;
-	width: 5%;
-	border-radius: 50px;
-	border: 2px solid black;
-}
-
-.player-blue {
-	background-color: blue !important;
-	height: 5%;
-	width: 5%;
-	border-radius: 50px;
-	border: 2px solid black;
-}
-
-.player-yellow {
-	background-color: yellow !important;
-	height: 5%;
-	width: 5%;
-	border-radius: 50px;
-	border: 2px solid black;
-}
-
-.player-green {
-	background-color: green !important;
+.field {
 	height: 5%;
 	width: 5%;
 	border-radius: 50px;
@@ -186,20 +153,24 @@ html {
 }
 
 /* Figuren */
-
 .head {
 	height: 30px;
 	width: 30px;
 	border-radius: 50%;
-	position: relative;
+	position: absolute;
 	top: 16px;
 	left: 2px;
+	border: 1px solid black;
 }
 
 .body {
 	height: 40px;
 	width: 40px;
 	border-radius: 50%;
+	border: 1px solid black;
+	top: 3px;
+	left: 11px;
+	position: absolute;
 }
 
 .green {
@@ -216,4 +187,8 @@ html {
 
 .yellow {
 	background-color: yellow !important;
+}
+
+.white {
+	background-color: white !important;
 }

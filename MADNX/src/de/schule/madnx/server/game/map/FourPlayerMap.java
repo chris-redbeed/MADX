@@ -3,7 +3,9 @@
  */
 package de.schule.madnx.server.game.map;
 
-import com.google.gwt.user.client.rpc.core.java.util.Arrays;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import de.schule.madnx.server.game.Field;
 import de.schule.madnx.server.game.GameMap;
@@ -34,7 +36,7 @@ public class FourPlayerMap implements FieldMap{
 	
 	public void createFields(GameMap gameMap) {
 		int zaehler = 0;
-		Field[] fields = new Field[64];
+		Field[] fields = new Field[76];
 		
 		for(int[] i : this.map){
 			fields[zaehler] = new Field(Field.Type.PATH, zaehler, i[0], i[1]);
@@ -101,5 +103,47 @@ public class FourPlayerMap implements FieldMap{
 		}
 		
 		gameMap.fields = Arrays.asList(fields);
+	}
+
+	@Override
+	public int[][] getMapAsArray() {
+		return map;
+	}
+
+	@Override
+	public ArrayList<int[][]> getFieldsForPlayerList() {
+		ArrayList<int[][]> result = new ArrayList<>();
+		int[][] helpArray = new int[9][2];
+		System.arraycopy(redSpawn, 0, helpArray, 0, redSpawn.length);
+		System.arraycopy(redFinish, 0, helpArray, redSpawn.length, redFinish.length);
+		System.arraycopy(redStart, 0, helpArray, redSpawn.length + redFinish.length, redStart.length);
+		result.add(helpArray);
+		helpArray = new int[9][2];
+		System.arraycopy(blueSpawn, 0, helpArray, 0, blueSpawn.length);
+		System.arraycopy(blueFinish, 0, helpArray, redFinish.length, blueFinish.length);
+		System.arraycopy(blueStart, 0, helpArray, blueSpawn.length + blueFinish.length, blueStart.length);
+		result.add(helpArray);
+		helpArray = new int[9][2];
+		System.arraycopy(greenSpawn, 0, helpArray, 0, greenSpawn.length);
+		System.arraycopy(greenFinish, 0, helpArray, greenSpawn.length, greenFinish.length);
+		System.arraycopy(greenStart, 0, helpArray, greenSpawn.length + greenFinish.length, greenStart.length);
+		result.add(helpArray);
+		helpArray = new int[9][2];
+		System.arraycopy(yellowSpawn, 0, helpArray, 0, yellowSpawn.length);
+		System.arraycopy(yellowFinish, 0, helpArray, yellowSpawn.length, yellowFinish.length);
+		System.arraycopy(yellowStart, 0, helpArray, yellowSpawn.length + yellowFinish.length, yellowStart.length);
+		result.add(helpArray);
+		return result;
+	}
+	
+	public ArrayList<int[][]> getSpawnForFigureList() {
+		ArrayList<int[][]> result = new ArrayList<>();
+		
+		result.add(redSpawn);
+		result.add(blueSpawn);
+		result.add(greenSpawn);
+		result.add(yellowSpawn);
+		
+		return result;
 	}
 }

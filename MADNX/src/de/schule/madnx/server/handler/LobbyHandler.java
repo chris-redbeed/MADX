@@ -16,8 +16,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import de.schule.madnx.server.handler.list.SessionLobby;
 import de.schule.madnx.shared.NetworkGame;
+import de.schule.madnx.server.SessionLobby;
 import de.schule.madnx.shared.JSONHelper;
 import de.schule.madnx.shared.Methods;
 import de.schule.madnx.shared.coder.NetworkGameListCoder;

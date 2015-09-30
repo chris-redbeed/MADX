@@ -3,14 +3,14 @@
  */
 package de.schule.madnx.server.game;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author xgadscj
  *
  */
 public class GameMap {
-	public ArrayList<Field> fields;
+	public List<Field> fields;
 	private PathFinder finder;
 	
 	public boolean canBeSet(Figure figure) {
