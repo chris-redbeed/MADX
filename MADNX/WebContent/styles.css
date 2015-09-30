@@ -184,3 +184,36 @@ html {
 .board {
 	position: inherit !important;
 }
+
+/* Figuren */
+
+.head {
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	position: relative;
+	top: 16px;
+	left: 2px;
+}
+
+.body {
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+}
+
+.green {
+	background-color: green !important;
+}
+
+.blue {
+	background-color: blue !important;
+}
+
+.red {
+	background-color: red !important;
+}
+
+.yellow {
+	background-color: yellow !important;
+}

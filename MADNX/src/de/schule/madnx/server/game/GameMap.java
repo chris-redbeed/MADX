@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  */
 public class GameMap {
-	private ArrayList<Field> map;
+	public ArrayList<Field> fields;
 	private PathFinder finder;
 	
 	public boolean canBeSet(Figure figure) {

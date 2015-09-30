@@ -28,7 +28,7 @@ import de.schule.madnx.shared.Methods;
  */
 public class LoginPresenter extends AbstractPresenter {
 	
-	private static final String WebSocketURL = "ws://msgscjm1.gadeg.de:8080/MADNX/serverendpoint";
+	private static final String WebSocketURL = "ws://127.0.0.1:8080/MADNX/serverendpoint";
 
 	public interface Display {
 
