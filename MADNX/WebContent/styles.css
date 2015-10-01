@@ -152,18 +152,33 @@ html {
 	position: inherit !important;
 }
 
+.figure {
+	/* 	-webkit-filter: drop-shadow(rgb(0, 0, 0) 0px 0px 2px); */
+	-webkit-filter: drop-shadow(rgb(0, 0, 0) 5px 5px 5px);
+}
+
 /* Figuren */
 .head {
-	height: 30px;
-	width: 30px;
+	height: 26px;
+	width: 26px;
 	border-radius: 50%;
 	position: absolute;
-	top: 16px;
-	left: 2px;
+	top: -13px;
+	left: 19px;
 	border: 1px solid black;
 }
 
 .body {
+	/* 	height: 40px; */ /* 	width: 40px; */ /* 	border-radius: 50%; */
+	/* 	border: 1px solid black; */ /* 	top: 3px; */ /* 	left: 11px; */
+	/* 	position: absolute; */ /* 	border-bottom: 100px solid red; */
+	/* 	border-left: 50px solid transparent; */
+	/* 	border-right: 50px solid transparent; */ /* 	height: 0; */
+	/* 	width: 100px; */ /* */ /* 	top: 9px; */ /* 	left: 7px; */
+	/* 	position: absolute; */ /* 	border-bottom: 36px solid; */
+	/* 	border-left: 20px solid transparent; */
+	/* 	border-right: 20px solid transparent; */ /* 	height: 0; */
+	/* 	width: 10px; */ /* 	border-radius: 41%; */
 	height: 40px;
 	width: 40px;
 	border-radius: 50%;
@@ -171,24 +186,61 @@ html {
 	top: 3px;
 	left: 11px;
 	position: absolute;
+	border: 1px solid black;
 }
 
-.green {
-	background-color: green !important;
+.body.red {
+	/* 	border-bottom-color: #c00; */
+	background-color: #c00;
 }
 
-.blue {
-	background-color: blue !important;
+.body.green {
+	/* 	border-bottom-color: #0c0; */
+	background-color: #0c0;
 }
 
-.red {
-	background-color: red !important;
+.body.blue {
+	/* 	border-bottom-color: #00A; */
+	background-color: #00A;
 }
 
-.yellow {
-	background-color: yellow !important;
+.body.yellow {
+	/* 	border-bottom-color: #cc0; */
+	background-color: #cc0;
 }
 
-.white {
-	background-color: white !important;
+.head.red {
+	background-color: #c00;
+}
+
+.head.green {
+	background-color: #0c0;
+}
+
+.head.blue {
+	background-color: #00A;
+}
+
+.head.yellow {
+	background-color: #cc0;
+}
+
+.field.green {
+	background-color: green;
+}
+
+.field.blue {
+	background-color: #00F;
+}
+
+.field.red {
+	background-color: #F40;
+}
+
+.field.yellow {
+	background-color: yellow;
+}
+
+.field.white {
+	background-color: white;
 }

@@ -16,6 +16,12 @@ public class Player {
 	
 	private ArrayList<Figure> figures;
 	
+	public Player(String user) {
+		figures = new ArrayList<>();
+		this.user = user;
+		wins = false;
+	}
+	
 	public void setWins(boolean wins) {
 		this.wins = wins;
 	}

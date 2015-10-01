@@ -6,6 +6,7 @@ package de.schule.madnx.server.game.map;
 import java.util.ArrayList;
 
 import de.schule.madnx.server.game.GameMap;
+import de.schule.madnx.server.game.Player;
 
 /**
  * @author xgadscj
@@ -13,6 +14,8 @@ import de.schule.madnx.server.game.GameMap;
  */
 public interface FieldMap {
 	public void createFields(GameMap gameMap);
+
+	public void createFigures(GameMap gameMap, ArrayList<Player> players);
 	
 	public int[][] getMapAsArray();
 	

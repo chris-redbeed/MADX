@@ -18,12 +18,15 @@ public class PlayerUI extends Composite {
 	private FlowPanel rootPanel;
 	private FlowPanel body;
 	private FlowPanel head;
+	private boolean enabled;
 	private int x;
 	private int y;
+	private int id;
 
 	public PlayerUI(String style, int x, int y, int id) {
 		this.x = x;
 		this.y = y;
+		this.id = id;
 		init();
 		initStyles(style);
 	}
@@ -34,6 +37,7 @@ public class PlayerUI extends Composite {
 	}
 
 	private void initStyles(String style) {
+		rootPanel.setStyleName("figure");
 		body.setStyleName("body");
 		head.setStyleName("head");
 		body.addStyleName(style);
@@ -68,5 +72,16 @@ public class PlayerUI extends Composite {
 	public void setY(int y) {
 		this.y = y;
 	}
-
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	
+	public boolean getEnabled() {
+		return enabled;
+	}
 }

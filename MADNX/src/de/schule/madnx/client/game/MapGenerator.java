@@ -16,7 +16,7 @@ import com.google.gwt.user.client.ui.RootPanel;
  * @author xgadscj
  *
  */
-public class ClientMapGenerator {
+public class MapGenerator {
 
 	private AbsolutePanel panel;
 	private int countPlayers;
@@ -26,13 +26,15 @@ public class ClientMapGenerator {
 	private int[][] map;
 	private ArrayList<PlayerUI> playerUIs;
 	private static final int WINDOW_SIZE = 13;
+	private DiceUI diceUI;
 
-	public ClientMapGenerator(AbsolutePanel panel, ArrayList<int[][]> playerFields, int[][] map,
+	public MapGenerator(AbsolutePanel panel, ArrayList<int[][]> playerFields, int[][] map,
 			ArrayList<int[][]> spawnFigures) {
 		this.panel = panel;
 		this.playerFields = playerFields;
 		this.map = map;
 		this.playerUIs = new ArrayList<>();
+		this.diceUI = new DiceUI();
 		saveSpawnFigures(spawnFigures);
 		sizeMap = map.length;
 		countPlayers = playerFields.get(0).length;
@@ -45,12 +47,14 @@ public class ClientMapGenerator {
 	}
 
 	private void saveSpawnFigures(ArrayList<int[][]> spawnFigures) {
+		int count = 1;
 		for (int i = 0; i < spawnFigures.size(); i++) {
 			int[][] spawnFigureForPlayer = spawnFigures.get(i);
 			for (int j = 0; j < spawnFigureForPlayer.length; j++) {
 				Integer y = Integer.valueOf(spawnFigureForPlayer[j][0]);
 				Integer x = Integer.valueOf(spawnFigureForPlayer[j][1]);
-				playerUIs.add(new PlayerUI(getPlayerStyle(i), x, y, 0));
+				playerUIs.add(new PlayerUI(getPlayerStyle(i), x, y, count));
+				count++;
 			}
 		}
 	}
@@ -89,9 +93,9 @@ public class ClientMapGenerator {
 		case 2:
 			return "blue";
 		case 3:
-			return "yellow";
-		case 4:
 			return "green";
+		case 4:
+			return "yellow";
 		default:
 			return "";
 		}
@@ -110,6 +114,18 @@ public class ClientMapGenerator {
 			panel.add(feld, offsetWidth / WINDOW_SIZE * x, offsetHeight / WINDOW_SIZE * y);
 		}
 	}
+	
+	public void generateDice() {
+		panel.add(diceUI.asWidget());
+	}
+	
+	public void removeDice() {
+		panel.remove(diceUI.asWidget());
+	}
+	
+	public DiceUI getDiceUI() {
+		return diceUI;
+	}
 
 	private class WindowResizeHandler implements ResizeHandler {
 
@@ -122,7 +138,20 @@ public class ClientMapGenerator {
 		}
 	}
 	
+	public ArrayList<PlayerUI> getPlayerUIs() {
+		return playerUIs;
+	}
+	
 	public void moveFigureWithID(int id, int x, int y) {
-		
+		int offsetHeight = RootPanel.get().getOffsetHeight();
+		int offsetWidth = RootPanel.get().getOffsetWidth();
+		for (PlayerUI p : playerUIs) {
+			if (p.getId() == id) {
+				panel.remove(p.asWidget());
+				p.setX(x);
+				p.setY(y);
+				panel.add(p.asWidget(), offsetWidth / WINDOW_SIZE * x, offsetHeight / WINDOW_SIZE * y);
+			}
+		}
 	}
 }

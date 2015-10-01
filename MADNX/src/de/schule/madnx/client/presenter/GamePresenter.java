@@ -5,15 +5,19 @@ package de.schule.madnx.client.presenter;
 
 import java.util.ArrayList;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
+import com.google.gwt.json.client.JSONString;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 
 import de.schule.madnx.client.GameController;
 import de.schule.madnx.client.PresenterMapper;
 import de.schule.madnx.client.event.GetMessageEvent;
 import de.schule.madnx.client.event.GetMessageHandler;
-import de.schule.madnx.client.game.ClientMapGenerator;
+import de.schule.madnx.client.game.MapGenerator;
+import de.schule.madnx.client.game.PlayerUI;
 import de.schule.madnx.client.view.AbstractView;
 import de.schule.madnx.client.view.GameView;
 import de.schule.madnx.shared.JSONHelper;
@@ -26,9 +30,9 @@ import de.schule.madnx.shared.coder.PlayerFieldCoder;
  *
  */
 public class GamePresenter extends AbstractPresenter {
-	
-	private ClientMapGenerator generator;
-	
+
+	private MapGenerator generator;
+
 	public interface Display {
 		AbsolutePanel getBoard();
 	}
@@ -37,21 +41,23 @@ public class GamePresenter extends AbstractPresenter {
 		super(view, gameController);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.schule.madnx.client.presenter.AbstractPresenter#addHandler()
 	 */
 	@Override
 	public void addHandler() {
 		gameController.getEventBus().addHandler(GetMessageEvent.TYPE, new GameGetMessageHandler());
 	}
-	
+
 	private void generate(int[][] map, ArrayList<int[][]> playerFields, ArrayList<int[][]> spawnFigures) {
-		AbsolutePanel board = ((GameView)view).getBoard();
-		generator = new ClientMapGenerator(board, playerFields, map, spawnFigures);
+		AbsolutePanel board = ((GameView) view).getBoard();
+		generator = new MapGenerator(board, playerFields, map, spawnFigures);
 	}
-	
+
 	private class GameGetMessageHandler implements GetMessageHandler {
-		
+
 		@Override
 		public void getMessage(GetMessageEvent event) {
 			String data = event.getEvent().getData();
@@ -59,28 +65,94 @@ public class GamePresenter extends AbstractPresenter {
 			JSONObject parse = (JSONObject) JSONParser.parse(data);
 			String method = JSONHelper.valueToString(parse.get(Methods.METHOD).toString());
 
-			if (method.equals(Methods.CHAT)) {
-				
-			} else if (method.equals(Methods.START_GAME)) {
+			switch (method) {
+			case Methods.START_GAME:
 				String map = JSONHelper.valueToString(parse.get("map").toString());
 				String fields = JSONHelper.valueToString(parse.get("playerFields").toString());
 				String spawns = JSONHelper.valueToString(parse.get("spawnFigure").toString());
-				
+
 				int[][] gameMap = GameMapCoder.decode(map);
 				ArrayList<int[][]> playerFields = PlayerFieldCoder.decode(fields);
 				ArrayList<int[][]> spawnFields = PlayerFieldCoder.decode(spawns);
-				
+
 				generate(gameMap, playerFields, spawnFields);
 				
+				for (PlayerUI p :generator.getPlayerUIs()) {
+					p.addClickHandler(new PlayerUIClickHandler(p));
+					p.setEnabled(false);
+				}
+				
+				generator.getDiceUI().asWidget().addDomHandler(new DiceUIClickHandler(), ClickEvent.getType());
+
 				gameController.getPresenterChanger().goTo(PresenterMapper.GAME);
-			}  else if (method.equals(Methods.END_GAME)) {
+				generator.generateDice();
+				break;
+
+			case Methods.END_GAME:
+				break;
+
+			case Methods.DICE:
+				int dice = Integer.valueOf(JSONHelper.valueToString(parse.get("result").toString()));
+				generator.getDiceUI().setDiceText("" + dice);
 				
-			} else if (method.equals(Methods.VALID)) {
+				for (PlayerUI p : generator.getPlayerUIs()) {
+					p.setEnabled(true);
+				}
 				
-			} else if (method.equals(Methods.INVALID)) {
+				break;
+
+			case Methods.SET:
+				String result = JSONHelper.valueToString(parse.get("result").toString());
+				int id = Integer.valueOf(JSONHelper.valueToString(parse.get("id").toString()));
 				
+				int[][] figureCoord = GameMapCoder.decode(result);
+				
+				generator.moveFigureWithID(id, figureCoord[0][0], figureCoord[0][1]);
+				for (PlayerUI p : generator.getPlayerUIs()) {
+					p.setEnabled(false);
+				}
+				generator.getDiceUI().setEnabled(true);
+				break;
+
+			case Methods.END_SET:
+				generator.getDiceUI().setEnabled(true);
+				break;
 			}
 		}
 	}
+	
+	private class PlayerUIClickHandler implements ClickHandler {
+		
+		private PlayerUI playerUI;
+		
+		public PlayerUIClickHandler(PlayerUI p) {
+			playerUI = p;
+		}
 
+		@Override
+		public void onClick(ClickEvent arg0) {
+			if (playerUI.getEnabled()) {
+			int id = playerUI.getId();
+			
+			JSONObject object = new JSONObject();
+			object.put(Methods.METHOD, new JSONString(Methods.SET));
+			object.put("id", new JSONString("" + id));
+			
+			gameController.getWebSocket().send(object.toString());
+			}
+		}
+	}
+	
+	private class DiceUIClickHandler implements ClickHandler {
+		
+		@Override
+		public void onClick(ClickEvent arg0) {
+			generator.getDiceUI().setEnabled(false);
+			JSONObject object = new JSONObject();
+			object.put(Methods.METHOD, new JSONString(Methods.DICE));
+			
+			gameController.getWebSocket().send(object.toString());
+			
+		}
+	}
 }

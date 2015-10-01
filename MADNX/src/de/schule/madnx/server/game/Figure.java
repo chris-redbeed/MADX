@@ -3,6 +3,8 @@
  */
 package de.schule.madnx.server.game;
 
+import de.schule.madnx.server.game.field.Field.PlayerColor;
+
 /**
  * @author xgadscj
  *
@@ -10,10 +12,12 @@ package de.schule.madnx.server.game;
 public class Figure {
 	private int id;
 	private boolean set;
-	private boolean clickable;
+	private PlayerColor player;
 	
-	public void setClickable(boolean clickable) {
-		this.clickable = clickable;
+	public Figure(int id, boolean set,PlayerColor player) {
+		this.id= id;
+		this.set = set;
+		this.player = player;
 	}
 	public void setId(int id) {
 		this.id = id;
@@ -26,11 +30,11 @@ public class Figure {
 		return id;
 	}
 	
-	public boolean getClickable() {
-		return clickable;
-	}
-	
 	public boolean getSet() {
 		return set;
+	}
+	
+	public PlayerColor getPlayer() {
+		return player;
 	}
 }

@@ -11,8 +11,10 @@ import com.google.gson.JsonParser;
 
 import de.schule.madnx.server.SessionLobby;
 import de.schule.madnx.server.game.GamePlay;
+import de.schule.madnx.server.game.Player;
 import de.schule.madnx.shared.JSONHelper;
 import de.schule.madnx.shared.Methods;
+import de.schule.madnx.shared.User;
 import de.schule.madnx.shared.coder.GameMapCoder;
 import de.schule.madnx.shared.coder.PlayerFieldCoder;
 
@@ -30,32 +32,73 @@ public class GameHandler {
 		if (method.equals(Methods.START_GAME)) {
 			return startGame(lobby);
 		}else if (method.equals(Methods.DICE)) {
-			dice();
+			return dice(lobby, session);
 		}else if (method.equals(Methods.SET)) {
-			set();
+			return set(lobby, session, message);
+		} else if (method.equals(Methods.END_SET)) {
+			return endSet(lobby);
 		}
 		
 		return "error";
 	}
 
-	private void set() {
-		// TODO Auto-generated method stub
+	private String set(SessionLobby lobby, Session session, String message) {
+		JsonParser parser = new JsonParser();
+		JsonElement jelement = parser.parse(message);
+		JsonObject jsonObject = jelement.getAsJsonObject();
+		int id = jsonObject.get("id").getAsInt();
+		GamePlay gamePlay = lobby.getGamePlay();
+		int[][] result = gamePlay.set(id);
 		
+		JsonObject json = new JsonObject();
+		json.addProperty(Methods.METHOD, Methods.SET);
+		json.addProperty("result", GameMapCoder.encode(result));
+		json.addProperty("id", ""+id);
+		
+		return json.toString();
 	}
 
-	private void dice() {
-		// TODO Auto-generated method stub
-		
+	private String dice(SessionLobby lobby, Session session) {
+		GamePlay gamePlay = lobby.getGamePlay();
+		String user = session.getUserProperties().get(Methods.USER).toString();
+		if (gamePlay.getCurrentPlayer().getUser().equals(user)) {
+			int dice = gamePlay.dice();
+			JsonObject json = new JsonObject();
+			json.addProperty(Methods.METHOD, Methods.DICE);
+			json.addProperty("result", ""+dice);
+			return json.toString();
+		}
+		return "error";
 	}
 
 	private String startGame(SessionLobby lobby) {
 		lobby.setGamePlay(new GamePlay(4));
+		for (User u : lobby.getPlayers()) {
+			lobby.getGamePlay().addPlayer(new Player(u.getName()));
+			lobby.getGamePlay().addPlayer(new Player(u.getName()));
+			lobby.getGamePlay().addPlayer(new Player(u.getName()));
+			lobby.getGamePlay().addPlayer(new Player(u.getName()));
+		}
+		lobby.getGamePlay().start();
+		Player currentPlayer = lobby.getGamePlay().getCurrentPlayer();
 		
 		JsonObject json = new JsonObject();
 		json.addProperty(Methods.METHOD, Methods.START_GAME);
 		json.addProperty("map", GameMapCoder.encode(lobby.getGamePlay().getMap()));
 		json.addProperty("playerFields", PlayerFieldCoder.encode(lobby.getGamePlay().getFieldsForPlayers()));
 		json.addProperty("spawnFigure", PlayerFieldCoder.encode(lobby.getGamePlay().getSpawnsForPlayers()));
+		json.addProperty("player", currentPlayer.getUser());
+		return json.toString();
+	}
+	
+	private String endSet(SessionLobby lobby) {
+		GamePlay gamePlay = lobby.getGamePlay();
+		gamePlay.nextPlayer();
+		Player currentPlayer = gamePlay.getCurrentPlayer();
+		
+		JsonObject json = new JsonObject();
+		json.addProperty(Methods.METHOD, Methods.END_SET);
+		json.addProperty("player", currentPlayer.getUser());
 		return json.toString();
 	}
 	

@@ -1,26 +1,25 @@
-package de.schule.madnx.server.game;
+package de.schule.madnx.server.game.field;
+
+import de.schule.madnx.server.game.Figure;
 
 public class Field {
 	
 	public enum Type {
 		SPAWN, START, FINISH, PATH;
 	}
+	public enum PlayerColor {
+		RED, BLUE, GREEN, YELLOW;
+	}
 	
 	private boolean set;
 	private int x;
 	private int y;
-	private int fieldId;
-	private Type type;
+	public Type type;
 	private Figure figure;
 	private Field next;
 	
-	public Field(){
-		
-	}
-	
-	public Field(Type typ, int fieldId, int x, int y){
-		this.type = typ;
-		this.fieldId = fieldId;
+	public Field(Field next, int x, int y){
+		type = Type.PATH;
 		this.x = x;
 		this.y = y;
 	}
@@ -31,10 +30,6 @@ public class Field {
 	
 	public Type getType() {
 		return type;
-	}
-
-	public void setFieldID(int fieldID) {
-		this.fieldId = fieldID;
 	}
 
 	public void setNext(Field next) {
@@ -48,10 +43,6 @@ public class Field {
 	public void setPosition(int x, int y) {
 		this.x = x;
 		this.y = y;
-	}
-
-	public int getFieldID() {
-		return fieldId;
 	}
 
 	public Field getNext() {
