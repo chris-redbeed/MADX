@@ -19,10 +19,8 @@ public class GamePlay {
 	private String winner;
 	private FieldMap fieldMap;
 	private int currentDicedNumber;
-//	private int attempt;
 
 	public GamePlay(int countPlayers) {
-//		attempt = 0;
 		players = new ArrayList<>();
 		map = new GameMap();
 		switch (countPlayers) {
@@ -44,7 +42,6 @@ public class GamePlay {
 	}
 
 	public Player nextPlayer() {
-//		attempt = 0;
 		int index = players.indexOf(currentPlayer) + 1;
 		if (index < players.size()) {
 			currentPlayer = players.get(index);
@@ -55,21 +52,7 @@ public class GamePlay {
 	}
 
 	public int dice() {
-//		boolean figureSet = false;
-//		for (Figure f : currentPlayer.getFigures()) {
-//			if (f.getSet()) {
-//				figureSet = true;
-//			}
-//		}
 		int dice = Dice.dice();
-//		if (!figureSet && dice != 6) {
-//			status = Status.DICE;
-//			attempt++;
-//			if (attempt == 3) {
-//				nextPlayer();
-//			}
-//			return 0;
-//		}
 		currentDicedNumber = dice;
 		return currentDicedNumber;
 	}

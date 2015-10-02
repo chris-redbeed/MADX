@@ -76,16 +76,15 @@ public class GamePresenter extends AbstractPresenter {
 				ArrayList<int[][]> spawnFields = PlayerFieldCoder.decode(spawns);
 
 				generate(gameMap, playerFields, spawnFields);
-				
-				for (PlayerUI p :generator.getPlayerUIs()) {
+
+				for (PlayerUI p : generator.getPlayerUIs()) {
 					p.addClickHandler(new PlayerUIClickHandler(p));
 					p.setEnabled(false);
 				}
-				
-				generator.getDiceUI().asWidget().addDomHandler(new DiceUIClickHandler(), ClickEvent.getType());
+
+				generator.getDiceUI().addClickHandler(new DiceUIClickHandler());
 
 				gameController.getPresenterChanger().goTo(PresenterMapper.GAME);
-				generator.generateDice();
 				break;
 
 			case Methods.END_GAME:
@@ -93,20 +92,20 @@ public class GamePresenter extends AbstractPresenter {
 
 			case Methods.DICE:
 				int dice = Integer.valueOf(JSONHelper.valueToString(parse.get("result").toString()));
-				generator.getDiceUI().setDiceText("" + dice);
-				
+				generator.getDiceUI().setDice(dice);
+
 				for (PlayerUI p : generator.getPlayerUIs()) {
 					p.setEnabled(true);
 				}
-				
+
 				break;
 
 			case Methods.SET:
 				String result = JSONHelper.valueToString(parse.get("result").toString());
 				int id = Integer.valueOf(JSONHelper.valueToString(parse.get("id").toString()));
-				
+
 				int[][] figureCoord = GameMapCoder.decode(result);
-				
+
 				generator.moveFigureWithID(id, figureCoord[0][0], figureCoord[0][1]);
 				for (PlayerUI p : generator.getPlayerUIs()) {
 					p.setEnabled(false);
@@ -120,11 +119,11 @@ public class GamePresenter extends AbstractPresenter {
 			}
 		}
 	}
-	
+
 	private class PlayerUIClickHandler implements ClickHandler {
-		
+
 		private PlayerUI playerUI;
-		
+
 		public PlayerUIClickHandler(PlayerUI p) {
 			playerUI = p;
 		}
@@ -132,27 +131,28 @@ public class GamePresenter extends AbstractPresenter {
 		@Override
 		public void onClick(ClickEvent arg0) {
 			if (playerUI.getEnabled()) {
-			int id = playerUI.getId();
-			
-			JSONObject object = new JSONObject();
-			object.put(Methods.METHOD, new JSONString(Methods.SET));
-			object.put("id", new JSONString("" + id));
-			
-			gameController.getWebSocket().send(object.toString());
+				int id = playerUI.getId();
+
+				JSONObject object = new JSONObject();
+				object.put(Methods.METHOD, new JSONString(Methods.SET));
+				object.put("id", new JSONString("" + id));
+
+				gameController.getWebSocket().send(object.toString());
 			}
 		}
 	}
-	
+
 	private class DiceUIClickHandler implements ClickHandler {
-		
+
 		@Override
 		public void onClick(ClickEvent arg0) {
-			generator.getDiceUI().setEnabled(false);
-			JSONObject object = new JSONObject();
-			object.put(Methods.METHOD, new JSONString(Methods.DICE));
-			
-			gameController.getWebSocket().send(object.toString());
-			
+			if (generator.getDiceUI().getEnabled()) {
+				generator.getDiceUI().setEnabled(false);
+				JSONObject object = new JSONObject();
+				object.put(Methods.METHOD, new JSONString(Methods.DICE));
+
+				gameController.getWebSocket().send(object.toString());
+			}
 		}
 	}
 }

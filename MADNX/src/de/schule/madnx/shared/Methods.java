@@ -42,6 +42,7 @@ public class Methods {
 	public static final String END_GAME = "endgame";
 	public static final String END_SET = "endset";
 	public static final String NEXT_PLAYER = "nextPlayer";
+	public static final String INVALID = "invalid";
 
 	
 

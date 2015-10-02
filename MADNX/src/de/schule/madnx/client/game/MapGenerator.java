@@ -20,7 +20,6 @@ public class MapGenerator {
 
 	private AbsolutePanel panel;
 	private int countPlayers;
-	private int countFigures;
 	private int sizeMap;
 	private ArrayList<int[][]> playerFields;
 	private int[][] map;
@@ -38,10 +37,10 @@ public class MapGenerator {
 		saveSpawnFigures(spawnFigures);
 		sizeMap = map.length;
 		countPlayers = playerFields.get(0).length;
-		countFigures = (countPlayers - 1) / 2;
 		generateMap();
 		generatePlayer();
 		generateFigures();
+		generateDice();
 
 		Window.addResizeHandler(new WindowResizeHandler());
 	}
@@ -69,7 +68,7 @@ public class MapGenerator {
 		}
 	}
 
-	public void generatePlayer() {
+	private void generatePlayer() {
 		int offsetHeight = RootPanel.get().getOffsetHeight();
 		int offsetWidth = RootPanel.get().getOffsetWidth();
 		FlowPanel feld;
@@ -100,8 +99,12 @@ public class MapGenerator {
 			return "";
 		}
 	}
+	
+	private void generatePlayerNames() {
+		
+	}
 
-	public void generateMap() {
+	private void generateMap() {
 		int offsetHeight = RootPanel.get().getOffsetHeight();
 		int offsetWidth = RootPanel.get().getOffsetWidth();
 		FlowPanel feld;
@@ -115,14 +118,10 @@ public class MapGenerator {
 		}
 	}
 	
-	public void generateDice() {
+	private void generateDice() {
 		panel.add(diceUI.asWidget());
 	}
-	
-	public void removeDice() {
-		panel.remove(diceUI.asWidget());
-	}
-	
+
 	public DiceUI getDiceUI() {
 		return diceUI;
 	}
@@ -135,6 +134,7 @@ public class MapGenerator {
 			generateMap();
 			generatePlayer();
 			generateFigures();
+			generateDice();
 		}
 	}
 	
