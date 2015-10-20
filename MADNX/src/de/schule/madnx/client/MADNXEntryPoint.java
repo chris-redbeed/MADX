@@ -5,6 +5,8 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.user.client.ui.RootPanel;
 
+import de.schule.madnx.client.game.dice.DiceUI;
+
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
@@ -27,5 +29,6 @@ public class MADNXEntryPoint implements EntryPoint {
 		
 		gameController = new GameControllerImpl(eventBus);
 		gameController.go(rootPanel);
+//		rootPanel.add(new DiceUI().asWidget());
 	}
 }

@@ -12,6 +12,8 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 
+import de.schule.madnx.client.game.dice.DiceUI;
+
 /**
  * @author xgadscj
  *
