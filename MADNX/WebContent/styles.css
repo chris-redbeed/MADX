@@ -1,3 +1,5 @@
+
+
 /** Add css rules here for your application. */
 /** Example rules used by the template application (remove for your app) */
 body {
@@ -6,6 +8,7 @@ body {
 	width: 100%;
 	height: 100%;
 	margin: 0 !important;
+	font-size: 14px;
 }
 
 html {
@@ -13,13 +16,11 @@ html {
 	height: 100%;
 }
 
-.login-Main {
-	width: 20%;
-	padding-left: 40%;
-	padding-top: 20%;
+.login-Main, .menue-Main {
+    margin-top: 10%;
 }
 
-.gwt-Button-Menue {
+/*.gwt-Button-Menue {
 	margin-top: 25% !important;
 }
 
@@ -74,7 +75,7 @@ html {
 	text-align: center;
 }
 
-/* Lobby */
+/* Lobby * /
 .lobby-Chat-TextArea {
 	width: 100% !important;
 	height: 80% !important;
@@ -142,9 +143,9 @@ html {
 	position: absolute;
 }
 
-/* Figuren */
+/* Figuren * /
 .figure {
-	/* 	-webkit-filter: drop-shadow(rgb(0, 0, 0) 0px 0px 2px); */
+	/* 	-webkit-filter: drop-shadow(rgb(0, 0, 0) 0px 0px 2px); * /
 	-webkit-filter: drop-shadow(rgb(0, 0, 0) 5px 5px 5px);
 }
 
@@ -159,16 +160,7 @@ html {
 }
 
 .body {
-	/* 	height: 40px; */ /* 	width: 40px; */ /* 	border-radius: 50%; */
-	/* 	border: 1px solid black; */ /* 	top: 3px; */ /* 	left: 11px; */
-	/* 	position: absolute; */ /* 	border-bottom: 100px solid red; */
-	/* 	border-left: 50px solid transparent; */
-	/* 	border-right: 50px solid transparent; */ /* 	height: 0; */
-	/* 	width: 100px; */ /* */ /* 	top: 9px; */ /* 	left: 7px; */
-	/* 	position: absolute; */ /* 	border-bottom: 36px solid; */
-	/* 	border-left: 20px solid transparent; */
-	/* 	border-right: 20px solid transparent; */ /* 	height: 0; */
-	/* 	width: 10px; */ /* 	border-radius: 41%; */
+
 	height: 40px;
 	width: 40px;
 	border-radius: 50%;
@@ -180,26 +172,26 @@ html {
 }
 
 .body.red {
-	/* 	border-bottom-color: #c00; */
+	/* 	border-bottom-color: #c00; * /
 	background-color: #c00;
 }
 
 .body.green {
-	/* 	border-bottom-color: #0c0; */
+	/* 	border-bottom-color: #0c0; * /
 	background-color: #0c0;
 }
 
 .body.blue {
-	/* 	border-bottom-color: #00A; */
+	/* 	border-bottom-color: #00A; * /
 	background-color: #00A;
 }
 
 .body.yellow {
-	/* 	border-bottom-color: #cc0; */
+	/* 	border-bottom-color: #cc0; * /
 	background-color: #cc0;
 }
 
-.head.red {
+.head.red { 
 	background-color: #c00;
 }
 
@@ -215,7 +207,7 @@ html {
 	background-color: #cc0;
 }
 
-/* Felder */
+/* Felder * /
 .field {
 	height: 5%;
 	width: 5%;
@@ -255,7 +247,7 @@ html {
 
 .dice-button {
 	
-}
+}*/
 
 
 @-webkit-keyframes throw { 
