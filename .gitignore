@@ -8,5 +8,10 @@
 *.war
 *.ear
 
+.gwt/.gwt-log
+MADNX/.gwt/.gwt-log
+MADNX/gwt-unitCache/*
+MADNX/WebContent/WEB-INF/deploy/madnx/symbolMaps/
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
