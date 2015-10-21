@@ -82,7 +82,7 @@ public class GamePresenter extends AbstractPresenter {
 					p.setEnabled(false);
 				}
 
-				generator.getDiceUI().getBtn().addClickHandler(new DiceUIClickHandler());
+				generator.getDiceUI().addClickHandler(new DiceUIClickHandler());
 
 				gameController.getPresenterChanger().goTo(PresenterMapper.GAME);
 				break;
@@ -92,7 +92,7 @@ public class GamePresenter extends AbstractPresenter {
 
 			case Methods.DICE:
 				int dice = Integer.valueOf(JSONHelper.valueToString(parse.get("result").toString()));
-				generator.getDiceUI().getBtn().setText("" + dice);
+				generator.getDiceUI().setDice(dice);
 
 				for (PlayerUI p : generator.getPlayerUIs()) {
 					p.setEnabled(true);
@@ -110,11 +110,11 @@ public class GamePresenter extends AbstractPresenter {
 				for (PlayerUI p : generator.getPlayerUIs()) {
 					p.setEnabled(false);
 				}
-				generator.getDiceUI().getBtn().setEnabled(true);
+				generator.getDiceUI().setEnabled(true);
 				break;
 
 			case Methods.END_SET:
-				generator.getDiceUI().getBtn().setEnabled(true);
+				generator.getDiceUI().setEnabled(true);
 				break;
 			}
 		}
@@ -146,8 +146,8 @@ public class GamePresenter extends AbstractPresenter {
 
 		@Override
 		public void onClick(ClickEvent arg0) {
-//			if (generator.getDiceUI().getBtn().get) {
-				generator.getDiceUI().getBtn().setEnabled(false);
+			if (generator.getDiceUI().getEnabled()) {
+				generator.getDiceUI().setEnabled(false);
 				JSONObject object = new JSONObject();
 				object.put(Methods.METHOD, new JSONString(Methods.DICE));
 
@@ -155,4 +155,4 @@ public class GamePresenter extends AbstractPresenter {
 			}
 		}
 	}
-//}
+}
