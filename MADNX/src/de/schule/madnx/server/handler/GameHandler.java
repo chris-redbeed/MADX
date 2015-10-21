@@ -62,9 +62,12 @@ public class GameHandler {
 		GamePlay gamePlay = lobby.getGamePlay();
 		String user = session.getUserProperties().get(Methods.USER).toString();
 		if (gamePlay.getCurrentPlayer().getUser().equals(user)) {
+			boolean isPreGame = gamePlay.getIsPreGame();
 			int dice = gamePlay.dice();
 			JsonObject json = new JsonObject();
 			json.addProperty(Methods.METHOD, Methods.DICE);
+			if(isPreGame)
+				json.addProperty("player", gamePlay.getCurrentPlayer().getUser());
 			json.addProperty("result", ""+dice);
 			return json.toString();
 		}
