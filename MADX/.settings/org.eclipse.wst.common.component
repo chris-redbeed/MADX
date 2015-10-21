@@ -4,7 +4,6 @@
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/annotations"/>
-        <wb-resource deploy-path="/" source-path="/target/MADX-0.0.1-SNAPSHOT"/>
         <property name="context-root" value="MADX"/>
         <property name="java-output-path" value="/MADX/war/WEB-INF/classes"/>
     </wb-module>

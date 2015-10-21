@@ -253,6 +253,10 @@ html {
           animation: throw 1s linear 0s 1 normal;
 }
 
+.dice-button {
+	
+}
+
 
 @-webkit-keyframes throw { 
 	0% {

@@ -38,7 +38,7 @@ public class HighScoreHandler {
 	
 	private Properties prop = new Properties();;
 	private InputStream input;
-	private final static String PATH = "C:/Users/xgadscj/Desktop/Highscore.txt";
+	private final static String PATH = "Macintosh HD/Benutzer/julianschultehullern/Dokument/MadX/Highscore.txt";
 
 	public String handleMessage(String message, Session session) {
 		JsonParser parser = new JsonParser();

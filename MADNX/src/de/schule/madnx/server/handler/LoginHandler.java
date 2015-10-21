@@ -34,7 +34,7 @@ public class LoginHandler {
 	private Properties prop = new Properties();
 	private OutputStream output;
 	private InputStream input;
-	private final static String PATH = "C:/Users/xgadscj/Desktop/User_Password.txt";
+	private final static String PATH = "Macintosh HD/Benutzer/julianschultehullern/Dokument/MadX/User_Password.txt";
 
 	public String handleMessage(String message, Session session) {
 		
