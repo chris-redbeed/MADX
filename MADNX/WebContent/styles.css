@@ -20,50 +20,6 @@ html {
     margin-top: 10%;
 }
 
-/*.gwt-Button-Menue {
-	margin-top: 25% !important;
-}
-
-.gwt-Button {
-	width: 100%;
-}
-
-.menue-Main {
-	width: 20%;
-	padding-left: 40%;
-}
-
-.login-Label {
-	color: red !important;
-}
-
-.login-Button {
-	width: 50%;
-}
-
-.login-TextField {
-	width: 100%;
-	height: 15px;
-}
-
-.login-Title {
-	font-size: 40px;
-	font-style: italic;
-	color: red !important;
-	font-family: cursive;
-	text-align: center;
-	margin-bottom: 20%;
-}
-
-.menue-Title {
-	color: red !important;
-	font-size: 40px;
-	font-style: italic;
-	font-family: cursive;
-	text-align: center;
-	margin-bottom: 20%;
-}
-
 .network-Main {
 	width: 50%;
 	padding-left: 25%;
@@ -75,7 +31,7 @@ html {
 	text-align: center;
 }
 
-/* Lobby * /
+/* Lobby */
 .lobby-Chat-TextArea {
 	width: 100% !important;
 	height: 80% !important;
@@ -143,9 +99,9 @@ html {
 	position: absolute;
 }
 
-/* Figuren * /
+/* Figuren */
 .figure {
-	/* 	-webkit-filter: drop-shadow(rgb(0, 0, 0) 0px 0px 2px); * /
+	/* 	-webkit-filter: drop-shadow(rgb(0, 0, 0) 0px 0px 2px); */
 	-webkit-filter: drop-shadow(rgb(0, 0, 0) 5px 5px 5px);
 }
 
@@ -172,22 +128,22 @@ html {
 }
 
 .body.red {
-	/* 	border-bottom-color: #c00; * /
+	/* 	border-bottom-color: #c00; */
 	background-color: #c00;
 }
 
 .body.green {
-	/* 	border-bottom-color: #0c0; * /
+	/* 	border-bottom-color: #0c0; */
 	background-color: #0c0;
 }
 
 .body.blue {
-	/* 	border-bottom-color: #00A; * /
+	/* 	border-bottom-color: #00A; */
 	background-color: #00A;
 }
 
 .body.yellow {
-	/* 	border-bottom-color: #cc0; * /
+	/* 	border-bottom-color: #cc0; */
 	background-color: #cc0;
 }
 
@@ -207,7 +163,7 @@ html {
 	background-color: #cc0;
 }
 
-/* Felder * /
+/* Felder */
 .field {
 	height: 5%;
 	width: 5%;
