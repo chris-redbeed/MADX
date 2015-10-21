@@ -23,6 +23,10 @@ public class DiceUI extends Composite {
 		btn = new Button();
 		btn.addStyleName("dice-button");
 	}
+	
+	public Button getBtn() {
+		return btn;
+	}
 //	
 //	private void initStyles() {
 //		css.ensureInjected();
