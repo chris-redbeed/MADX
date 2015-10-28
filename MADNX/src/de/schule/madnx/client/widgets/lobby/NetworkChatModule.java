@@ -47,9 +47,9 @@ public class NetworkChatModule extends Composite{
 	}
 
 	private void initStyles() {
-		txtAContent.addStyleName("lobby-Chat-TextArea");
-		txtMessage.addStyleName("lobby-Chat-TextBox");
-		btnSend.addStyleName("lobby-Chat-Button");
+		txtAContent.addStyleName("lobby-Chat-TextArea form-control");
+		txtMessage.addStyleName("lobby-Chat-TextBox  form-control");
+		btnSend.addStyleName("lobby-Chat-Button  btn btn-success");
 	}
 	
 	public void addStyle (String styleName) {

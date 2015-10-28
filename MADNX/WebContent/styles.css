@@ -59,21 +59,15 @@ html {
 	position: absolute;
 	bottom: 10%;
 	right: 0;
-	height: 10%;
-	width: 20%;
 }
 
 .lobby-Button-bottom {
 	position: absolute;
 	bottom: 0;
 	right: 0;
-	height: 10%;
-	width: 20%;
 }
 
 .lobby-Chat {
-	width: 80%;
-	height: 20%;
 	bottom: 0;
 	left: 0;
 	position: absolute;

@@ -40,8 +40,8 @@ public class LobbyView extends AbstractView implements Display{
 		networkChat.addStyle("lobby-Chat");
 		gameOptions.addStyle("lobby-OptionsPanel");
 		lobby.addStyle("lobby-PlayerPanel");
-		btnStart.addStyleName("lobby-Button-bottom");
-		btnClose.addStyleName("lobby-Button-top");
+		btnStart.addStyleName("btn lobby-Button-bottom btn-block btn-success");
+		btnClose.addStyleName("btn lobby-Button-top btn-block btn-danger");
 		
 	}
 	
