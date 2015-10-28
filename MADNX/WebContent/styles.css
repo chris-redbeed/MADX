@@ -3,8 +3,8 @@
 /** Add css rules here for your application. */
 /** Example rules used by the template application (remove for your app) */
 body {
-	background-color: none;
-	background-image: url("img/MenschAErgereDichNicht.jpg") !important;
+	background-color: #303030;
+	/*background-image: url("img/MenschAErgereDichNicht.jpg");*/
 	width: 100%;
 	height: 100%;
 	margin: 0 !important;
@@ -17,7 +17,7 @@ html {
 }
 
 .img-logo {
-	margin-top: 20px;
+	margin-top: 40px;
 }
 
 .login-Main, .menue-Main {
