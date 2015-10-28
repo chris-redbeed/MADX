@@ -16,6 +16,10 @@ html {
 	height: 100%;
 }
 
+.img-logo {
+	margin-top: 20px;
+}
+
 .login-Main, .menue-Main {
     margin-top: 10%;
 }
