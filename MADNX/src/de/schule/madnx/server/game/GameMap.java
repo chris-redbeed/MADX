@@ -16,8 +16,12 @@ public class GameMap {
 	public List<Field> fields;
 	private PathFinder finder;
 
-	public boolean canBeSet(Figure figure) {
-		return false;
+	public boolean canBeatFigure(Figure figure, int diceNumber) {
+		return finder.canBeatFigure(figure.getId(), diceNumber);
+	}
+	
+	public boolean canBeSetInHouse(Figure figure, int diceNumber) {
+		return finder.canBeSetInHouse(figure.getId(), diceNumber);
 	}
 
 	public int[][] setFigure(Figure figure, int intCountFields) {

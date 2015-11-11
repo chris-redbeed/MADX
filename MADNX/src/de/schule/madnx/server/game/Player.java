@@ -46,4 +46,22 @@ public class Player {
 		return wins;
 	}
 	
+	public boolean hasFiguresOnField() {
+		for (Figure f: this.figures) {
+			if (f.getSet()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean hasFigureInHouse(int id) {
+		for (Figure f: this.figures) {
+			if (f.getId() != id && !f.getSet()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }

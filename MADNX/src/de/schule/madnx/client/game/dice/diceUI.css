@@ -1,4 +1,4 @@
-/* Würfel */
+/* Wï¿½rfel */
 .dice {
 	height: 50px;
 	left: 60px;
@@ -82,4 +82,8 @@
 .stage.device {
 	height: 50px;
 	width: 30px;
+}
+
+.transition {
+	transition: left 0.5s linear, top 0.5s linear;
 }

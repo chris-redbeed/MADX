@@ -96,7 +96,10 @@ public class GameHandler {
 	
 	private String endSet(SessionLobby lobby) {
 		GamePlay gamePlay = lobby.getGamePlay();
+		int dicedNumber = gamePlay.getCurrentDicedNumber();
+		if (dicedNumber != 6) {
 		gamePlay.nextPlayer();
+		}
 		Player currentPlayer = gamePlay.getCurrentPlayer();
 		
 		JsonObject json = new JsonObject();

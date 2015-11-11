@@ -1,5 +1,3 @@
-
-
 /** Add css rules here for your application. */
 /** Example rules used by the template application (remove for your app) */
 body {
@@ -21,7 +19,7 @@ html {
 }
 
 .login-Main, .menue-Main {
-    margin-top: 10%;
+	margin-top: 10%;
 }
 
 .network-Main {
@@ -114,7 +112,6 @@ html {
 }
 
 .body {
-
 	height: 40px;
 	width: 40px;
 	border-radius: 50%;
@@ -145,7 +142,7 @@ html {
 	background-color: #cc0;
 }
 
-.head.red { 
+.head.red {
 	background-color: #c00;
 }
 
@@ -194,61 +191,156 @@ html {
 }
 
 .dice.throwing {
-  -webkit-animation: throw 1s linear 0s 1 normal;
-     -moz-animation: throw 1s linear 0s 1 normal;
-          animation: throw 1s linear 0s 1 normal;
+	-webkit-animation: throw 1s linear 0s 1 normal;
+	-moz-animation: throw 1s linear 0s 1 normal;
+	animation: throw 1s linear 0s 1 normal;
 }
 
 .dice-button {
 	
-}*/
-
-
-@-webkit-keyframes throw { 
-	0% {
-		background-color: #ffc;
-		transform: rotateZ(0deg) scale(1);
-	}
-	
-	50% {
-		background-color: #ff0;
-		transform: rotateZ(360deg) scale(2);
-	}
-	
-	100% {
-		background-color: #ffc;
-		transform: rotateZ(0deg) scale(1);
-	}	
 }
-@-moz-keyframes throw {  
-	0% {
-		background-color: #ffc;
-		transform: rotateZ(0deg) scale(1);
-	}
-	
-	50% {
-		background-color: #ff0;
-		transform: rotateZ(360deg) scale(2);
-	}
-	
-	100% {
-		background-color: #ffc;
-		transform: rotateZ(0deg) scale(1);
-	}	
+
+.transition {
+	transition: left 0.5s linear, top 0.5s linear;
 }
-@keyframes throw {   
-	0% {
-		background-color: #ffc;
-		transform: rotateZ(0deg) scale(1);
-	}
+
+@
+-webkit-keyframes throw { 0% {
+	background-color: #ffc;
+	transform: rotateZ(0deg) scale(1);
+}
+
+50%
+{
+background-color
+:
+ 
+#ff0
+;
+
+		
+transform
+:
+ 
+rotateZ
+(360deg)
+ 
+scale
+(2);
+
 	
-	50% {
-		background-color: #ff0;
-		transform: rotateZ(360deg) scale(2);
-	}
+}
+100%
+{
+background-color
+:
+ 
+#ffc
+;
+
+		
+transform
+:
+ 
+rotateZ
+(0deg)
+ 
+scale
+(1);
+
 	
-	100% {
-		background-color: #ffc;
-		transform: rotateZ(0deg) scale(1);
-	}	
+}
+}
+@
+-moz-keyframes throw { 0% {
+	background-color: #ffc;
+	transform: rotateZ(0deg) scale(1);
+}
+
+50%
+{
+background-color
+:
+ 
+#ff0
+;
+
+		
+transform
+:
+ 
+rotateZ
+(360deg)
+ 
+scale
+(2);
+
+	
+}
+100%
+{
+background-color
+:
+ 
+#ffc
+;
+
+		
+transform
+:
+ 
+rotateZ
+(0deg)
+ 
+scale
+(1);
+
+	
+}
+}
+@
+keyframes throw { 0% {
+	background-color: #ffc;
+	transform: rotateZ(0deg) scale(1);
+}
+50%
+{
+background-color
+:
+ 
+#ff0
+;
+
+		
+transform
+:
+ 
+rotateZ
+(360deg)
+ 
+scale
+(2);
+
+	
+}
+100%
+{
+background-color
+:
+ 
+#ffc
+;
+
+		
+transform
+:
+ 
+rotateZ
+(0deg)
+ 
+scale
+(1);
+
+	
+}
 }

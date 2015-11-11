@@ -149,6 +149,7 @@ public class MapGenerator {
 		int offsetWidth = RootPanel.get().getOffsetWidth();
 		for (PlayerUI p : playerUIs) {
 			if (p.getId() == id) {
+				p.addStyleName("transition");
 				panel.remove(p.asWidget());
 				p.setX(x);
 				p.setY(y);

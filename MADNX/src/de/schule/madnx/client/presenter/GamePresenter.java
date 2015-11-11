@@ -85,6 +85,7 @@ public class GamePresenter extends AbstractPresenter {
 				generator.getDiceUI().addClickHandler(new DiceUIClickHandler());
 
 				gameController.getPresenterChanger().goTo(PresenterMapper.GAME);
+				generator.getDiceUI().setEnabled(true);
 				break;
 
 			case Methods.END_GAME:

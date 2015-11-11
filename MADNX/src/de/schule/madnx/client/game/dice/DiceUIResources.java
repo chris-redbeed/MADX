@@ -58,5 +58,9 @@ public interface DiceUIResources extends ClientBundle {
 
 		@ClassName("device")
 		String device();
+		
+
+		@ClassName("transition")
+		String transition();
 	}
 }
