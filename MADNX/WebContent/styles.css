@@ -190,7 +190,7 @@ html {
 	background-color: white;
 }
 
-.dice.throwing {
+.throwing {
 	-webkit-animation: throw 1s linear 0s 1 normal;
 	-moz-animation: throw 1s linear 0s 1 normal;
 	animation: throw 1s linear 0s 1 normal;
@@ -207,48 +207,76 @@ html {
 @
 -webkit-keyframes throw { 0% {
 	background-color: #ffc;
-	transform: rotateZ(0deg) scale(1);
+	transform: rotateZ(360deg) scale(1);
 }
 
 50%
 {
 background-color
+
+
 :
+
  
+
 #ff0
+
+
 ;
-
-		
 transform
-:
- 
-rotateZ
-(360deg)
- 
-scale
-(2);
 
-	
+
+:
+
+ 
+
+rotateZ
+
+
+(360
+deg
+)
+
+ 
+
+scale
+
+
+(2);
 }
 100%
 {
 background-color
+
+
 :
+
  
+
 #ffc
+
+
 ;
-
-		
 transform
-:
- 
-rotateZ
-(0deg)
- 
-scale
-(1);
 
-	
+
+:
+
+ 
+
+rotateZ
+
+
+(0
+deg
+)
+
+ 
+
+scale
+
+
+(1);
 }
 }
 @
@@ -260,42 +288,58 @@ scale
 50%
 {
 background-color
+
+
 :
+
  
+
 #ff0
+
+
 ;
-
-		
 transform
-:
- 
-rotateZ
-(360deg)
- 
-scale
-(2);
 
-	
+
+:
+
+ 
+
+rotateZ
+
+
+(360
+deg
+)
+
+ 
+
+scale
+
+
+(2);
 }
 100%
 {
 background-color
+
+
 :
+
  
+
 #ffc
+
+
 ;
-
-		
 transform
-:
- 
-rotateZ
-(0deg)
- 
-scale
-(1);
 
-	
+
+:
+
+ 
+
+rotateZ(0deg)scale(1);
 }
 }
 @
@@ -306,41 +350,69 @@ keyframes throw { 0% {
 50%
 {
 background-color
+
+
 :
+
  
+
 #ff0
+
+
 ;
-
-		
 transform
-:
- 
-rotateZ
-(360deg)
- 
-scale
-(2);
 
-	
+
+:
+
+ 
+
+rotateZ
+
+
+(360
+deg
+)
+
+ 
+
+scale
+
+
+(2);
 }
 100%
 {
 background-color
+
+
 :
+
  
+
 #ffc
+
+
 ;
-
-		
 transform
-:
- 
-rotateZ
-(0deg)
- 
-scale
-(1);
 
-	
+
+:
+
+ 
+
+rotateZ
+
+
+(0
+deg
+)
+
+ 
+
+scale
+
+
+(1);
 }
 }

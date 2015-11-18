@@ -73,6 +73,7 @@ public class GamePlay {
 				this._preGameWinner = players.indexOf(this.currentPlayer);
 			this._preGameWinningNumber = currentDicedNumber;
 			this.setEnd();
+			return dice;
 		}
 
 		if (_diceCounter == 3 && currentDicedNumber != 6) {

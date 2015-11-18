@@ -15,52 +15,39 @@ public interface DiceUIResources extends ClientBundle {
 	public static final DiceUIResources INSTANCE = GWT.create(DiceUIResources.class);
 
 	@Source("de/schule/madnx/client/game/dice/diceUI.css")
-	DiceUIStyle css();
+	DiceContentUIStyle css();
 
 	/*
 	 * 
 	 */
 
-	public interface DiceUIStyle extends CssResource {
+	public interface DiceContentUIStyle extends CssResource {
 
-		@ClassName("face")
-		String face();
+		@ClassName("dice-left-up")
+		String leftUp();
 
-		@ClassName("face-0")
-		String face0();
+		@ClassName("dice-left-mid")
+		String leftMid();
 
-		@ClassName("face-1")
-		String face1();
+		@ClassName("dice-left-down")
+		String leftDown();
 
-		@ClassName("face-2")
-		String face2();
+		@ClassName("dice-right-up")
+		String rightUp();
 
-		@ClassName("face-3")
-		String face3();
+		@ClassName("dice-right-mid")
+		String rightMid();
 
-		@ClassName("face-4")
-		String face4();
+		@ClassName("dice-right-down")
+		String rightDown();
 
-		@ClassName("face-5")
-		String face5();
-
-		@ClassName("dice")
-		String dice();
-
-		@ClassName("content")
-		String content();
-
-		@ClassName("background")
-		String background();
-
-		@ClassName("stage")
-		String stage();
-
-		@ClassName("device")
-		String device();
+		@ClassName("dice-mid")
+		String mid();
 		
-
 		@ClassName("transition")
 		String transition();
+		
+		@ClassName("dice")
+		String dice();
 	}
 }
