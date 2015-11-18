@@ -93,10 +93,17 @@ public class GamePresenter extends AbstractPresenter {
 
 			case Methods.DICE:
 				int dice = Integer.valueOf(JSONHelper.valueToString(parse.get("result").toString()));
-				generator.getDiceUI().setDice(dice);
+				generator.getDiceUI().setContent(dice);
 
+				boolean isPreGame = Boolean.parseBoolean(parse.get("pregame").toString());
+				
+				if (!isPreGame) {
 				for (PlayerUI p : generator.getPlayerUIs()) {
 					p.setEnabled(true);
+				}
+				}
+				else {
+					generator.getDiceUI().setEnabled(true);
 				}
 
 				break;
