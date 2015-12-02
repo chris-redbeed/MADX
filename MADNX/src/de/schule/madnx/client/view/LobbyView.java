@@ -16,32 +16,56 @@ public class LobbyView extends AbstractView implements Display{
 	private LobbyModule lobby;
 	private Button btnStart;
 	private Button btnClose;
+
+	private FlowPanel bottomContainer;
+	private FlowPanel chatContainer;
+	private FlowPanel buttonCol;
+	private FlowPanel textCol;
 	
 	@Override
 	void init(FlowPanel rootPanel) {
 		networkChat = new NetworkChatModule();
 		gameOptions = new GameOptionsModule();
 		lobby = new LobbyModule();
+
+		this.bottomContainer = new FlowPanel();
+		this.chatContainer = new FlowPanel();
+
+		this.buttonCol = new FlowPanel();
+		this.textCol = new FlowPanel();
+		
 		btnStart = new Button("Spiel starten");
 		btnClose = new Button("zurück");
 		
 		rootPanel.add(lobby.asWidget());
 		rootPanel.add(gameOptions.asWidget());
-		rootPanel.add(networkChat.asWidget());
+		this.textCol.add(networkChat.asWidget());
 		
-		rootPanel.add(btnStart);
-		rootPanel.add(btnClose);
+		this.buttonCol.add(btnStart);
+		this.buttonCol.add(btnClose);
+		
+		this.chatContainer.add(this.textCol);
+		this.chatContainer.add(this.buttonCol);
+		
+		this.bottomContainer.add(this.chatContainer);
+		rootPanel.add(this.bottomContainer);
 		
 		rootPanel.addStyleName("lobby-RootPanel");
 	}
 
 	@Override
 	void initStyles() {
-		networkChat.addStyle("lobby-Chat");
+		
+		this.bottomContainer.addStyleName("container-bottom");
+		this.chatContainer.addStyleName("container");
+		this.textCol.addStyleName("col-md-8");
+		this.buttonCol.addStyleName("col-md-4");
+		
+		networkChat.addStyle("form-control lobby-Chat");
 		gameOptions.addStyle("lobby-OptionsPanel");
 		lobby.addStyle("lobby-PlayerPanel");
-		btnStart.addStyleName("btn lobby-Button-bottom btn-block btn-success");
-		btnClose.addStyleName("btn lobby-Button-top btn-block btn-danger");
+		btnStart.addStyleName("btn btn-block btn-success");
+		btnClose.addStyleName("btn btn-block btn-danger");
 		
 	}
 	
