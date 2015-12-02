@@ -226,16 +226,16 @@ public class FourPlayerMap implements FieldMap {
 	@Override
 	public void createFigures(GameMap gameMap, ArrayList<Player> players) {
 		int id = 1;
-		id = createFiguresForPlayer(gameMap, players, id, redSpawn, PlayerColor.RED);
-		id = createFiguresForPlayer(gameMap, players, id, blueSpawn, PlayerColor.BLUE);
-		id = createFiguresForPlayer(gameMap, players, id, greenSpawn, PlayerColor.GREEN);
-		createFiguresForPlayer(gameMap, players, id, yellowSpawn, PlayerColor.YELLOW);
+		id = createFiguresForPlayer(gameMap,0, players,id, redSpawn, PlayerColor.RED);
+		id = createFiguresForPlayer(gameMap,1, players,id, blueSpawn, PlayerColor.BLUE);
+		id = createFiguresForPlayer(gameMap, 2,players,id, greenSpawn, PlayerColor.GREEN);
+		createFiguresForPlayer(gameMap,3, players, id,yellowSpawn, PlayerColor.YELLOW);
 	}
 
-	private int createFiguresForPlayer(GameMap gameMap, ArrayList<Player> players, int id, int[][] spawnArray,
+	private int createFiguresForPlayer(GameMap gameMap, int playerId, ArrayList<Player> players, int id, int[][] spawnArray,
 			PlayerColor playerColor) {
 		for (int[] j : spawnArray) {
-			Player player = players.get(0);
+			Player player = players.get(playerId);
 			Figure figure = new Figure(id, false, playerColor);
 			player.getFigures().add(figure);
 			gameMap.setFigure(figure, j[0], j[1]);

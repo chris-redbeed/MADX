@@ -40,7 +40,7 @@ public class Methods {
 	public static final String DICE = "dice";
 	public static final String SET = "set";
 	public static final String END_GAME = "endgame";
-	public static final String END_SET = "endset";
+	public static final String CHECK_GAMESTATE = "endset";
 	public static final String NEXT_PLAYER = "nextPlayer";
 	public static final String INVALID = "invalid";
 

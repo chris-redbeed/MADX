@@ -1,6 +1,8 @@
 package de.schule.madnx.server.handler;
 
+import java.io.IOException;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.websocket.Session;
@@ -37,8 +39,8 @@ public class GameHandler {
 			return dice(lobby, session);
 		} else if (method.equals(Methods.SET)) {
 			return set(lobby, session, message);
-		} else if (method.equals(Methods.END_SET)) {
-			return endSet(lobby);
+		} else if (method.equals(Methods.CHECK_GAMESTATE)) {
+			return checkGameState(lobby,session);
 		}
 
 		return "error";
@@ -64,17 +66,9 @@ public class GameHandler {
 		GamePlay gamePlay = lobby.getGamePlay();
 		String user = session.getUserProperties().get(Methods.USER).toString();
 		if (gamePlay.getCurrentPlayer().getUser().equals(user)) {
-			boolean isPreGame = gamePlay.getIsPreGame();
 			int dice = gamePlay.dice();
 			JsonObject json = new JsonObject();
 			json.addProperty(Methods.METHOD, Methods.DICE);
-			 if (isPreGame) {
-				 json.addProperty("pregame", true);
-			 }
-			 else {
-				 json.addProperty("pregame", false);
-			 }
-			json.addProperty("player", gamePlay.getCurrentPlayer().getUser());
 			json.addProperty("result", "" + dice);
 			return json.toString();
 		}
@@ -90,7 +84,6 @@ public class GameHandler {
 			lobby.getGamePlay().addPlayer(new Player(u.getName()));
 		}
 		lobby.getGamePlay().start();
-		Player currentPlayer = lobby.getGamePlay().getCurrentPlayer();
 
 		JsonObject json = new JsonObject();
 		json.addProperty(Methods.METHOD, Methods.START_GAME);
@@ -100,21 +93,36 @@ public class GameHandler {
 				.getGamePlay().getFieldsForPlayers()));
 		json.addProperty("spawnFigure", PlayerFieldCoder.encode(lobby
 				.getGamePlay().getSpawnsForPlayers()));
-		json.addProperty("player", currentPlayer.getUser());
 		return json.toString();
 	}
 
-	private String endSet(SessionLobby lobby) {
+	private String checkGameState(SessionLobby lobby, Session session) {
 		GamePlay gamePlay = lobby.getGamePlay();
-		int dicedNumber = gamePlay.getCurrentDicedNumber();
-		if (dicedNumber != 6) {
-			gamePlay.nextPlayer();
-		}
-		Player currentPlayer = gamePlay.getCurrentPlayer();
-
 		JsonObject json = new JsonObject();
-		json.addProperty(Methods.METHOD, Methods.END_SET);
-		json.addProperty("player", currentPlayer.getUser());
+		json.addProperty(Methods.METHOD, Methods.CHECK_GAMESTATE);
+		boolean isPreGame = gamePlay.getIsPreGame();
+		if (isPreGame && gamePlay.get_diceCounter() > 0) {
+			gamePlay.nextPlayer();
+			json.addProperty("result", "dice");
+			return json.toString();
+		}
+		switch (gamePlay.getGameState()) {
+		case DICE:
+			json.addProperty("result", "dice");
+			break;
+		case END:
+			json.addProperty("result", "end");
+			break;
+		case NEXT_PLAYER:
+			json.addProperty("result", "dice");
+			gamePlay.nextPlayer();
+			break;
+		case SET:
+			json.addProperty("result", "set");
+			break;
+		}
+		json.addProperty("player", gamePlay.getCurrentPlayer().getUser());
+		sendTo(json.toString(), gamePlay.getCurrentPlayer().getUser(), lobby);
 		return json.toString();
 	}
 
@@ -125,5 +133,18 @@ public class GameHandler {
 		SessionLobby sessionLobby = lobbies.get(lobbyID);
 		return sessionLobby;
 	}
+	
+	public void sendTo(String message, String user, SessionLobby lobby) {
+		for (Session s : lobby.getLobby()) {
+				try {
+					if (s.getUserProperties().get(Methods.USER).toString().equals(user)) {
+					s.getBasicRemote().sendText(message);
+					}
+				} catch (IOException e) {
+					logger.log(Level.SEVERE, "CheckGameState-Error", e);
+					e.printStackTrace();
+				}
+			}
+		}
 
 }

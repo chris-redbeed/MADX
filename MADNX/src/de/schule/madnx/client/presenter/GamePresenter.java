@@ -13,6 +13,7 @@ import com.google.gwt.json.client.JSONString;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 
 import de.schule.madnx.client.GameController;
+import de.schule.madnx.client.PresenterChanger;
 import de.schule.madnx.client.PresenterMapper;
 import de.schule.madnx.client.event.GetMessageEvent;
 import de.schule.madnx.client.event.GetMessageHandler;
@@ -48,10 +49,12 @@ public class GamePresenter extends AbstractPresenter {
 	 */
 	@Override
 	public void addHandler() {
-		gameController.getEventBus().addHandler(GetMessageEvent.TYPE, new GameGetMessageHandler());
+		gameController.getEventBus().addHandler(GetMessageEvent.TYPE,
+				new GameGetMessageHandler());
 	}
 
-	private void generate(int[][] map, ArrayList<int[][]> playerFields, ArrayList<int[][]> spawnFigures) {
+	private void generate(int[][] map, ArrayList<int[][]> playerFields,
+			ArrayList<int[][]> spawnFigures) {
 		AbsolutePanel board = ((GameView) view).getBoard();
 		generator = new MapGenerator(board, playerFields, map, spawnFigures);
 	}
@@ -60,23 +63,30 @@ public class GamePresenter extends AbstractPresenter {
 
 		@Override
 		public void getMessage(GetMessageEvent event) {
+			String result = "";
+			JSONObject object = new JSONObject();
 			String data = event.getEvent().getData();
 
 			JSONObject parse = (JSONObject) JSONParser.parse(data);
-			String method = JSONHelper.valueToString(parse.get(Methods.METHOD).toString());
+			String method = JSONHelper.valueToString(parse.get(Methods.METHOD)
+					.toString());
 
 			switch (method) {
 			case Methods.START_GAME:
-				String map = JSONHelper.valueToString(parse.get("map").toString());
-				String fields = JSONHelper.valueToString(parse.get("playerFields").toString());
-				String spawns = JSONHelper.valueToString(parse.get("spawnFigure").toString());
+				String map = JSONHelper.valueToString(parse.get("map")
+						.toString());
+				String fields = JSONHelper.valueToString(parse.get(
+						"playerFields").toString());
+				String spawns = JSONHelper.valueToString(parse.get(
+						"spawnFigure").toString());
 
 				int[][] gameMap = GameMapCoder.decode(map);
-				ArrayList<int[][]> playerFields = PlayerFieldCoder.decode(fields);
-				ArrayList<int[][]> spawnFields = PlayerFieldCoder.decode(spawns);
+				ArrayList<int[][]> playerFields = PlayerFieldCoder
+						.decode(fields);
+				ArrayList<int[][]> spawnFields = PlayerFieldCoder
+						.decode(spawns);
 
 				generate(gameMap, playerFields, spawnFields);
-
 				for (PlayerUI p : generator.getPlayerUIs()) {
 					p.addClickHandler(new PlayerUIClickHandler(p));
 					p.setEnabled(false);
@@ -85,44 +95,65 @@ public class GamePresenter extends AbstractPresenter {
 				generator.getDiceUI().addClickHandler(new DiceUIClickHandler());
 
 				gameController.getPresenterChanger().goTo(PresenterMapper.GAME);
-				generator.getDiceUI().setEnabled(true);
+				generator.getDiceUI().setEnabled(false);
+				object.put(Methods.METHOD, new JSONString(Methods.CHECK_GAMESTATE));
+
+				gameController.getWebSocket().send(object.toString());
 				break;
 
 			case Methods.END_GAME:
 				break;
 
 			case Methods.DICE:
-				int dice = Integer.valueOf(JSONHelper.valueToString(parse.get("result").toString()));
+				int dice = Integer.valueOf(JSONHelper.valueToString(parse.get(
+						"result").toString()));
 				generator.getDiceUI().setContent(dice);
-
-				boolean isPreGame = Boolean.parseBoolean(parse.get("pregame").toString());
-				
-				if (!isPreGame) {
-				for (PlayerUI p : generator.getPlayerUIs()) {
-					p.setEnabled(true);
-				}
-				}
-				else {
-					generator.getDiceUI().setEnabled(true);
-				}
-
-				break;
-
-			case Methods.SET:
-				String result = JSONHelper.valueToString(parse.get("result").toString());
-				int id = Integer.valueOf(JSONHelper.valueToString(parse.get("id").toString()));
-
-				int[][] figureCoord = GameMapCoder.decode(result);
-
-				generator.moveFigureWithID(id, figureCoord[0][0], figureCoord[0][1]);
 				for (PlayerUI p : generator.getPlayerUIs()) {
 					p.setEnabled(false);
 				}
-				generator.getDiceUI().setEnabled(true);
+				generator.getDiceUI().setEnabled(false);
+				object.put(Methods.METHOD, new JSONString(Methods.CHECK_GAMESTATE));
+
+				gameController.getWebSocket().send(object.toString());
 				break;
 
-			case Methods.END_SET:
-				generator.getDiceUI().setEnabled(true);
+			case Methods.SET:
+				result = JSONHelper.valueToString(parse.get("result")
+						.toString());
+				int id = Integer.valueOf(JSONHelper.valueToString(parse.get(
+						"id").toString()));
+
+				int[][] figureCoord = GameMapCoder.decode(result);
+
+				generator.moveFigureWithID(id, figureCoord[0][0],
+						figureCoord[0][1]);
+				for (PlayerUI p : generator.getPlayerUIs()) {
+					p.setEnabled(false);
+				}
+				generator.getDiceUI().setEnabled(false);
+				object.put(Methods.METHOD, new JSONString(Methods.CHECK_GAMESTATE));
+
+				gameController.getWebSocket().send(object.toString());
+				break;
+
+			case Methods.CHECK_GAMESTATE:
+				result = JSONHelper.valueToString(parse.get("result")
+						.toString());
+				switch (result) {
+				case "dice":
+					generator.getDiceUI().setEnabled(true);
+					break;
+				case "end":
+					// TODO schicke zum EndScreen
+					gameController.getPresenterChanger().goTo("");
+					break;
+				case "set":
+					for (PlayerUI p : generator.getPlayerUIs()) {
+						p.addClickHandler(new PlayerUIClickHandler(p));
+						p.setEnabled(true);
+					}
+					break;
+				}
 				break;
 			}
 		}
