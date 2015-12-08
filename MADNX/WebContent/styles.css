@@ -1,424 +1,272 @@
 /** Add css rules here for your application. */
 /** Example rules used by the template application (remove for your app) */
+
 body {
-	background-color: #303030;
-	/*background-image: url("img/MenschAErgereDichNicht.jpg");*/
-	width: 100%;
-	height: 100%;
-	margin: 0 !important;
-	font-size: 14px;
+    background-color: #303030;
+    /*background-image: url("img/MenschAErgereDichNicht.jpg");*/
+    
+    width: 100%;
+    height: 100%;
+    margin: 0 !important;
+    font-size: 14px;
+    
+    perspective: 600px;
+}
+html {
+    width: 100%;
+    height: 100%;
 }
 
-html {
-	width: 100%;
-	height: 100%;
+.form-control {
+	margin-bottom: 10px;
+}
+
+.form-inline {
+	margin: auto;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.form-chatbox {
+	min-height: 300px;
+}
+
+.well-lg {
+	margin-top: 15px;
 }
 
 .img-logo {
-	margin-top: 40px;
+    margin-top: 40px;
 }
-
-.login-Main, .menue-Main {
-	margin-top: 10%;
+.login-Main,
+.menue-Main {
+    margin-top: 10%;
 }
-
 .network-Main {
-	width: 50%;
-	padding-left: 25%;
+    width: 50%;
+    padding-left: 25%;
 }
-
 .network-Table {
-	width: 100%;
-	color: red !important;
-	text-align: center;
+    width: 100%;
+    color: red !important;
+    text-align: center;
 }
-
 /* Lobby */
+
 .lobby-Chat-TextArea {
-	width: 100% !important;
-	height: 80% !important;
-	padding: 0px !important;
-	margin: 0px !important;
+    width: 100% !important;
+    height: 80% !important;
+    padding: 0px !important;
+    margin: 0px !important;
 }
-
 .lobby-Chat-TextBox {
-	width: 85%;
-	bottom: 0 !important;
+    width: 85%;
+    bottom: 0 !important;
 }
-
 .lobby-Chat-Button {
-	width: 14% !important;
-	right: 0% !important;
-	bottom: 0% !important;
-	margin-left: 5px;
+    width: 14% !important;
+    right: 0% !important;
+    bottom: 0% !important;
+    margin-left: 5px;
 }
-
 .lobby-Button-top {
-	position: absolute;
-	bottom: 10%;
-	right: 0;
+    position: absolute;
+    bottom: 10%;
+    right: 0;
 }
-
 .lobby-Button-bottom {
-	position: absolute;
-	bottom: 0;
-	right: 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
-
 .lobby-Chat {
-	bottom: 0;
-	left: 0;
-	position: absolute;
+    bottom: 0;
+    left: 0;
+    position: absolute;
 }
-
 .lobby-RootPanel {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
-
 .lobby-OptionsPanel {
-	width: 20%;
-	right: 0;
-	top: 0;
-	bottom: 20%;
-	position: absolute;
+    width: 20%;
+    right: 0;
+    top: 0;
+    bottom: 20%;
+    position: absolute;
 }
-
 .lobby-PlayerPanel {
-	width: 80%;
-	left: 0;
-	height: 80%;
-	top: 0;
-	position: absolute;
+    width: 80%;
+    left: 0;
+    height: 80%;
+    top: 0;
+    position: absolute;
 }
-
 .container-bottom {
-	position: absolute;
-	bottom: 15px;
-	width: 100%;
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
 }
-
 /* Figuren */
+
 .figure {
-	/* 	-webkit-filter: drop-shadow(rgb(0, 0, 0) 0px 0px 2px); */
-	-webkit-filter: drop-shadow(rgb(0, 0, 0) 5px 5px 5px);
+    /* 	-webkit-filter: drop-shadow(rgb(0, 0, 0) 0px 0px 2px); */
+    
+    -webkit-filter: drop-shadow(rgb(0, 0, 0) 5px 5px 5px);
+    
+    margin-top: -5%;
+    margin-left: auto;
+    transform: rotateX(-45deg) translateZ(101px);
 }
 
 .head {
-	height: 26px;
-	width: 26px;
-	border-radius: 50%;
-	position: absolute;
-	top: -13px;
-	left: 19px;
-	border: 1px solid black;
+    height: 34px;
+    width: 34px;
+    border-radius: 50%;
+    position: absolute;
+    top: -20px;
+    left: 34px;
+    border: 1px solid black;
+}
+
+.GPL1F0TCEI {
+	transform: rotateX(-45deg) scale(1.5) translateZ(101px);
 }
 
 .body {
-	height: 40px;
-	width: 40px;
-	border-radius: 50%;
-	border: 1px solid black;
-	top: 3px;
-	left: 11px;
-	position: absolute;
-	border: 1px solid black;
+    border-radius: 50%;
+    top: 3px;
+    left: 11px;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 40px 60px 40px;
+    border-color: transparent transparent #007bff transparent;
 }
-
 .body.red {
-	/* 	border-bottom-color: #c00; */
-	background-color: #c00;
+    /* 	border-bottom-color: #c00; */
+    
+    /*background-color: #c00;*/
+   border-color: transparent transparent #c00 transparent;
 }
-
 .body.green {
-	/* 	border-bottom-color: #0c0; */
-	background-color: #0c0;
+    /* 	border-bottom-color: #0c0; */
+    
+    /*background-color: #0c0;*/
+   border-color: transparent transparent #0c0 transparent;
 }
-
 .body.blue {
-	/* 	border-bottom-color: #00A; */
-	background-color: #00A;
+    /* 	border-bottom-color: #00A; */
+    
+    /*background-color: #00A;*/
+   border-color: transparent transparent #00A transparent;
 }
-
 .body.yellow {
-	/* 	border-bottom-color: #cc0; */
-	background-color: #cc0;
+    /* 	border-bottom-color: #cc0; */
+    
+    /*background-color: #cc0;*/
+   border-color: transparent transparent #cc0 transparent;
 }
-
 .head.red {
-	background-color: #c00;
+    background-color: #c00;
 }
-
 .head.green {
-	background-color: #0c0;
+    background-color: #0c0;
 }
-
 .head.blue {
-	background-color: #00A;
+    background-color: #00A;
 }
-
 .head.yellow {
-	background-color: #cc0;
+    background-color: #cc0;
 }
-
 /* Felder */
+
 .field {
-	height: 5%;
-	width: 5%;
-	border-radius: 50%;
-	border: 2px solid black;
+    height: 5%;
+    width: 5%;
+    border-radius: 50%;
+    border: 2px solid black;
 }
 
 .board {
-	position: inherit !important;
+    position: relative !important;
+    transform: rotateX( 45deg );
+    transform-origin: 0 100%;
+    height: 100%;
+    margin-top: -200px;
+    overflow: inherit !important;
+    background-color: #ffff80;
+    border: 14px solid red;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
 }
 
 .field.green {
-	background-color: green;
+    background-color: green;
 }
-
 .field.blue {
-	background-color: #00F;
+    background-color: #00F;
 }
-
 .field.red {
-	background-color: #F40;
+    background-color: #F40;
 }
-
 .field.yellow {
-	background-color: yellow;
+    background-color: yellow;
 }
-
 .field.white {
-	background-color: white;
+    background-color: white;
 }
-
 .throwing {
-	-webkit-animation: throw 1s linear 0s 1 normal;
-	-moz-animation: throw 1s linear 0s 1 normal;
-	animation: throw 1s linear 0s 1 normal;
+    -webkit-animation: throw 1s linear 0s 1 normal;
+    -moz-animation: throw 1s linear 0s 1 normal;
+    animation: throw 1s linear 0s 1 normal;
 }
-
-.dice-button {
-	
+.dice-button {} .transition {
+    transition: left 0.5s linear, top 0.5s linear;
 }
-
-.transition {
-	transition: left 0.5s linear, top 0.5s linear;
+@ -webkit-keyframes throw {
+    0% {
+        background-color: #ffc;
+        transform: rotateZ(360deg) scale(1);
+    }
+    50% {
+        background-color: #ff0;
+        transform: rotateZ (360 deg) scale (2);
+    }
+    100% {
+        background-color: #ffc;
+        transform: rotateZ (0 deg) scale (1);
+    }
 }
-
-@
--webkit-keyframes throw { 0% {
-	background-color: #ffc;
-	transform: rotateZ(360deg) scale(1);
+@ -moz-keyframes throw {
+    0% {
+        background-color: #ffc;
+        transform: rotateZ(0deg) scale(1);
+    }
+    50% {
+        background-color: #ff0;
+        transform: rotateZ (360 deg) scale (2);
+    }
+    100% {
+        background-color: #ffc;
+        transform: rotateZ(0deg)scale(1);
+    }
 }
-
-50%
-{
-background-color
-
-
-:
-
- 
-
-#ff0
-
-
-;
-transform
-
-
-:
-
- 
-
-rotateZ
-
-
-(360
-deg
-)
-
- 
-
-scale
-
-
-(2);
-}
-100%
-{
-background-color
-
-
-:
-
- 
-
-#ffc
-
-
-;
-transform
-
-
-:
-
- 
-
-rotateZ
-
-
-(0
-deg
-)
-
- 
-
-scale
-
-
-(1);
-}
-}
-@
--moz-keyframes throw { 0% {
-	background-color: #ffc;
-	transform: rotateZ(0deg) scale(1);
-}
-
-50%
-{
-background-color
-
-
-:
-
- 
-
-#ff0
-
-
-;
-transform
-
-
-:
-
- 
-
-rotateZ
-
-
-(360
-deg
-)
-
- 
-
-scale
-
-
-(2);
-}
-100%
-{
-background-color
-
-
-:
-
- 
-
-#ffc
-
-
-;
-transform
-
-
-:
-
- 
-
-rotateZ(0deg)scale(1);
-}
-}
-@
-keyframes throw { 0% {
-	background-color: #ffc;
-	transform: rotateZ(0deg) scale(1);
-}
-50%
-{
-background-color
-
-
-:
-
- 
-
-#ff0
-
-
-;
-transform
-
-
-:
-
- 
-
-rotateZ
-
-
-(360
-deg
-)
-
- 
-
-scale
-
-
-(2);
-}
-100%
-{
-background-color
-
-
-:
-
- 
-
-#ffc
-
-
-;
-transform
-
-
-:
-
- 
-
-rotateZ
-
-
-(0
-deg
-)
-
- 
-
-scale
-
-
-(1);
-}
+@ keyframes throw {
+    0% {
+        background-color: #ffc;
+        transform: rotateZ(0deg) scale(1);
+    }
+    50% {
+        background-color: #ff0;
+        transform: rotateZ (360 deg) scale (2);
+    }
+    100% {
+        background-color: #ffc;
+        transform: rotateZ (0 deg) scale (1);
+    }
 }

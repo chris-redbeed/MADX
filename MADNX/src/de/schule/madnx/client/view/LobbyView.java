@@ -17,6 +17,8 @@ public class LobbyView extends AbstractView implements Display{
 	private Button btnStart;
 	private Button btnClose;
 
+	private FlowPanel helpText;
+
 	private FlowPanel bottomContainer;
 	private FlowPanel chatContainer;
 	private FlowPanel buttonCol;
@@ -33,6 +35,8 @@ public class LobbyView extends AbstractView implements Display{
 
 		this.buttonCol = new FlowPanel();
 		this.textCol = new FlowPanel();
+		this.helpText = new FlowPanel();
+		this.helpText.getElement().setInnerHTML("Du kannst <b>hier</b> mit deinen Spielkameraden Chaten oder direkt in das nächste Spiel starten!<br>Worauf wartest du? Los geht es!");
 		
 		btnStart = new Button("Spiel starten");
 		btnClose = new Button("zurück");
@@ -43,6 +47,7 @@ public class LobbyView extends AbstractView implements Display{
 		
 		this.buttonCol.add(btnStart);
 		this.buttonCol.add(btnClose);
+		this.buttonCol.add(this.helpText);
 		
 		this.chatContainer.add(this.textCol);
 		this.chatContainer.add(this.buttonCol);
@@ -61,11 +66,13 @@ public class LobbyView extends AbstractView implements Display{
 		this.textCol.addStyleName("col-md-8");
 		this.buttonCol.addStyleName("col-md-4");
 		
-		networkChat.addStyle("form-control lobby-Chat");
+		//networkChat.addStyle("");
 		gameOptions.addStyle("lobby-OptionsPanel");
 		lobby.addStyle("lobby-PlayerPanel");
 		btnStart.addStyleName("btn btn-block btn-success");
-		btnClose.addStyleName("btn btn-block btn-danger");
+		btnClose.addStyleName("btn btn-block btn-danger"); 
+		
+		this.helpText.addStyleName("well well-lg well-top");
 		
 	}
 	

@@ -27,9 +27,9 @@ public class MADNXEntryPoint implements EntryPoint {
 	private void init() {
 		rootPanel = RootPanel.get();
 		EventBus eventBus = new SimpleEventBus();
-//		
-//		gameController = new GameControllerImpl(eventBus);
-//		gameController.go(rootPanel);
-		rootPanel.add(new LobbyView().asWidget());
+		
+		gameController = new GameControllerImpl(eventBus);
+		gameController.go(rootPanel);
+//		rootPanel.add(new LobbyView().asWidget());
 	}
 }
