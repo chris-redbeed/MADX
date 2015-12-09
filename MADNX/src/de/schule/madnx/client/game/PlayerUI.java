@@ -84,4 +84,14 @@ public class PlayerUI extends Composite {
 	public boolean getEnabled() {
 		return enabled;
 	}
+	
+	@Override
+	public void addStyleName(String style) {
+		rootPanel.addStyleName(style);
+	}
+	
+	@Override
+	public void removeStyleName(String style) {
+		rootPanel.removeStyleName(style);
+	}
 }

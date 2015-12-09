@@ -149,7 +149,6 @@ public class GamePresenter extends AbstractPresenter {
 					break;
 				case "set":
 					for (PlayerUI p : generator.getPlayerUIs()) {
-						p.addClickHandler(new PlayerUIClickHandler(p));
 						p.setEnabled(true);
 					}
 					break;

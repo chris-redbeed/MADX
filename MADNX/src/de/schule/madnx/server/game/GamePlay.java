@@ -27,7 +27,7 @@ public class GamePlay {
 	protected int _preGameWinner = 0;
 	protected int _diceCounter = 0;
 	private GameState gameState = GameState.NEXT_PLAYER;
-	
+
 	public enum GameState {
 		NEXT_PLAYER, DICE, SET, END;
 	}
@@ -46,7 +46,6 @@ public class GamePlay {
 
 	public void start() {
 		fieldMap.createFigures(map, players);
-		currentPlayer = players.get(0);
 		this._isPreGame = true;
 	}
 
@@ -55,22 +54,27 @@ public class GamePlay {
 	}
 
 	public Player nextPlayer() {
-		int index = players.indexOf(currentPlayer) + 1;
-		_diceCounter = 0;
-		if (index < players.size()) {
-			currentPlayer = players.get(index);
-		} else {
+		if (currentPlayer == null) {
 			currentPlayer = players.get(0);
-			if (this._isPreGame) {
-				this._isPreGame = false;
-				return currentPlayer = players.get(this._preGameWinner);
+		} else {
+			int index = players.indexOf(currentPlayer) + 1;
+			_diceCounter = 0;
+			if (index < players.size()) {
+				currentPlayer = players.get(index);
+			} else {
+				currentPlayer = players.get(0);
+				if (this._isPreGame) {
+					this._isPreGame = false;
+					_diceCounter = 0;
+					return currentPlayer = players.get(this._preGameWinner);
+				}
 			}
 		}
 		return currentPlayer;
 	}
 
 	public int dice() {
-		
+
 		_diceCounter++;
 		int dice = Dice.dice();
 		currentDicedNumber = dice;
@@ -78,19 +82,22 @@ public class GamePlay {
 			if (currentDicedNumber > this._preGameWinningNumber)
 				this._preGameWinner = players.indexOf(this.currentPlayer);
 			this._preGameWinningNumber = currentDicedNumber;
-			this.setEnd();
+//			this.setEnd();
 			return dice;
 		}
 
-		if (_diceCounter == 3 && currentDicedNumber != 6) {
+		if (_diceCounter >= 3 && currentDicedNumber != 6) {
 			gameState = GameState.NEXT_PLAYER;
+			return currentDicedNumber;
 		}
 
 		if (!getCurrentPlayer().hasFiguresOnField() && currentDicedNumber != 6) {
 			gameState = GameState.DICE;
+			return currentDicedNumber;
 		}
 		if (canAnyFigureSet()) {
-		gameState = GameState.SET;
+			gameState = GameState.SET;
+			return currentDicedNumber;
 		}
 		return currentDicedNumber;
 	}
@@ -163,6 +170,9 @@ public class GamePlay {
 				return map.setFigure(f, currentDicedNumber);
 			}
 		}
+		if (currentDicedNumber == 6) {
+			gameState = GameState.DICE;
+		}
 		if (this.hasWinner()) {
 			gameState = GameState.END;
 		}
@@ -213,13 +223,13 @@ public class GamePlay {
 	public int getCurrentDicedNumber() {
 		return currentDicedNumber;
 	}
-	
+
 	public GameState getGameState() {
 		return gameState;
 	}
-	
+
 	public int get_diceCounter() {
 		return _diceCounter;
 	}
-	
+
 }

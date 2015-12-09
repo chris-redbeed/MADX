@@ -101,7 +101,7 @@ public class GameHandler {
 		JsonObject json = new JsonObject();
 		json.addProperty(Methods.METHOD, Methods.CHECK_GAMESTATE);
 		boolean isPreGame = gamePlay.getIsPreGame();
-		if (isPreGame && gamePlay.get_diceCounter() > 0) {
+		if (isPreGame && gamePlay.get_diceCounter() >= 0) {
 			gamePlay.nextPlayer();
 			json.addProperty("result", "dice");
 			return json.toString();
